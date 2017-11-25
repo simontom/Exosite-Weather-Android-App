@@ -1,0 +1,410 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal|center_vertical"
+    android:gravity="center_vertical"
+    tools:context=".MainActivity$PlaceholderFragment"
+    android:background="#b8000000"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.10">
+
+        <TextView
+            android:id="@+id/textView"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:text="  Outside"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/outsideUpdate"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center_vertical|center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tempOut"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/humOut"
+            android:textColor="@color/white"
+            android:background="@color/appBlue2"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.10">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:text="  Pressure"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/pressureUpdate"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center_vertical|center" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/preOut"
+        android:textColor="@color/white"
+        android:background="@color/appBlue2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:textSize="22sp"
+        android:layout_margin="0dp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.10">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:text="  Bedroom"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/bedroomUpdate"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center_vertical|center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/tempBed"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/humBed"
+            android:textColor="@color/white"
+            android:background="@color/appBlue2"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.10" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:text="  Bathroom"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/bathroomUpdate"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center_vertical|center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/tempBat"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/humBat"
+            android:textColor="@color/white"
+            android:background="@color/appBlue2"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.10" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:text="  Living Room"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/livingUpdate"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center_vertical|center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/tempLiv"
+            android:textColor="@color/white"
+            android:background="@color/appBlue"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/humLiv"
+            android:textColor="@color/white"
+            android:background="@color/appBlue2"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:textSize="22sp"
+            android:layout_margin="0dp"
+            android:layout_weight="0.50"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:background="#b9803408">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_"
+                android:textColor="@color/white"
+                android:layout_width="313dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_margin="0dp"
+                android:gravity="center"
+                android:elegantTextHeight="false"
+                android:text="PWM Control" />
+
+            <SeekBar
+                android:id="@+id/pwmR"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:max="@integer/slider_max"
+                android:progress="@integer/slider_default"
+                android:nestedScrollingEnabled="false" />
+
+            <SeekBar
+                android:id="@+id/pwmG"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:max="@integer/slider_max"
+                android:progress="@integer/slider_default" />
+
+            <SeekBar
+                android:id="@+id/pwmB"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:max="@integer/slider_max"
+                android:progress="@integer/slider_default" />
+
+            <TextView
+                android:id="@+id/pwmRGBText"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical|center|center_horizontal"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical">
+
+            <ToggleButton
+                android:id="@+id/switch_control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elegantTextHeight="false"
+                android:layout_marginTop="48dp"
+                android:typeface="monospace" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/volOut"
+        android:textColor="@color/white"
+        android:background="@color/appBlue2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:textSize="22sp"
+        android:layout_margin="0dp"
+        android:gravity="center" />
+</LinearLayout>

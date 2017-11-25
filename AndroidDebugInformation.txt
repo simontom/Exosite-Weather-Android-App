@@ -1,0 +1,47 @@
+// Android Debug information
+
+V/ReadTask:
+
+// Call
+{"auth":
+    {"cik":"8a6b74***... CIK ID HERE"},
+    "calls":[
+        {"id":"temOut", "procedure":"read", "arguments":[{"alias":"temOut"}, {"limit":1,"sort":"desc"}]},
+        {"id":"preOut", "procedure":"read", "arguments":[{"alias":"preOut"}, {"limit":1,"sort":"desc"}]},
+        {"id":"switch", "procedure":"read", "arguments":[{"alias":"switch"}, {"limit":1,"sort":"desc"}]}
+    ]
+}
+// Response
+[
+    {"id":"temOut", "status":"ok", "result":[[1436941954,19.5]]},
+    {"id":"preOut", "status":"ok", "result":[[1436943956,58.0]]},
+    {"id":"switch", "status":"ok", "result":[[1436944174,1]]}
+]
+
+/** ------------------------------------------------------------------------------------------------------------------ **/
+
+D/WriteTask:
+
+// Call
+{"auth":
+    {"cik":"8a6b74***... CIK ID HERE"},
+        "calls":[
+            {"id":"preOut", "procedure":"write", "arguments":[{"alias":"preOut"}, "63.0"]}
+        ]
+}
+// Response
+[
+    {"id":"preOut","status":"ok","result":1436944883}
+]
+///////////////
+// Call
+{"auth":
+    {"cik":"8a6b74***... CIK ID HERE"},
+        "calls":[
+            {"id":"switch", "procedure":"write", "arguments":[{"alias":"switch"}, "0"]}
+        ]
+}
+// Response
+[
+    {"id":"switch", "status":"ok", "result":1436944915}
+]

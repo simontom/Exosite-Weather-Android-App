@@ -1,0 +1,36 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- Used for tabHead background -->
+    <color name="tabTextBackground">#dd004704</color>
+
+    <!-- Used for text -->
+    <color name="white">#ffc8c8c8</color>
+
+    <!-- Used for info head background -->
+    <color name="appBlue">#ff001b58</color>
+
+    <!-- Used for info background -->
+    <color name="appBlue2">#e9002a8c</color>
+
+    <!-- Used for info showing scale temperature background -->
+    <color name="temperature_rising">#ffc51300</color>
+    <color name="temperature_falling">#025bec</color>
+    <color name="temperature_stable">#555555</color>
+
+    <!-- Used for info showing scale voltage background -->
+    <color name="voltage_alert">#ffc51300</color>
+    <color name="voltage_normal">#e9002a8c</color>
+
+    <color name="uv_low">#ff156f07</color>
+    <color name="uv_moderate">#ff6f6c03</color>
+    <color name="uv_high">#ff753c00</color>
+    <color name="uv_veryHigh">#ff750005</color>
+    <color name="uv_extreme">#ff750055</color>
+
+</resources>

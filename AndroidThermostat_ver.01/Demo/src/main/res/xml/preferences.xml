@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:key="version"
+        android:title="@string/version"
+        android:summary="1.1"/>
+    <Preference
+        android:key="help"
+        android:title="Help - value background"
+        android:summary="grey - stable\nred - warming (voltage &lt; 3800mV)\nblue - cooling (voltage &gt;= 3800mV)"/>
+    <EditTextPreference
+        android:key="cik"
+        android:title="@string/cik"
+        android:defaultValue="8a6b7465ef593b47821c2a4f2ff7b1e1d2cb77b3" />
+</PreferenceScreen>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidThermostat.iml" filepath="$PROJECT_DIR$/AndroidThermostat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExositeThermostat/ExositeThermostat.iml" filepath="$PROJECT_DIR$/ExositeThermostat/ExositeThermostat.iml" />
+    </modules>
+  </component>
+</project>

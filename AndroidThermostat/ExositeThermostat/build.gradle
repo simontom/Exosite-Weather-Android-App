@@ -1,0 +1,156 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'android-apt'
+//apply plugin: 'me.tatarka.retrolambda'
+
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.3.0'
+        classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
+        classpath 'io.fabric.tools:gradle:1.22.0'
+    }
+    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
+}
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '26.0.2'
+
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('C:/Users/SaymonRey/.android/debug.keystore')
+            storePassword 'android'
+        }
+    }
+
+    defaultConfig {
+        applicationId "cz.saymon.exosite.weatherstation"
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+//    retrolambda {
+//        jvmArgs '-noverify'
+//    }
+}
+
+repositories {
+    jcenter()
+    maven { url "https://clojars.org/repo/" }
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+dependencies {
+    def androidSupportVersion = '24.2.1'
+    def nucleusVersion = '4.0.0'
+    def esperandroVersion = '2.2.0'
+    def icepickVersion = '3.2.0'
+    def daggerVersion = '2.7'
+    def autoValueVersion = '1.2'
+    def autoValueGsonVersion = '0.4.4'
+    def autoValueParcelVersion = '0.2.5'
+    def autoValueRedactedVersion = '1.0.0'
+    def autoValueCursorVersion = '1.0.0'
+    def butterKnifeVersion = '8.4.0'
+    def retrofitVersion = '2.1.0'
+    def reactivexVersion = '1.2.1'
+    def rxBindingVersion = '0.4.0'
+    def okhttp3Version = '3.4.1'
+
+
+    // Android Support libs (views)
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.android.support:support-v4:$androidSupportVersion"
+    compile "com.android.support:appcompat-v7:$androidSupportVersion"
+    compile "com.android.support:design:$androidSupportVersion"
+    compile "com.android.support:recyclerview-v7:$androidSupportVersion"
+    compile "com.android.support:cardview-v7:$androidSupportVersion"
+
+    // MVP architecture support
+    compile "info.android15.nucleus:nucleus:$nucleusVersion"
+    compile "info.android15.nucleus:nucleus-support-v4:$nucleusVersion"
+    compile "info.android15.nucleus:nucleus-support-v7:$nucleusVersion"
+
+    // EventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    // Loggin; better than plain 'Log'
+    compile 'com.jakewharton.timber:timber:4.3.1'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
+        transitive = true;
+    }
+
+    // Saving (persistent) data helpers
+    ////////////////////////////////////
+    // SharedPrefs
+    compile "de.devland.esperandro:esperandro-api:$esperandroVersion"
+    apt     "de.devland.esperandro:esperandro:$esperandroVersion"
+    compile "de.devland.esperandro:esperandro-gson-addon:$esperandroVersion"
+    // OnSaveInstanceState helper
+    compile "frankiesardo:icepick:$icepickVersion"
+    apt     "frankiesardo:icepick-processor:$icepickVersion"
+
+    // Dependency injection, Code generating
+    /////////////////////////////////////////
+    // Dagger
+    compile  "com.google.dagger:dagger:$daggerVersion"
+    apt      "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    // ButterKnife
+    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+    apt     "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+    // AutoValue
+    apt     "com.google.auto.value:auto-value:$autoValueVersion"
+    compile "com.google.auto.value:auto-value:$autoValueVersion"
+    // https://github.com/rharter/auto-value-gson
+    apt     "com.ryanharter.auto.value:auto-value-gson:$autoValueGsonVersion"
+    compile "com.ryanharter.auto.value:auto-value-gson:$autoValueGsonVersion"
+    // https://github.com/rharter/auto-value-parcel
+    apt     "com.ryanharter.auto.value:auto-value-parcel:$autoValueParcelVersion"
+    compile "com.ryanharter.auto.value:auto-value-parcel-adapter:$autoValueParcelVersion"
+    // https://github.com/square/auto-value-redacted
+    apt     "com.squareup.auto.value:auto-value-redacted:$autoValueRedactedVersion"
+
+    // Networking
+    //////////////
+    // Network
+//    compile "com.squareup.okhttp3:okhttp:$okhttp3Version"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttp3Version"
+    // Retrofit and its helper parts
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
+    compile 'com.google.code.gson:gson:2.7'
+
+    // Reactive
+    compile "io.reactivex:rxjava:$reactivexVersion"
+    compile "io.reactivex:rxandroid:$reactivexVersion"
+    compile "com.jakewharton.rxbinding:rxbinding:$rxBindingVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+}
