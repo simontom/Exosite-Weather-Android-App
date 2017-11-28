@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ExositeOnePlatformRpcTest.iml" filepath="$PROJECT_DIR$/ExositeOnePlatformRpcTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExositeWeatherApp.iml" filepath="$PROJECT_DIR$/ExositeWeatherApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
