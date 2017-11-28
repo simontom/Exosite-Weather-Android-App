@@ -4,15 +4,15 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonParseException
-import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.Value
+import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerValue
 import java.lang.reflect.Type
 
-class ValueGsonDeserializer : JsonDeserializer<Value> {
+class ValueGsonDeserializer : JsonDeserializer<ServerValue> {
 
     @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): Value {
+    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): ServerValue {
         val valueJson = json.asJsonArray
-        return Value(valueJson.get(0).asLong, valueJson.get(1).asDouble)
+        return ServerValue(valueJson.get(0).asLong, valueJson.get(1).asDouble)
     }
 
 }

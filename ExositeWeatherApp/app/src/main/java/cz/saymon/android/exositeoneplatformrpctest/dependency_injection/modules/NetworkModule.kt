@@ -3,7 +3,7 @@ package cz.saymon.android.exositeoneplatformrpctest.dependency_injection.modules
 import com.google.gson.GsonBuilder
 import cz.saymon.android.exositeoneplatformrpctest.App
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerApi
-import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.Value
+import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerValue
 import cz.saymon.android.exositeoneplatformrpctest.utils.ValueGsonDeserializer
 import cz.saymon.android.exositeoneplatformrpctest.utils.NetworkStatus
 import dagger.Module
@@ -100,7 +100,7 @@ class NetworkModule(private val mBaseServerUrl: String) {
     @Singleton
     internal fun provideGson(): GsonConverterFactory {
         val builder = GsonBuilder()
-        builder.registerTypeAdapter(Value::class.java, ValueGsonDeserializer())
+        builder.registerTypeAdapter(ServerValue::class.java, ValueGsonDeserializer())
         return GsonConverterFactory.create(builder.create())
     }
 
