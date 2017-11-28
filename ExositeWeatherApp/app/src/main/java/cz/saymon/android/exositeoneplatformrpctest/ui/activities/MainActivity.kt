@@ -8,6 +8,7 @@ import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerRequest.ServerRequest
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerResponse
 import cz.saymon.android.exositeoneplatformrpctest.utils.app
+import cz.saymon.android.exositeoneplatformrpctest.utils.contains
 import cz.saymon.android.exositeoneplatformrpctest.utils.toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -37,6 +38,14 @@ class MainActivity : AppCompatActivity() {
         Timber.d("onCreate()")
 
         toast("Initialized")
+
+        regexContainsTest()
+    }
+
+    private fun regexContainsTest() {
+        when("Simon") {
+            in Regex(".+mon") -> println("ends with mon")
+        }
     }
 
     private fun testApi(_ignored: View) {
