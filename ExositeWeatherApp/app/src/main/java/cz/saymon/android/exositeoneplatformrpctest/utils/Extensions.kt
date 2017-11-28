@@ -14,3 +14,5 @@ fun Activity.toast(text: String, showDuration: Int = Toast.LENGTH_SHORT) {
 fun Activity.toast(textResource: Int, showDuration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, textResource, showDuration).show()
 }
+
+operator fun Regex.contains(text: CharSequence) = matches(text)
