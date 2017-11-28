@@ -4,7 +4,7 @@ import com.google.gson.GsonBuilder
 import cz.saymon.android.exositeoneplatformrpctest.App
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.Value
-import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ValueGsonDeserializer
+import cz.saymon.android.exositeoneplatformrpctest.utils.ValueGsonDeserializer
 import cz.saymon.android.exositeoneplatformrpctest.utils.NetworkStatus
 import dagger.Module
 import dagger.Provides

@@ -2,7 +2,7 @@
 
 ext {
     compileSdkVersion = 27
-    buildToolsVersion = '26.0.2'
+    buildToolsVersion = '27.0.1'
 
     androidSupportVersion = '27.0.1'
     googleServicesVersion = '9.8.0'
@@ -13,7 +13,7 @@ ext {
 
     icepickVersion = '3.2.0'
 
-    daggerVersion = '2.10'
+    daggerVersion = '2.11'
 
     autoValueVersion = '1.2'
     autoValueGsonVersion = '0.4.4'
@@ -32,7 +32,7 @@ ext {
 }
 
 buildscript {
-    ext.kotlin_version = '1.1.60'
+    ext.kotlin_version = '1.2.0'
 
     repositories {
         jcenter()

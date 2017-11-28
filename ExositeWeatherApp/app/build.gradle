@@ -10,7 +10,6 @@ buildscript {
     }
     dependencies {
     }
-    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
 }
 
 android {
@@ -28,16 +27,16 @@ android {
 
     defaultConfig {
         applicationId "cz.saymon.android.exositeoneplatformrpctest"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath true
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                includeCompileClasspath true
+//            }
+//        }
     }
 
     buildTypes {

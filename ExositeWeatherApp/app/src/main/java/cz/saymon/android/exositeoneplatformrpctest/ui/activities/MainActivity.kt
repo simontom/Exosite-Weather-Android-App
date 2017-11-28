@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         toast("onNext: ${System.currentTimeMillis()}")
         Timber.d(dataset.toString())
         text.text = dataset.toString()
+
     }
 
     private fun handleResponse(throwable: Throwable?) {
