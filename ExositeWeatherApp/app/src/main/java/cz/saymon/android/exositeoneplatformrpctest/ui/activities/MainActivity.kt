@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import cz.saymon.android.exositeoneplatformrpctest.R
-import cz.saymon.android.exositeoneplatformrpctest.model.data_objects.Bar
-import cz.saymon.android.exositeoneplatformrpctest.model.data_objects.Foo
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerRequest.ServerRequest
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerResponse
@@ -39,9 +37,6 @@ class MainActivity : AppCompatActivity() {
         Timber.d("onCreate()")
 
         toast("Initialized")
-
-        val test = Foo("foo test", Bar(42))
-        Timber.d(test.toString())
     }
 
     private fun testApi(_ignored: View) {
