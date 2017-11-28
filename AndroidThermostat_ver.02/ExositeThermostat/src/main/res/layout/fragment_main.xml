@@ -1,0 +1,599 @@
+<!--<LinearLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:paddingLeft="0dp"-->
+    <!--android:paddingRight="0dp"-->
+    <!--android:paddingTop="0dp"-->
+    <!--android:paddingBottom="0dp"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_gravity="center_horizontal|center_vertical"-->
+    <!--android:gravity="center_vertical"-->
+    <!--tools:context=".PlaceholderFragment"-->
+    <!--android:background="#d0000000"-->
+    <!--android:weightSum="1">-->
+
+    <!--<TabHost-->
+        <!--android:id="@+id/tabHost"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" >-->
+
+<TabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tabHost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal|center_vertical"
+    android:gravity="center_vertical"
+    tools:context=".PlaceholderFragment"
+    android:background="#d0000000"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="none" >
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/tabTextBackground" />
+
+        </HorizontalScrollView>
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+             <!-- TAB 1 -->
+            <LinearLayout
+                android:id="@+id/tab1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvPressure"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.34"
+                        android:text="@string/pressure_label"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/head_left_padding"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/pressureUpdate"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.66"
+                        android:gravity="center_vertical|center" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/preOut"
+                    android:textColor="@color/white"
+                    android:background="@color/appBlue2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:textSize="22sp"
+                    android:layout_margin="0dp"
+                    android:gravity="center" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvOutside"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.34"
+                        android:text="@string/outside_label"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/head_left_padding"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/outsideUpdate"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.66"
+                        android:gravity="center_vertical|center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tempOut"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/humOut"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue2"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/volOut"
+                    android:textColor="@color/white"
+                    android:background="@color/appBlue2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:textSize="22sp"
+                    android:layout_margin="0dp"
+                    android:gravity="center" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvLight"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.34"
+                        android:text="@string/light_label"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/head_left_padding"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/lightUpdate"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.66"
+                        android:gravity="center_vertical|center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/uvOut"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue2"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.30"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/ligOut"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue2"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.80"
+                        android:gravity="center"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/volOut2"
+                    android:textColor="@color/white"
+                    android:background="@color/appBlue2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:textSize="22sp"
+                    android:layout_margin="0dp"
+                    android:gravity="center"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+            <!-- TAB 2 -->
+            <LinearLayout
+                android:id="@+id/tab2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvBedroom"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.34"
+                        android:gravity="center_vertical"
+                        android:text="@string/bedroom_label"
+                        android:paddingLeft="@dimen/head_left_padding"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/bedroomUpdate"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.66"
+                        android:gravity="center_vertical|center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1" >
+
+                    <TextView
+                        android:id="@+id/tempBed"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/humBed"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue2"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvBathroom"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.34"
+                        android:gravity="center_vertical"
+                        android:text="@string/bathroom_label"
+                        android:paddingLeft="@dimen/head_left_padding"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/bathroomUpdate"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.66"
+                        android:gravity="center_vertical|center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1" >
+
+                    <TextView
+                        android:id="@+id/tempBat"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/humBat"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue2"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- TAB 3 -->
+            <LinearLayout
+                android:id="@+id/tab3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvLiving"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.34"
+                        android:gravity="center_vertical"
+                        android:text="@string/livingroom_label"
+                        android:paddingLeft="@dimen/head_left_padding"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/livingUpdate"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.66"
+                        android:gravity="center_vertical|center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1" >
+
+                    <TextView
+                        android:id="@+id/tempLiv"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/humLiv"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue2"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvLiving2"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.34"
+                        android:gravity="center_vertical"
+                        android:text="@string/livingroom_label2"
+                        android:paddingLeft="@dimen/head_left_padding"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/livingUpdate2"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.66"
+                        android:gravity="center_vertical|center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1" >
+
+                    <TextView
+                        android:id="@+id/tempLiv2"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/humLiv2"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue2"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1" >
+
+                    <TextView
+                        android:id="@+id/tvBedroom2"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.34"
+                        android:gravity="center_vertical"
+                        android:text="@string/bedroom_label2"
+                        android:paddingLeft="@dimen/head_left_padding"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/bedroomUpdate2"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.66"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1" >
+
+                    <TextView
+                        android:id="@+id/tempBed2"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/humBed2"
+                        android:textColor="@color/white"
+                        android:background="@color/appBlue2"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:textSize="22sp"
+                        android:layout_margin="0dp"
+                        android:layout_weight="0.50"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</TabHost>

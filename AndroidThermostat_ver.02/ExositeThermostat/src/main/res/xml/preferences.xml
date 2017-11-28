@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:key="version"
+        android:title="@string/version"
+        android:summary="1.1"/>
+    <Preference
+        android:key="help_temperature"
+        android:title="@string/help_temperature"
+        android:summary="@string/help_temperature_info" />
+    <Preference
+        android:key="help_voltage"
+        android:title="@string/help_voltage"
+        android:summary="@string/help_voltage_info" />
+    <Preference
+        android:key="help_uv"
+        android:title="@string/help_uv"
+        android:summary="@string/help_uv_info" />
+    <EditTextPreference
+        android:key="cik"
+        android:title="@string/cik"
+        android:defaultValue="@string/cik_default_value" />
+</PreferenceScreen>

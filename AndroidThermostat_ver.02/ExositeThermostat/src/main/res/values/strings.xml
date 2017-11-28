@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name -->
+    <string name="app_name">WeatherStation</string>
+    <string name="app_label">WeatherStation</string>
+
+    <!-- Preferences -->
+    <string name="action_settings">Settings</string>
+    <string name="action_update">Update</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="version">Version</string>
+    <string name="cik">Device CIK</string>
+    <string name="cik_default_value">8a6b7465ef593b47821c2a4f2ff7b1e1d2cb77b3</string>
+
+    <string name="help_temperature">Background of Temperature</string>
+    <string name="help_temperature_info">grey - stable\nred - rising\nblue - falling</string>
+    <string name="help_voltage">Background of Voltage</string>
+    <string name="help_voltage_info">red - voltage &lt; 3800mV\nblue - voltage &gt;= 3800mV</string>
+    <string name="help_uv">Background of UV</string>
+    <string name="help_uv_info">green - low (1, 2)\nyellow - moderate (3, 4, 5)\norange - high (6, 7)\nred - very high (8, 9, 10)\npurple - exterme (11 +)</string>
+
+    <!-- TabHost-tab labels -->
+    <string name="outside_tab_label">Outside</string>
+    <string name="basement_tab_label">Basement</string>
+    <string name="living_tab_label">Upstairs</string>
+    <string name="pwm_control_tab_label">PWM\nControl</string>
+
+    <!-- TextView labels -->
+    <string name="pressure_label">Pressure</string>
+    <string name="outside_label">Outside</string>
+    <string name="light_label">Light</string>
+    <string name="bedroom_label">Bedroom</string>
+    <string name="bedroom_label2">Bedroom (kids)</string>
+    <string name="bathroom_label">Bathroom</string>
+    <string name="livingroom_label">Living (sister)</string>
+    <string name="livingroom_label2">Living (mom)</string>
+    <string name="pwm_control_label">PWM Control</string>
+</resources>
