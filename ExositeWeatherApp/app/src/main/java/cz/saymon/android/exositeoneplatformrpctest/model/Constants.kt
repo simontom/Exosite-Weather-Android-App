@@ -11,8 +11,17 @@ object Constants {
     private val ALIAS_HUMBAT = "humBat"
     private val ALIAS_TEMPLIV = "temLiv"
     private val ALIAS_HUMLIV = "humLiv"
-    private val ALIAS_PREHAL = "preHal"
     private val ALIAS_TEMPHAL = "temHal"
-    val ALIASES = arrayOf(ALIAS_TEMPBED, ALIAS_HUMBED, ALIAS_TEMPBAT, ALIAS_HUMBAT, ALIAS_TEMPLIV, ALIAS_HUMLIV, ALIAS_TEMPHAL, ALIAS_PREHAL)
+    private val ALIAS_PREHAL = "preHal"
+    private val ALIAS_TEMPOUT = "temOut"
+    private val ALIAS_HUMOUT = "humOut"
+    private val ALIAS_VOLOUT = "volOut"
+
+    val ALIASES = arrayOf(
+            ALIAS_TEMPBED, ALIAS_HUMBED,
+            ALIAS_TEMPBAT, ALIAS_HUMBAT,
+            ALIAS_TEMPLIV, ALIAS_HUMLIV,
+            ALIAS_TEMPHAL, ALIAS_PREHAL,
+            ALIAS_TEMPOUT, ALIAS_HUMOUT, ALIAS_VOLOUT)
 
 }
