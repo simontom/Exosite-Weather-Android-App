@@ -1,15 +1,18 @@
 package cz.saymon.android.exositeoneplatformrpctest.model.data_objects
 
-enum class ValueStatus {
+enum class DataportStatus {
     OK,
     INVALID,
-    ERROR;
+    UNKNOWN_ERROR;
 
     companion object {
-        fun of(status: String): ValueStatus = when(status) {
-            "ok" -> OK
-            "invalid" -> INVALID
-            else -> ERROR
+        private const val OK_STATUS = "ok"
+        private const val INVALID_STATUS = "invalid"
+
+        fun parseFrom(status: String): DataportStatus = when(status) {
+            OK_STATUS -> OK
+            INVALID_STATUS -> INVALID
+            else -> UNKNOWN_ERROR
         }
     }
 }
