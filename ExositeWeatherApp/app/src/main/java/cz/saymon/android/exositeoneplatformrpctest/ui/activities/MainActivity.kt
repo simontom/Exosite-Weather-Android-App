@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import cz.saymon.android.exositeoneplatformrpctest.R
+import cz.saymon.android.exositeoneplatformrpctest.model.data_objects.Dataport
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerRequest.ServerRequest
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerResponse
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         subscription1 = api.getItem(serverRequest)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { dataset -> handleResponse(dataset) },
+                        { dataset -> handleResponse1(dataset) },
                         { throwable -> handleResponse(throwable) })
     }
 
@@ -54,21 +55,28 @@ class MainActivity : AppCompatActivity() {
         subscription2?.dispose()
 
         subscription2 = api.getItem(serverRequest)
+                .map(Dataport.MAPPER)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { dataset -> handleResponse(dataset) },
+                        { dataset -> handleResponse2(dataset) },
                         { throwable -> handleResponse(throwable) })
     }
 
-    private fun handleResponse(dataset: List<ServerResponse>?) {
+    private fun handleResponse1(dataset: List<ServerResponse>?) {
         toast("onNext: ${System.currentTimeMillis()}")
         Timber.d(dataset.toString())
         text.text = dataset.toString()
+    }
 
+    private fun handleResponse2(dataset: List<Dataport>?) {
+        toast("onNext: ${System.currentTimeMillis()}")
+        Timber.d(dataset.toString())
+        text.text = dataset.toString()
     }
 
     private fun handleResponse(throwable: Throwable?) {
         toast("onException: ${System.currentTimeMillis()}")
+        Timber.d(throwable.toString())
         text.text = throwable.toString()
     }
 
