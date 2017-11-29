@@ -3,6 +3,6 @@ package cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerRespons
 import com.google.gson.annotations.SerializedName
 
 data class ServerResponse(
-        @SerializedName("id") private val id: String? = null,
-        @SerializedName("status") private val status: String? = null,
-        @SerializedName("result") private val values: List<ServerValue>? = null)
+        @SerializedName("id") val id: String? = null,
+        @SerializedName("status") val status: String? = null,
+        @SerializedName("result") val values: List<ServerValue>? = null)
