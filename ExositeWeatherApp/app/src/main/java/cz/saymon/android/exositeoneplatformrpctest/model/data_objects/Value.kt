@@ -1,7 +1,3 @@
 package cz.saymon.android.exositeoneplatformrpctest.model.data_objects
 
-/**
- * Created by Simon on 28.11.2017.
- */
-class Value {
-}
+data class Value (val value: Double, val time: Long)
