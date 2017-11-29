@@ -8,7 +8,6 @@ import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerRequest.ServerRequest
 import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerResponse
 import cz.saymon.android.exositeoneplatformrpctest.utils.app
-import cz.saymon.android.exositeoneplatformrpctest.utils.contains
 import cz.saymon.android.exositeoneplatformrpctest.utils.toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -24,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var api: ServerApi
 
-    internal var subscription: Disposable? = null
+    internal var subscription1: Disposable? = null
+    internal var subscription2: Disposable? = null
     internal var serverRequest = ServerRequest()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,25 +33,27 @@ class MainActivity : AppCompatActivity() {
 
         app.appComponent.inject(this)
 
-        main.setOnClickListener(this::testApi);
+        button1.setOnClickListener(this::testApi1)
+        button2.setOnClickListener(this::testApi2)
 
         Timber.d("onCreate()")
-
         toast("Initialized")
-
-        regexContainsTest()
     }
 
-    private fun regexContainsTest() {
-        when("Simon") {
-            in Regex(".+mon") -> println("ends with mon")
-        }
+    private fun testApi1(_ignored: View) {
+        subscription1?.dispose()
+
+        subscription1 = api.getItem(serverRequest)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { dataset -> handleResponse(dataset) },
+                        { throwable -> handleResponse(throwable) })
     }
 
-    private fun testApi(_ignored: View) {
-        subscription?.dispose()
+    private fun testApi2(_ignored: View) {
+        subscription2?.dispose()
 
-        subscription = api.getItem(serverRequest)
+        subscription2 = api.getItem(serverRequest)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { dataset -> handleResponse(dataset) },
