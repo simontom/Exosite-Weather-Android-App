@@ -1,6 +1,8 @@
 package cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerRequest
 
 import com.google.gson.annotations.SerializedName
+import cz.saymon.android.exositeoneplatformrpctest.model.Constants
+import java.util.ArrayList
 
 data class ServerRequest(val dataportIds: List<String>?) {
 
