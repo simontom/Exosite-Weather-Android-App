@@ -5,6 +5,7 @@ ext {
     buildToolsVersion = '27.0.1'
 
     androidSupportVersion = '27.0.1'
+    constraintLayoutVersion = '1.0.2'
     googleServicesVersion = '9.8.0'
 
     nucleusVersion = '4.0.0'
