@@ -1,13 +1,15 @@
 package cz.saymon.android.exositeoneplatformrpctest.model.data_objects
 
 import cz.saymon.android.exositeoneplatformrpctest.utils.contains
+import com.google.gson.annotations.SerializedName
 
-enum class DataportType {
-    TEMPERATURE,
-    HUMIDITY,
-    PRESSURE,
-    VOLTAGE,
-    UNKNOWN;
+
+enum class DataportType(val unit: String) {
+    TEMPERATURE("°C"),
+    HUMIDITY("%"),
+    PRESSURE("hPa"),
+    VOLTAGE("mV"),
+    UNKNOWN("--");
 
     companion object {
         private val TEMPERATURE_TYPE = Regex("tem.+", RegexOption.IGNORE_CASE)
