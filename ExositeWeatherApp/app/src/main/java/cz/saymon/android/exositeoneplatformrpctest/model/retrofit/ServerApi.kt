@@ -8,5 +8,5 @@ import retrofit2.http.POST
 
 interface ServerApi {
     @POST("process")
-    fun getItem(@Body request: ServerRequest): Flowable<List<ServerResponse>>
+    fun getItem(@Body request: ServerRequest = ServerRequest()): Flowable<List<ServerResponse>>
 }
