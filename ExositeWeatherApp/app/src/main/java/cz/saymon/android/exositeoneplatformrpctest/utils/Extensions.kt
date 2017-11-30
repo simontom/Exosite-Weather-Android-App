@@ -1,8 +1,14 @@
 package cz.saymon.android.exositeoneplatformrpctest.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.widget.Toast
 import cz.saymon.android.exositeoneplatformrpctest.App
+import java.text.SimpleDateFormat
+import java.util.Date
+
+@SuppressLint("SimpleDateFormat")
+private val dateFormatter = SimpleDateFormat("dd/MM HH:mm")
 
 val Activity.app: App
     get() = application as App
@@ -16,3 +22,5 @@ fun Activity.toast(textResource: Int, showDuration: Int = Toast.LENGTH_SHORT) {
 }
 
 operator fun Regex.contains(text: CharSequence) = matches(text)
+
+fun Long.toFormattedDate() = dateFormatter.format(Date(this))
