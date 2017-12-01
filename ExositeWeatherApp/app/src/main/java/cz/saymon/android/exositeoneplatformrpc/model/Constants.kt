@@ -25,7 +25,7 @@ object Constants {
     val ALIAS_UVOUT = "uvOut"
     val ALIAS_VOLOUT2 = "volOut2"
 
-    val ALIASES = arrayOf(
+    val ALIASES = listOf(
             ALIAS_TEMPBED, ALIAS_HUMBED,
             ALIAS_TEMPBAT, ALIAS_HUMBAT,
             ALIAS_TEMPLIV, ALIAS_HUMLIV,
