@@ -1,17 +1,14 @@
 package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 
-enum class DataportStatus {
-    OK,
-    INVALID,
-    UNKNOWN_ERROR;
+enum class DataportStatus(private val status: String) {
+    OK("ok"),
+    INVALID("invalid"),
+    UNKNOWN_ERROR("");
 
     companion object {
-        private const val OK_STATUS = "ok"
-        private const val INVALID_STATUS = "invalid"
-
         fun parseFrom(status: String): DataportStatus = when(status) {
-            OK_STATUS -> OK
-            INVALID_STATUS -> INVALID
+            OK.status -> OK
+            INVALID.status -> INVALID
             else -> UNKNOWN_ERROR
         }
     }
