@@ -29,18 +29,18 @@ class RecyclerViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_recycler_view)
 
         app.appComponent.inject(this)
+
+        recyclerview.setOnClickListener { callApi() }
     }
 
     private fun handleResponse(dataset: List<Dataport>?) {
         toast("onNext: ${System.currentTimeMillis()}")
         Timber.d(dataset.toString())
-        text.text = dataset.toString()
     }
 
     private fun handleResponse(throwable: Throwable?) {
         toast("onException: ${System.currentTimeMillis()}")
         Timber.d(throwable.toString())
-        text.text = throwable.toString()
     }
 
     private fun callApi() {
