@@ -18,7 +18,7 @@ enum class DataportLocation(private val regex: Regex) {
             in LIVING_ROOM.regex -> LIVING_ROOM
             in HALLWAY.regex -> HALLWAY
             in OUTSIDE.regex -> OUTSIDE
-            in BEDROOM2.regex -> BEDROOM
+            in BEDROOM2.regex -> BEDROOM2
             else -> UNKNOWN
         }
     }

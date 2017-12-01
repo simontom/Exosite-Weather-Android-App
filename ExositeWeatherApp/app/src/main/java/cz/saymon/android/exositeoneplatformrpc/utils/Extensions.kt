@@ -2,6 +2,11 @@ package cz.saymon.android.exositeoneplatformrpc.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.support.annotation.IntegerRes
+import android.support.annotation.LayoutRes
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import cz.saymon.android.exositeoneplatformrpc.App
 import java.text.SimpleDateFormat
@@ -24,3 +29,7 @@ fun Activity.toast(textResource: Int, showDuration: Int = Toast.LENGTH_SHORT) {
 operator fun Regex.contains(text: CharSequence) = matches(text)
 
 fun Long.toFormattedDate() = dateFormatter.format(Date(this))
+
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+}

@@ -8,7 +8,17 @@ data class Dataport(val id: String,
                     val status: DataportStatus,
                     val location: DataportLocation,
                     val type: DataportType,
-                    val values: List<Value>) {
+                    val values: List<Value>) : Comparable<Dataport> {
+
+    override fun compareTo(other: Dataport): Int {
+        var comparisionResult = location.compareTo(other.location)
+        if (comparisionResult == 0) {
+            comparisionResult = type.compareTo(other.type)
+        }
+
+        return comparisionResult
+    }
+
     companion object {
         val MAPPER: Function<in List<ServerResponse>, out List<Dataport>>? = Function { responses ->
             val dataports = ArrayList<Dataport>()
