@@ -15,7 +15,7 @@ data class Call(
     }
 
     companion object {
-        val defaults: List<Call> by lazy {
+        val default: List<Call> by lazy {
             val calls = ArrayList<Call>()
 
             calls.add(Call("errorAlias"))
