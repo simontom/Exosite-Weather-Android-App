@@ -10,7 +10,7 @@ data class ServerRequest(val dataportIds: List<String>?) {
     @SerializedName("auth")
     val auth: Auth = Auth()
     @SerializedName("calls")
-    var calls: List<Call> = Call.defaults
+    var calls: List<Call> = Call.default
         private set
 
     init {
