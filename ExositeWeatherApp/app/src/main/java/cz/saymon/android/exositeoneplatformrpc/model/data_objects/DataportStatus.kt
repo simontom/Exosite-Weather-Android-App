@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpctest.model.data_objects
+package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 
 enum class DataportStatus {
     OK,

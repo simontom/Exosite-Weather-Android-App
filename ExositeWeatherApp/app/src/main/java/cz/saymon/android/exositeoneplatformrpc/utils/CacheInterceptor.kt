@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpctest.utils
+package cz.saymon.android.exositeoneplatformrpc.utils
 
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -1,6 +1,6 @@
-package cz.saymon.android.exositeoneplatformrpctest.model.data_objects
+package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 
-import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerValue
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerResponse.ServerValue
 
 data class Value(val time: Long, val value: Double) {
     companion object {

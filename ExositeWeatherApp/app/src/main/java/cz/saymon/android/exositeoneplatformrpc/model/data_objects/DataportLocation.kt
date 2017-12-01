@@ -1,6 +1,6 @@
-package cz.saymon.android.exositeoneplatformrpctest.model.data_objects
+package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 
-import cz.saymon.android.exositeoneplatformrpctest.utils.contains
+import cz.saymon.android.exositeoneplatformrpc.utils.contains
 
 enum class DataportLocation {
     BEDROOM,

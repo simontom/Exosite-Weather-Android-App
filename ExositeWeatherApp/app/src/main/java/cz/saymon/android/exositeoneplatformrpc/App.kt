@@ -1,11 +1,11 @@
-package cz.saymon.android.exositeoneplatformrpctest
+package cz.saymon.android.exositeoneplatformrpc
 
 import android.app.Application
-import cz.saymon.android.exositeoneplatformrpctest.dependency_injection.components.AppComponent
-import cz.saymon.android.exositeoneplatformrpctest.dependency_injection.components.DaggerAppComponent
-import cz.saymon.android.exositeoneplatformrpctest.dependency_injection.modules.AppModule
-import cz.saymon.android.exositeoneplatformrpctest.dependency_injection.modules.NetworkModule
-import cz.saymon.android.exositeoneplatformrpctest.model.Constants.BASE_SERVER_URL
+import cz.saymon.android.exositeoneplatformrpc.dependency_injection.components.AppComponent
+import cz.saymon.android.exositeoneplatformrpc.dependency_injection.components.DaggerAppComponent
+import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.AppModule
+import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.NetworkModule
+import cz.saymon.android.exositeoneplatformrpc.model.Constants.BASE_SERVER_URL
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 

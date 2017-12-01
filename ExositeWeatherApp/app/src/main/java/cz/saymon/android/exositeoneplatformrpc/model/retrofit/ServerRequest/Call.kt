@@ -1,7 +1,7 @@
-package cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerRequest
+package cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerRequest
 
 import com.google.gson.annotations.SerializedName
-import cz.saymon.android.exositeoneplatformrpctest.model.Constants
+import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import java.util.*
 
 data class Call(

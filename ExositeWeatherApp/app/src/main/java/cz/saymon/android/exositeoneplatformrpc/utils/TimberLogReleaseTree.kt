@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpctest.utils
+package cz.saymon.android.exositeoneplatformrpc.utils
 
 import android.util.Log
 

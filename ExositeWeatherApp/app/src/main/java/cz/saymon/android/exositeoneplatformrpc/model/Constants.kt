@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpctest.model
+package cz.saymon.android.exositeoneplatformrpc.model
 
 object Constants {
 

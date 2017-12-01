@@ -1,10 +1,10 @@
-package cz.saymon.android.exositeoneplatformrpctest.utils
+package cz.saymon.android.exositeoneplatformrpc.utils
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonParseException
-import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerValue
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerResponse.ServerValue
 import java.lang.reflect.Type
 //import java.util.Date
 

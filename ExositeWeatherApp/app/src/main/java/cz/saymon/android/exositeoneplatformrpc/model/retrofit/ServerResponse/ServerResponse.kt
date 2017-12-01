@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse
+package cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerResponse
 
 import com.google.gson.annotations.SerializedName
 

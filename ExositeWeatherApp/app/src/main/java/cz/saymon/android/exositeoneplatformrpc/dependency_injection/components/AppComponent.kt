@@ -1,10 +1,10 @@
-package cz.saymon.android.exositeoneplatformrpctest.dependency_injection.components
+package cz.saymon.android.exositeoneplatformrpc.dependency_injection.components
 
-import cz.saymon.android.exositeoneplatformrpctest.App
-import cz.saymon.android.exositeoneplatformrpctest.dependency_injection.modules.AppModule
-import cz.saymon.android.exositeoneplatformrpctest.dependency_injection.modules.NetworkModule
-import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerApi
-import cz.saymon.android.exositeoneplatformrpctest.ui.activities.MainActivity
+import cz.saymon.android.exositeoneplatformrpc.App
+import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.AppModule
+import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.NetworkModule
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
+import cz.saymon.android.exositeoneplatformrpc.ui.activities.MainActivity
 import dagger.Component
 import retrofit2.Retrofit
 import javax.inject.Singleton

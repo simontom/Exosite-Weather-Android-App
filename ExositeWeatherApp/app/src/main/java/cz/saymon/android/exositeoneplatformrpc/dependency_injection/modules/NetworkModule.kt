@@ -1,11 +1,11 @@
-package cz.saymon.android.exositeoneplatformrpctest.dependency_injection.modules
+package cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules
 
 import com.google.gson.GsonBuilder
-import cz.saymon.android.exositeoneplatformrpctest.App
-import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerApi
-import cz.saymon.android.exositeoneplatformrpctest.model.retrofit.ServerResponse.ServerValue
-import cz.saymon.android.exositeoneplatformrpctest.utils.ValueGsonDeserializer
-import cz.saymon.android.exositeoneplatformrpctest.utils.NetworkStatus
+import cz.saymon.android.exositeoneplatformrpc.App
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerResponse.ServerValue
+import cz.saymon.android.exositeoneplatformrpc.utils.ValueGsonDeserializer
+import cz.saymon.android.exositeoneplatformrpc.utils.NetworkStatus
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers

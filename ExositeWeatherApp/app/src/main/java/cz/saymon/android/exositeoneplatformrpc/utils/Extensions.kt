@@ -1,9 +1,9 @@
-package cz.saymon.android.exositeoneplatformrpctest.utils
+package cz.saymon.android.exositeoneplatformrpc.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.widget.Toast
-import cz.saymon.android.exositeoneplatformrpctest.App
+import cz.saymon.android.exositeoneplatformrpc.App
 import java.text.SimpleDateFormat
 import java.util.Date
 

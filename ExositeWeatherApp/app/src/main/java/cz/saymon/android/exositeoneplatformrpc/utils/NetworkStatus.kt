@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpctest.utils
+package cz.saymon.android.exositeoneplatformrpc.utils
 
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.Context.WIFI_SERVICE
@@ -8,7 +8,7 @@ import android.net.NetworkInfo
 import android.net.wifi.WifiManager
 import android.telephony.TelephonyManager.NETWORK_TYPE_1xRTT
 import android.telephony.TelephonyManager.NETWORK_TYPE_EDGE
-import cz.saymon.android.exositeoneplatformrpctest.App
+import cz.saymon.android.exositeoneplatformrpc.App
 import javax.inject.Inject
 import javax.inject.Singleton
 

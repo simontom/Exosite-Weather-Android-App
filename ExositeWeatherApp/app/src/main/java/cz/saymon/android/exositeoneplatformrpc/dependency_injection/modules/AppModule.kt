@@ -1,6 +1,6 @@
-package cz.saymon.android.exositeoneplatformrpctest.dependency_injection.modules
+package cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules
 
-import cz.saymon.android.exositeoneplatformrpctest.App
+import cz.saymon.android.exositeoneplatformrpc.App
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
