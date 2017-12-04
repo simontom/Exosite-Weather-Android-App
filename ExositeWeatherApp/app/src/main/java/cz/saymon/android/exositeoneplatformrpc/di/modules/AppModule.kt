@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules
+package cz.saymon.android.exositeoneplatformrpc.di.modules
 
 import cz.saymon.android.exositeoneplatformrpc.App
 import dagger.Module

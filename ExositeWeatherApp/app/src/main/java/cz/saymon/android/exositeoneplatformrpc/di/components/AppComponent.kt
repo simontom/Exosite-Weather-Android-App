@@ -1,8 +1,8 @@
-package cz.saymon.android.exositeoneplatformrpc.dependency_injection.components
+package cz.saymon.android.exositeoneplatformrpc.di.components
 
 import cz.saymon.android.exositeoneplatformrpc.App
-import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.AppModule
-import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.NetworkModule
+import cz.saymon.android.exositeoneplatformrpc.di.modules.AppModule
+import cz.saymon.android.exositeoneplatformrpc.di.modules.NetworkModule
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.ui.activities.MainActivity
 import cz.saymon.android.exositeoneplatformrpc.ui.activities.RecyclerViewActivity

@@ -1,10 +1,10 @@
 package cz.saymon.android.exositeoneplatformrpc
 
 import android.app.Application
-import cz.saymon.android.exositeoneplatformrpc.dependency_injection.components.AppComponent
-import cz.saymon.android.exositeoneplatformrpc.dependency_injection.components.DaggerAppComponent
-import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.AppModule
-import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.NetworkModule
+import cz.saymon.android.exositeoneplatformrpc.di.components.AppComponent
+import cz.saymon.android.exositeoneplatformrpc.di.components.DaggerAppComponent
+import cz.saymon.android.exositeoneplatformrpc.di.modules.AppModule
+import cz.saymon.android.exositeoneplatformrpc.di.modules.NetworkModule
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
