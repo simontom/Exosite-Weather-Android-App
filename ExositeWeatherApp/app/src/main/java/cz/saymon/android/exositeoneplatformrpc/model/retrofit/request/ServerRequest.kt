@@ -3,7 +3,7 @@ package cz.saymon.android.exositeoneplatformrpc.model.retrofit.request
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class ServerRequest(val dataportIds: List<String>?) {
+data class ServerRequest(val dataportIds: List<String>? = null) {
 
     constructor() : this(null)
 

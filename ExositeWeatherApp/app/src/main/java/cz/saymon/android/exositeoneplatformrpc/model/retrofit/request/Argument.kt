@@ -10,7 +10,11 @@ data class Argument(
         @SerializedName("sort") val sort: ArgumentSortType? = ArgumentSortType.DESCENDING,
         @SerializedName("limit") val limit: Int? = 1,
         @SerializedName("selection") val selection: ArgumentSelectionType? = ArgumentSelectionType.ALL
-)
+) {
+    companion object {
+        fun createWithAlias(alias: String) = Argument(alias, null, null, null,  null, null)
+    }
+}
 
 /*
 "arguments": [

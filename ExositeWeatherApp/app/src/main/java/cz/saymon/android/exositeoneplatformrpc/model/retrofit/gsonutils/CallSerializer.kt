@@ -5,13 +5,14 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
 import com.google.gson.annotations.SerializedName
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Argument
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Call
 import java.lang.reflect.Type
 
 
-class CallGsonSerializer : JsonSerializer<Call> {
+class CallSerializer : JsonSerializer<Call> {
 
-    override fun serialize(src: Call, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
+    override fun serialize(src: Call, typeOfSrc: Type?, context: JsonSerializationContext): JsonElement {
         val callJsonObject = JsonObject()
 
         addIdProperty(src, callJsonObject)
@@ -30,6 +31,9 @@ class CallGsonSerializer : JsonSerializer<Call> {
         callJsonObject.addProperty(procedureSerializedName, src.procedure.procedureName)
     }
 
+    private fun addArguments(src: Call, context: JsonSerializationContext, callJsonObject: JsonObject) {
+        val argumentId = Argument.createWithAlias(src.id)
 
+    }
 
 }
