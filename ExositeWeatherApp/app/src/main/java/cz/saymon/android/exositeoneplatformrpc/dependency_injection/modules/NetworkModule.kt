@@ -2,10 +2,12 @@ package cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules
 
 import com.google.gson.GsonBuilder
 import cz.saymon.android.exositeoneplatformrpc.App
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Request.CallGsonSerializer
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerValue
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerValueGsonDeserializer
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerResponse.ServerValue
-import cz.saymon.android.exositeoneplatformrpc.utils.ValueGsonDeserializer
 import cz.saymon.android.exositeoneplatformrpc.utils.NetworkStatus
+import cz.saymon.android.exositeoneplatformrpc.model.Constants.BASE_SERVER_URL
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -24,12 +26,11 @@ import javax.inject.Singleton
 
 @Suppress("unused")
 @Module
-class NetworkModule(private val mBaseServerUrl: String) {
+class NetworkModule {
 
     @Provides
     @Singleton
-    internal fun provideOkHttpCache(app: App): Cache =
-            Cache(File(app.cacheDir, CACHE_FOLDER_NAME), CACHE_SIZE_BYTES.toLong())
+    internal fun provideOkHttpCache(app: App): Cache = Cache(File(app.cacheDir, CACHE_FOLDER_NAME), CACHE_SIZE_BYTES.toLong())
 
     @Provides
     @Singleton
@@ -72,6 +73,7 @@ class NetworkModule(private val mBaseServerUrl: String) {
             cacheBuilder.maxAge(2, TimeUnit.MINUTES)
             cacheBuilder.build()
             val cacheControl = cacheBuilder.build()
+
             val response = chain.proceed(chain.request())
             response.newBuilder()
                     .header("Cache-Control", cacheControl.toString())
@@ -100,7 +102,8 @@ class NetworkModule(private val mBaseServerUrl: String) {
     @Singleton
     internal fun provideGson(): GsonConverterFactory {
         val builder = GsonBuilder()
-        builder.registerTypeAdapter(ServerValue::class.java, ValueGsonDeserializer())
+        builder.registerTypeAdapter(CallGsonSerializer::class.java, CallGsonSerializer())
+        builder.registerTypeAdapter(ServerValue::class.java, ServerValueGsonDeserializer())
         return GsonConverterFactory.create(builder.create())
     }
 
@@ -111,7 +114,7 @@ class NetworkModule(private val mBaseServerUrl: String) {
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(gson)
                 .addCallAdapterFactory(rxAdapter)
-                .baseUrl(mBaseServerUrl)
+                .baseUrl(BASE_SERVER_URL)
                 .client(okHttp)
                 .build()
     }

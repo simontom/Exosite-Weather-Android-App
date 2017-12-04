@@ -5,7 +5,6 @@ import cz.saymon.android.exositeoneplatformrpc.dependency_injection.components.A
 import cz.saymon.android.exositeoneplatformrpc.dependency_injection.components.DaggerAppComponent
 import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.AppModule
 import cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules.NetworkModule
-import cz.saymon.android.exositeoneplatformrpc.model.Constants.BASE_SERVER_URL
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -15,7 +14,7 @@ class App : Application() {
         DaggerAppComponent
                 .builder()
                 .appModule(AppModule(this))
-                .networkModule(NetworkModule(BASE_SERVER_URL))
+                .networkModule(NetworkModule())
                 .build()
     }
 

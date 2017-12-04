@@ -8,8 +8,8 @@ import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerRequest.ServerRequest
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerResponse.ServerResponse
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Request.ServerRequest
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerResponse
 import cz.saymon.android.exositeoneplatformrpc.utils.app
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 Constants.ALIAS_TEMPBAT, Constants.ALIAS_HUMBAT,
                 Constants.ALIAS_TEMPLIV, Constants.ALIAS_HUMLIV)
 
-//        subscription2 = api.getItem(ServerRequest())
+//        subscription2 = api.getItem(Request())
         subscription2 = api.getItem(ServerRequest(dataports))
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }

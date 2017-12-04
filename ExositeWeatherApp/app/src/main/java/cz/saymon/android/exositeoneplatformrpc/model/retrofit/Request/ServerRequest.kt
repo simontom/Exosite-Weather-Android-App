@@ -1,7 +1,7 @@
-package cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerRequest
+package cz.saymon.android.exositeoneplatformrpc.model.retrofit.Request
 
 import com.google.gson.annotations.SerializedName
-import java.util.ArrayList
+import java.util.*
 
 data class ServerRequest(val dataportIds: List<String>?) {
 
@@ -9,6 +9,7 @@ data class ServerRequest(val dataportIds: List<String>?) {
 
     @SerializedName("auth")
     val auth: Auth = Auth()
+
     @SerializedName("calls")
     var calls: List<Call> = Call.default
         private set
