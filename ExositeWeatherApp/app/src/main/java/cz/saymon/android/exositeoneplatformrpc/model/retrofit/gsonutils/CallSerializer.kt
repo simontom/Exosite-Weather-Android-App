@@ -1,9 +1,6 @@
 package cz.saymon.android.exositeoneplatformrpc.model.retrofit.gsonutils
 
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
-import com.google.gson.JsonSerializationContext
-import com.google.gson.JsonSerializer
+import com.google.gson.*
 import com.google.gson.annotations.SerializedName
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Argument
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Call
@@ -32,8 +29,18 @@ class CallSerializer : JsonSerializer<Call> {
     }
 
     private fun addArguments(src: Call, context: JsonSerializationContext, callJsonObject: JsonObject) {
-        val argumentId = Argument.createWithAlias(src.id)
+        val argumentWithId = Argument.createWithAlias(src.id)
+        val argumentWithIdJson = context.serialize(argumentWithId)
 
+        val argumentWithOptions = src.arguments.copy(alias = null)
+        val argumentWithOptionsJson = context.serialize(argumentWithOptions)
+
+        val argumentsJsonArray = JsonArray()
+        argumentsJsonArray.add(argumentWithIdJson)
+        argumentsJsonArray.add(argumentWithOptionsJson)
+
+        val argumentsSerializedName = src.javaClass.getField("arguments").getAnnotation(SerializedName::class.java).value
+        callJsonObject.add(argumentsSerializedName, argumentsJsonArray)
     }
 
 }
