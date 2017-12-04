@@ -2,9 +2,9 @@ package cz.saymon.android.exositeoneplatformrpc.dependency_injection.modules
 
 import com.google.gson.GsonBuilder
 import cz.saymon.android.exositeoneplatformrpc.App
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Request.CallGsonSerializer
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerValue
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerValueGsonDeserializer
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.CallGsonSerializer
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerValue
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerValueGsonDeserializer
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.utils.NetworkStatus
 import cz.saymon.android.exositeoneplatformrpc.model.Constants.BASE_SERVER_URL

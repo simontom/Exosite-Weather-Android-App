@@ -1,7 +1,7 @@
 package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerResponse
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerValue
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerResponse
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerValue
 import io.reactivex.functions.Function
 
 data class Dataport(val id: String,

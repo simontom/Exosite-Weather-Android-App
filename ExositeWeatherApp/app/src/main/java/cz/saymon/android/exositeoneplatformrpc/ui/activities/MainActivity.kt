@@ -8,8 +8,8 @@ import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Request.ServerRequest
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerResponse
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerResponse
 import cz.saymon.android.exositeoneplatformrpc.utils.app
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
 import io.reactivex.android.schedulers.AndroidSchedulers

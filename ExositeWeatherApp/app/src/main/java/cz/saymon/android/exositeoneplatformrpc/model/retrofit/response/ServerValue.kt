@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response
+package cz.saymon.android.exositeoneplatformrpc.model.retrofit.response
 
 data class ServerValue(
         val time: Long,

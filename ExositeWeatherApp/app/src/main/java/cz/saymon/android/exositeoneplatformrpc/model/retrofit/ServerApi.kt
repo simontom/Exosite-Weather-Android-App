@@ -1,7 +1,7 @@
 package cz.saymon.android.exositeoneplatformrpc.model.retrofit
 
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Request.ServerRequest
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.Response.ServerResponse
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerResponse
 import io.reactivex.Flowable
 import retrofit2.http.Body
 import retrofit2.http.POST
