@@ -37,4 +37,6 @@ object Constants {
             ALIAS_TEMPOUT, ALIAS_HUMOUT, ALIAS_VOLOUT,
             ALIAS_TEMPBED2, ALIAS_HUMBED2)
 
+    val ALIASES_PWM = listOf(ALIAS_PWMR, ALIAS_PWMG, ALIAS_PWMB)
+
 }
