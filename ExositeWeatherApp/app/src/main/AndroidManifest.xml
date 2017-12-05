@@ -16,7 +16,7 @@
 
         <activity
             android:name=".ui.activities.RecyclerViewActivity"
-            android:label="Test"
+            android:label="Recycler"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -26,6 +26,7 @@
 
         <activity
             android:name=".ui.activities.MainActivity"
+            android:label="Main"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
