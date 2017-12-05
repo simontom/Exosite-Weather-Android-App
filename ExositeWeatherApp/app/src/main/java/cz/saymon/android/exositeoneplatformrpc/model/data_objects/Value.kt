@@ -4,6 +4,6 @@ import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerVal
 
 data class Value(val time: Long, val value: Double) {
     companion object {
-        fun parseFrom(serverValue: ServerValue) = Value(serverValue.time, serverValue.value)
+        fun parseFrom(serverValue: ServerValue) = Value(serverValue.time * 1000, serverValue.value)
     }
 }
