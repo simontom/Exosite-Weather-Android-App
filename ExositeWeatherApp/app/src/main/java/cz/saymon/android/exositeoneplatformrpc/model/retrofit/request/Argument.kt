@@ -1,10 +1,12 @@
 package cz.saymon.android.exositeoneplatformrpc.model.retrofit.request
 
 import com.google.gson.annotations.SerializedName
+import com.google.gson.annotations.Expose
 import java.util.Date
 
 data class Argument(
         @SerializedName("alias") val alias: String? = null,
+        @Expose(serialize = false) val writeValue: String? = null,
         @SerializedName("starttime") val starttime: Long? = 0,
         @SerializedName("endtime") val endtime: Long? = Date().time,
         @SerializedName("sort") val sort: ArgumentSortType? = ArgumentSortType.DESCENDING,
