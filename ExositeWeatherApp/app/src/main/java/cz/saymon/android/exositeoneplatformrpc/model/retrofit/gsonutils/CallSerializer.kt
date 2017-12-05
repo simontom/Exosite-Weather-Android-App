@@ -12,23 +12,24 @@ class CallSerializer : JsonSerializer<Call> {
     override fun serialize(src: Call, typeOfSrc: Type?, context: JsonSerializationContext): JsonElement {
         val callJsonObject = JsonObject()
 
-        addIdProperty(src, callJsonObject)
-        addProcedure(src, callJsonObject)
+        addIdProperty(callJsonObject, src)
+        addProcedure(callJsonObject, src)
+        addArguments(callJsonObject, context, src)
 
         return callJsonObject
     }
 
-    private fun addIdProperty(src: Call, callJsonObject: JsonObject) {
-        val idSerializedName = src.javaClass.getField("id").getAnnotation(SerializedName::class.java).value
+    private fun addIdProperty(callJsonObject: JsonObject, src: Call) {
+        val idSerializedName = src.javaClass.getDeclaredField("id").getAnnotation(SerializedName::class.java).value
         callJsonObject.addProperty(idSerializedName, src.id)
     }
 
-    private fun addProcedure(src: Call, callJsonObject: JsonObject) {
-        val procedureSerializedName = src.javaClass.getField("procedure").getAnnotation(SerializedName::class.java).value
+    private fun addProcedure(callJsonObject: JsonObject, src: Call) {
+        val procedureSerializedName = src.javaClass.getDeclaredField("procedure").getAnnotation(SerializedName::class.java).value
         callJsonObject.addProperty(procedureSerializedName, src.procedure.procedureName)
     }
 
-    private fun addArguments(src: Call, context: JsonSerializationContext, callJsonObject: JsonObject) {
+    private fun addArguments(callJsonObject: JsonObject, context: JsonSerializationContext, src: Call) {
         val argumentWithId = Argument.createWithAlias(src.id)
         val argumentWithIdJson = context.serialize(argumentWithId)
 
@@ -39,7 +40,7 @@ class CallSerializer : JsonSerializer<Call> {
         argumentsJsonArray.add(argumentWithIdJson)
         argumentsJsonArray.add(argumentWithOptionsJson)
 
-        val argumentsSerializedName = src.javaClass.getField("arguments").getAnnotation(SerializedName::class.java).value
+        val argumentsSerializedName = src.javaClass.getDeclaredField("arguments").getAnnotation(SerializedName::class.java).value
         callJsonObject.add(argumentsSerializedName, argumentsJsonArray)
     }
 
