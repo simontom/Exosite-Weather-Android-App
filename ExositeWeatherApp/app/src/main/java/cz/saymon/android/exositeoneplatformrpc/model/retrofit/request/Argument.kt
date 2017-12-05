@@ -3,18 +3,19 @@ package cz.saymon.android.exositeoneplatformrpc.model.retrofit.request
 import com.google.gson.annotations.SerializedName
 import com.google.gson.annotations.Expose
 import java.util.Date
+import kotlin.math.roundToLong
 
 data class Argument(
         @SerializedName("alias") val alias: String? = null,
         @Expose(serialize = false) val writeValue: String? = null,
         @SerializedName("starttime") val starttime: Long? = 0,
-        @SerializedName("endtime") val endtime: Long? = Date().time,
+        @SerializedName("endtime") val endtime: Long? = (Date().time / 1000.0).roundToLong(), // Because it returns milliseconds
         @SerializedName("sort") val sort: ArgumentSortType? = ArgumentSortType.DESCENDING,
         @SerializedName("limit") val limit: Int? = 1,
         @SerializedName("selection") val selection: ArgumentSelectionType? = ArgumentSelectionType.ALL
 ) {
     companion object {
-        fun createWithAlias(alias: String) = Argument(alias, null, null, null,  null, null)
+        fun createWithAlias(alias: String) = Argument(alias, null, null, null,  null, null, null)
     }
 }
 
