@@ -9,7 +9,7 @@ data class Argument(
         @SerializedName("alias") val alias: String? = null,
         @Expose(serialize = false) val writeValue: String? = null,
         @SerializedName("starttime") val starttime: Long? = 0,
-        @SerializedName("endtime") val endtime: Long? = (Date().time / 1000.0).roundToLong(), // Because it returns milliseconds
+        @SerializedName("endtime") val endtime: Long? = (Date().time / 1000.0).toLong(), // Because it returns milliseconds
         @SerializedName("sort") val sort: ArgumentSortType? = ArgumentSortType.DESCENDING,
         @SerializedName("limit") val limit: Int? = 1,
         @SerializedName("selection") val selection: ArgumentSelectionType? = ArgumentSelectionType.ALL
