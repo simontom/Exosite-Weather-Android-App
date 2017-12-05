@@ -25,6 +25,10 @@ object Constants {
     val ALIAS_UVOUT = "uvOut"
     val ALIAS_VOLOUT2 = "volOut2"
 
+    val ALIAS_PWM_R = "pwmR"
+    val ALIAS_PWM_G = "pwmG"
+    val ALIAS_PWM_B = "pwmB"
+
     val ALIASES = listOf(
             ALIAS_TEMPBED, ALIAS_HUMBED,
             ALIAS_TEMPBAT, ALIAS_HUMBAT,
