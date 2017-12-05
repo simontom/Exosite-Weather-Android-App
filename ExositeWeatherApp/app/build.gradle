@@ -200,10 +200,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.kotlin_version"
 
     //    compile "com.jakewharton.rxbinding:rxbinding-support-v4:$rxBindingVersion"
-
     //    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rxBindingVersion"
-
     //    compile "com.jakewharton.rxbinding:rxbinding-design:$rxBindingVersion"
-
     //    compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:$rxBindingVersion"
 }
