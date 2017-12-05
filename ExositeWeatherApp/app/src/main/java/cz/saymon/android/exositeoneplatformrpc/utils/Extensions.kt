@@ -2,11 +2,13 @@ package cz.saymon.android.exositeoneplatformrpc.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.support.annotation.IntegerRes
 import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import cz.saymon.android.exositeoneplatformrpc.App
 import java.text.SimpleDateFormat
@@ -24,6 +26,13 @@ fun Activity.toast(text: String, showDuration: Int = Toast.LENGTH_SHORT) {
 
 fun Activity.toast(textResource: Int, showDuration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, textResource, showDuration).show()
+}
+
+fun Activity.hideSoftKeyboard() {
+    if (currentFocus != null) {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+    }
 }
 
 operator fun Regex.contains(text: CharSequence) = matches(text)
