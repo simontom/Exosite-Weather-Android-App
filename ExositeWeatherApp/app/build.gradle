@@ -62,7 +62,6 @@ kapt {
 
 
 dependencies {
-
     // Android Support libs (views) etc.
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
