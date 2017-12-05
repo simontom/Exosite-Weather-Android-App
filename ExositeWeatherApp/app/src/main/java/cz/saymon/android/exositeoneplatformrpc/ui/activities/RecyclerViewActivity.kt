@@ -52,14 +52,14 @@ class RecyclerViewActivity : AppCompatActivity() {
     }
 
     private fun handleResponse(dataset: List<Dataport>) {
-        toast("onNext: ${System.currentTimeMillis()}")
+        toast("onNext: ${System.currentTimeMillis()} ms")
         Timber.d(dataset.toString())
         adapter.setDataports(dataset)
         swiperefreshlayout.isRefreshing = false
     }
 
     private fun handleResponse(throwable: Throwable) {
-        toast("onException: ${System.currentTimeMillis()}")
+        toast("onException: ${System.currentTimeMillis()} ms")
         Timber.d(throwable.toString())
         swiperefreshlayout.isRefreshing = false
     }
