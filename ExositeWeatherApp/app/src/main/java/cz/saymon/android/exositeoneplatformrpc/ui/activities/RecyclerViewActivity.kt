@@ -12,11 +12,20 @@ import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequ
 import cz.saymon.android.exositeoneplatformrpc.ui.recyclerview.DataportRecyclerViewAdapter
 import cz.saymon.android.exositeoneplatformrpc.utils.app
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
+import io.reactivex.internal.operators.observable.ObservableDelay
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_recycler_view.*
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
+import android.util.TypedValue
+
 
 class RecyclerViewActivity : AppCompatActivity() {
 
@@ -31,31 +40,55 @@ class RecyclerViewActivity : AppCompatActivity() {
 
         app.appComponent.inject(this)
 
-        button.setOnClickListener { callApi() }
         setRecyclerView()
+        setSwipeRefreshLayout()
+
+        callApi()
+    }
+
+    private fun setSwipeRefreshLayout() {
+        swiperefreshlayout.setOnRefreshListener { callApi() }
+        swiperefreshlayout.setColorSchemeResources(R.color.blue, R.color.red, R.color.orange,
+                R.color.pink, R.color.yellow, R.color.black, R.color.cyan)
     }
 
     private fun setRecyclerView() {
-        adapter = DataportRecyclerViewAdapter() { toast("Clicked on: ${it.id}") }
+        adapter = DataportRecyclerViewAdapter { toast("Clicked on: ${it.id}") }
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = adapter
+    }
+
+    private fun stopRefreshingLayout() {
+        if (swiperefreshlayout.isRefreshing) {
+            swiperefreshlayout.isRefreshing = false
+        }
     }
 
     private fun handleResponse(dataset: List<Dataport>) {
         toast("onNext: ${System.currentTimeMillis()}")
         Timber.d(dataset.toString())
         adapter.setDataports(dataset)
+        stopRefreshingLayout()
     }
 
     private fun handleResponse(throwable: Throwable) {
         toast("onException: ${System.currentTimeMillis()}")
         Timber.d(throwable.toString())
+        stopRefreshingLayout()
     }
 
     private fun callApi() {
+        swiperefreshlayout.isRefreshing = true
         subscription?.dispose()
 
+//        subscription = Observable.just(true)
+//                .delay(5000, TimeUnit.MILLISECONDS)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe { swiperefreshlayout.isRefreshing = false }
+
         subscription = api.getItem(ServerRequest(Constants.ALIASES))
+                .delay(1500, TimeUnit.MILLISECONDS)
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }
                 .toSortedList()
