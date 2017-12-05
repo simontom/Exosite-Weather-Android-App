@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import cz.saymon.android.exositeoneplatformrpc.App
+import cz.saymon.android.exositeoneplatformrpc.di.components.AppComponent
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -19,6 +20,9 @@ private val dateFormatter = SimpleDateFormat("dd/MM HH:mm")
 
 val Activity.app: App
     get() = application as App
+
+val Activity.appComponent: AppComponent
+    get() = app.appComponent
 
 fun Activity.toast(text: String, showDuration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, text, showDuration).show()

@@ -10,7 +10,7 @@ import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerResponse
-import cz.saymon.android.exositeoneplatformrpc.utils.app
+import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        app.appComponent.inject(this)
+        appComponent.inject(this)
 
         button1.setOnClickListener(this::testApi1)
         button2.setOnClickListener(this::testApi2)
