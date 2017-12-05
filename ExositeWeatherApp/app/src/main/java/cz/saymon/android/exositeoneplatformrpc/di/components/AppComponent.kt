@@ -7,6 +7,7 @@ import cz.saymon.android.exositeoneplatformrpc.di.modules.JsonConverterModule
 import cz.saymon.android.exositeoneplatformrpc.di.modules.NetworkModule
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.ui.activities.MainActivity
+import cz.saymon.android.exositeoneplatformrpc.ui.activities.PwmControlActivity
 import cz.saymon.android.exositeoneplatformrpc.ui.activities.RecyclerViewActivity
 import dagger.Component
 import retrofit2.Retrofit
@@ -27,5 +28,6 @@ interface AppComponent {
     //////////////
     fun inject(activity: MainActivity)
     fun inject(activity: RecyclerViewActivity)
+    fun inject(activity: PwmControlActivity)
 
 }
