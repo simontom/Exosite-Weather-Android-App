@@ -40,8 +40,8 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     private fun initSwipeRefreshLayout() {
         swiperefreshlayout.setOnRefreshListener { callApi() }
-        swiperefreshlayout.setColorSchemeResources(R.color.blue, R.color.red, R.color.orange,
-                R.color.pink, R.color.yellow, R.color.black, R.color.cyan)
+        swiperefreshlayout.setColorSchemeResources(R.color.blue, R.color.red,
+                R.color.orange, R.color.pink, R.color.yellow, R.color.black, R.color.cyan)
     }
 
     private fun initRecyclerView() {
