@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private fun testApi1(_ignored: View) {
         subscription1?.dispose()
 
-        subscription1 = api.getItem()
+        subscription1 = api.callRpcApi()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { dataset -> handleResponse1(dataset) },
@@ -60,8 +60,8 @@ class MainActivity : AppCompatActivity() {
                 Constants.ALIAS_TEMPBAT, Constants.ALIAS_HUMBAT,
                 Constants.ALIAS_TEMPLIV, Constants.ALIAS_HUMLIV)
 
-//        subscription2 = api.getItem(Request())
-        subscription2 = api.getItem(ServerRequest(dataports))
+//        subscription2 = api.callRpcApi(Request())
+        subscription2 = api.callRpcApi(ServerRequest(dataports))
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }
                 .toSortedList { dataport1, dataport2 -> dataport1.location.compareTo(dataport2.location) }

@@ -4,25 +4,30 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class ServerRequest(@Expose(serialize = false) val dataportIds: List<String>? = null) {
-
-    constructor() : this(null)
+data class ServerRequest(
+        @Expose(serialize = false) val dataportIds: List<String>? = null,
+        @Expose(serialize = false) val argument: Argument? = null) {
 
     @SerializedName("auth")
     val auth: Auth = Auth()
 
     @SerializedName("calls")
-    var calls: List<Call> = Call.default
+    var calls: MutableList<Call> = ArrayList()
         private set
 
     init {
-        if (dataportIds != null) {
-            val calls = ArrayList<Call>()
+        dataportIds?.let {
             for (alias in dataportIds) {
                 calls.add(Call(alias))
             }
-            this.calls = calls
-        }
+        } ?: argument?.let {
+            val id = argument.alias!!
+            val procedure = when (argument.writeValue == null) {
+                true -> CallProcedureType.READ
+                false -> CallProcedureType.WRITE
+            }
+            calls.add(Call(id, procedure, argument))
+        } ?: calls.addAll(Call.defaultCalls)
     }
 
 }

@@ -67,7 +67,7 @@ class RecyclerViewActivity : AppCompatActivity() {
         swiperefreshlayout.isRefreshing = true
         subscription?.dispose()
 
-        subscription = api.getItem(ServerRequest(Constants.ALIASES))
+        subscription = api.callRpcApi(ServerRequest(Constants.ALIASES))
                 .delay(800, TimeUnit.MILLISECONDS)
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }

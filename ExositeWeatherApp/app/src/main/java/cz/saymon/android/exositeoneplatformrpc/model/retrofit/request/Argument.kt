@@ -15,7 +15,11 @@ data class Argument(
         @SerializedName("selection") val selection: ArgumentSelectionType? = ArgumentSelectionType.ALL
 ) {
     companion object {
-        fun createWithAlias(alias: String) = Argument(alias, null, null, null,  null, null, null)
+        fun createWithAlias(alias: String) =
+                Argument(alias, null, null, null,  null, null, null)
+
+        fun createWithAliasWriteValue(alias: String, writeValue: String) =
+                Argument(alias, writeValue, null, null, null, null, null)
     }
 }
 

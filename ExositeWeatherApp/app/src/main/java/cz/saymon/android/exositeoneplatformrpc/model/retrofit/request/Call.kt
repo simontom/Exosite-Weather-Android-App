@@ -10,7 +10,7 @@ data class Call(
         @SerializedName("arguments") val arguments: Argument = Argument()) {
 
     companion object {
-        val default: List<Call> by lazy {
+        val defaultCalls: List<Call> by lazy {
             val calls = ArrayList<Call>()
             calls.add(Call("errorAlias")) // Only for testing purpose
             for (alias in Constants.ALIASES) {

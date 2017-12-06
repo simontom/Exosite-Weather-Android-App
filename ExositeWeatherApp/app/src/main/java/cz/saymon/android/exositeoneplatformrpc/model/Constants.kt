@@ -2,6 +2,8 @@ package cz.saymon.android.exositeoneplatformrpc.model
 
 object Constants {
 
+    val UI_DEBOUNCE_TIME_MS = 500L
+
     val BASE_SERVER_URL = "http://m2.exosite.com/onep:v1/rpc/"
     val CIK = "8a6b7465ef593b47821c2a4f2ff7b1e1d2cb77b3"
 
