@@ -1,9 +1,8 @@
 package cz.saymon.android.exositeoneplatformrpc.model.retrofit.request
 
-import com.google.gson.annotations.SerializedName
 import com.google.gson.annotations.Expose
-import java.util.Date
-import kotlin.math.roundToLong
+import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class Argument(
         @SerializedName("alias") val alias: String? = null,
@@ -16,7 +15,7 @@ data class Argument(
 ) {
     companion object {
         fun createWithAlias(alias: String) =
-                Argument(alias, null, null, null,  null, null, null)
+                Argument(alias, null, null, null, null, null, null)
 
         fun createWithAliasWriteValue(alias: String, writeValue: String) =
                 Argument(alias, writeValue, null, null, null, null, null)

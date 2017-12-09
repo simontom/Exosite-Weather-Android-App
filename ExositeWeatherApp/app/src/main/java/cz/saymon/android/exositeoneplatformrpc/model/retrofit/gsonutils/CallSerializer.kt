@@ -25,12 +25,12 @@ class CallSerializer : JsonSerializer<Call> {
     }
 
     private fun addIdProperty(callJsonObject: JsonObject, src: Call) {
-        val idSerializedName = src.javaClass.getDeclaredField("id").getAnnotation(SerializedName::class.java).value
+        val idSerializedName = "id"
         callJsonObject.addProperty(idSerializedName, src.id)
     }
 
     private fun addProcedure(callJsonObject: JsonObject, src: Call) {
-        val procedureSerializedName = src.javaClass.getDeclaredField("procedure").getAnnotation(SerializedName::class.java).value
+        val procedureSerializedName = "procedure"
         callJsonObject.addProperty(procedureSerializedName, src.procedure.procedureName)
     }
 

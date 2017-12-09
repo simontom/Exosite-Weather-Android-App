@@ -15,7 +15,7 @@ class DataportViewHolder(val view: View?, val clickListener: (Dataport) -> Unit)
 //        this.dataport = dataport
         view ?: return
         with (view) {
-            location.text = "${dataport.location.name} - ${dataport.type.name}"
+            location.text = "${dataport.location.locationName} - ${dataport.type.name}"
             value.text = "${dataport.values[0].value} ${dataport.type.unit}"
             time.text = dataport.values[0].time.toFormattedDate()
         }

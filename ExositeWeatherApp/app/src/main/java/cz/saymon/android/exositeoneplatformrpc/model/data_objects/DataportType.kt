@@ -3,24 +3,21 @@ package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 import cz.saymon.android.exositeoneplatformrpc.utils.contains
 
 
-enum class DataportType(val unit: String) {
-    TEMPERATURE("°C"),
-    HUMIDITY("%"),
-    PRESSURE("hPa"),
-    VOLTAGE("mV"),
-    UNKNOWN("--");
+enum class DataportType(private val regex: Regex, val unit: String) {
+    TEMPERATURE(Regex("tem.+"), "°C"),
+    HUMIDITY(Regex("hum.+"), "%"),
+    PRESSURE(Regex("pre.+"), "hPa"),
+    LIGHT(Regex("lig.+"), "lx"),
+    UV(Regex("uv.+"), "uv"),
+    VOLTAGE(Regex("vol.+"), "mV"),
+    UNKNOWN(Regex("_ignored_"), "--");
 
     companion object {
-        private val TEMPERATURE_TYPE = Regex("tem.+", RegexOption.IGNORE_CASE)
-        private val HUMIDITY_TYPE = Regex("hum.+", RegexOption.IGNORE_CASE)
-        private val PRESSURE_TYPE = Regex("pre.+", RegexOption.IGNORE_CASE)
-        private val VOLTAGE_TYPE = Regex("vol.+", RegexOption.IGNORE_CASE)
-
         fun parseFrom(dataportId: String): DataportType = when (dataportId) {
-            in TEMPERATURE_TYPE -> TEMPERATURE
-            in HUMIDITY_TYPE -> HUMIDITY
-            in PRESSURE_TYPE -> PRESSURE
-            in VOLTAGE_TYPE -> VOLTAGE
+            in TEMPERATURE.regex -> TEMPERATURE
+            in HUMIDITY.regex -> HUMIDITY
+            in PRESSURE.regex -> PRESSURE
+            in VOLTAGE.regex -> VOLTAGE
             else -> UNKNOWN
         }
     }
