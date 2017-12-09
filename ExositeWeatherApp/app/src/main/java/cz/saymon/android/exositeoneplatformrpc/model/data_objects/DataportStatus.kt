@@ -6,7 +6,7 @@ enum class DataportStatus(private val status: String) {
     UNKNOWN_ERROR("");
 
     companion object {
-        fun parseFrom(status: String): DataportStatus = when(status) {
+        fun parseFrom(status: String): DataportStatus = when(status.toLowerCase()) {
             OK.status -> OK
             INVALID.status -> INVALID
             else -> UNKNOWN_ERROR
