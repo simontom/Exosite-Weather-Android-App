@@ -28,6 +28,7 @@ class PwmControlActivity : AppCompatActivity() {
     lateinit var api: ServerApi
     private var subscriptionRead: Disposable? = null
     private var subscriptionWrite: Disposable? = null
+    private var subscriptionSeekBar: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,11 @@ class PwmControlActivity : AppCompatActivity() {
 
         readServerPwmValues()
         initPwmSeekbars()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        subscriptionSeekBar?.dispose()
     }
 
     private fun initPwmSeekbars() {
