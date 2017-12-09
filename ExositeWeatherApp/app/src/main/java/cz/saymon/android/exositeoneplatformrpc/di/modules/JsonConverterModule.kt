@@ -6,6 +6,7 @@ import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ArgumentSe
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ArgumentSortType
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Call
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.CallProcedureType
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerResponse
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerValue
 import dagger.Module
 import dagger.Provides
@@ -23,7 +24,8 @@ class JsonConverterModule {
                 .registerTypeAdapter(CallProcedureType::class.java, CallProcedureTypeSerializer())
                 .registerTypeAdapter(ArgumentSortType::class.java, ArgumentSortTypeSerializer())
                 .registerTypeAdapter(ArgumentSelectionType::class.java, ArgumentSelectionTypeSerializer())
-                .registerTypeAdapter(ServerValue::class.java, ServerValueGsonDeserializer())
+                .registerTypeAdapter(ServerValue::class.java, ServerValueDeserializer())
+                .registerTypeAdapter(ServerResponse::class.java, ServerResponseDeserializer())
         return GsonConverterFactory.create(builder.create())
     }
 
