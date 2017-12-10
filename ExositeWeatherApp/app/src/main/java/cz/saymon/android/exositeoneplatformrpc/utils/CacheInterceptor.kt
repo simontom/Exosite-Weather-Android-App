@@ -5,9 +5,7 @@ import okhttp3.Response
 import java.io.IOException
 import javax.inject.Inject
 
-class CacheInterceptor @Inject
-constructor(private val networkStatus: NetworkStatus) : Interceptor {
-
+class CacheInterceptor /*@Inject*/ constructor(private val networkStatus: NetworkStatus) : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
