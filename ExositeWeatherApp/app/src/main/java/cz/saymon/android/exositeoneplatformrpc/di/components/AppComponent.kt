@@ -9,6 +9,8 @@ import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.ui.activities.MainActivity
 import cz.saymon.android.exositeoneplatformrpc.ui.activities.PwmControlActivity
 import cz.saymon.android.exositeoneplatformrpc.ui.activities.RecyclerViewActivity
+import cz.saymon.android.exositeoneplatformrpc.ui.fragments.DataportsListFragment
+import cz.saymon.android.exositeoneplatformrpc.ui.fragments.PwmControlFragment
 import dagger.Component
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -29,5 +31,8 @@ interface AppComponent {
     fun inject(activity: MainActivity)
     fun inject(activity: RecyclerViewActivity)
     fun inject(activity: PwmControlActivity)
+
+    fun inject(fragment: DataportsListFragment)
+    fun inject(fragment: PwmControlFragment)
 
 }

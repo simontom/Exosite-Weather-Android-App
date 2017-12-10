@@ -7,15 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import kotlinx.android.synthetic.main.fragment_pwm_control.view.*
 
 import cz.saymon.android.exositeoneplatformrpc.R
+import kotlinx.android.synthetic.main.activity_main.*
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PwmControlFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PwmControlFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
@@ -30,10 +26,10 @@ class PwmControlFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val textView = TextView(activity)
         textView.setText(R.string.hello_blank_fragment)
+        textView.text = textView.text.toString() + " : $mParam1 : $mParam2"
         return textView
     }
 
