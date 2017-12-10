@@ -15,6 +15,7 @@ class ServerResponseDeserializer : JsonDeserializer<ServerResponse> {
         val result = when (resultJson) {
             is JsonArray -> parseResultProperty(resultJson, context)
             is JsonPrimitive -> parseResultProperty(resultJson, context)
+            null -> emptyList<ServerValue>()
             else -> throw JsonParseException("Expected JsonArray or JsonPrimitive, got: ${resultJson.javaClass}")
         }
 
