@@ -2,10 +2,26 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cz.saymon.android.exositeoneplatformrpc.ui.activities.PwmControlActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cz.saymon.android.exositeoneplatformrpc.ui.activities.PwmControlActivity">
+    android:layout_marginLeft="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginEnd="4dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Pwm Red"/>
+
+    <TextView
+        android:id="@+id/pwmr_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="123"/>
 
     <SeekBar
         android:id="@+id/pwmr"
@@ -15,6 +31,20 @@
         android:layout_marginBottom="8dp"
         android:max="255"/>
 
+    <include layout="@layout/horizontal_separator"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Pwm Green"/>
+
+    <TextView
+        android:id="@+id/pwmg_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="123"/>
+
     <SeekBar
         android:id="@+id/pwmg"
         android:layout_width="match_parent"
@@ -22,6 +52,20 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:max="255"/>
+
+    <include layout="@layout/horizontal_separator"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Pwm Blue"/>
+
+    <TextView
+        android:id="@+id/pwmb_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="123"/>
 
     <SeekBar
         android:id="@+id/pwmb"

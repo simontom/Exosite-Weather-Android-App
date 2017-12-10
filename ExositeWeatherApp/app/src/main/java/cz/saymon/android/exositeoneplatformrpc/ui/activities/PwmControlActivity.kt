@@ -15,6 +15,7 @@ import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerRes
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
 import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_pwm_control.*
@@ -27,8 +28,9 @@ class PwmControlActivity : AppCompatActivity() {
     @Inject
     lateinit var api: ServerApi
     private var subscriptionRead: Disposable? = null
-    private var subscriptionWrite: Disposable? = null
-    private var subscriptionSeekBar: Disposable? = null
+    private var subscriptionWriteR: Disposable? = null
+    private var subscriptionWriteG: Disposable? = null
+    private var subscriptionWriteB: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,21 +42,27 @@ class PwmControlActivity : AppCompatActivity() {
         initPwmSeekbars()
     }
 
-    override fun onStop() {
-        super.onStop()
-        subscriptionSeekBar?.dispose()
-    }
-
     private fun initPwmSeekbars() {
-        RxSeekBar.changeEvents(pwmr)
+        val flowablePwmR = RxSeekBar.changeEvents(pwmr)
                 .ofType(SeekBarProgressChangeEvent::class.java)
                 .toFlowable(BackpressureStrategy.LATEST)
                 .debounce(Constants.UI_DEBOUNCE_TIME_MS, TimeUnit.MILLISECONDS)
+
+        val flowablePwmG = RxSeekBar.changeEvents(pwmg)
+                .ofType(SeekBarProgressChangeEvent::class.java)
+                .toFlowable(BackpressureStrategy.LATEST)
+                .debounce(Constants.UI_DEBOUNCE_TIME_MS, TimeUnit.MILLISECONDS)
+
+        val flowablePwmB = RxSeekBar.changeEvents(pwmb)
+                .ofType(SeekBarProgressChangeEvent::class.java)
+                .toFlowable(BackpressureStrategy.LATEST)
+                .debounce(Constants.UI_DEBOUNCE_TIME_MS, TimeUnit.MILLISECONDS)
+
+        Flowable.merge(flowablePwmR, flowablePwmG, flowablePwmB)
+                .filter { it.fromUser() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { seekBarEvent ->
-                    if (seekBarEvent.fromUser()) {
-                        writeServerPwmValue(Constants.ALIAS_PWMR, seekBarEvent.progress())
-                    }
+                    writeServerPwmValueHelper(seekBarEvent.view().id, seekBarEvent.progress())
                 }
     }
 
@@ -64,15 +72,25 @@ class PwmControlActivity : AppCompatActivity() {
 
         for (pwmDataport in dataset) {
             val progress = pwmDataport.values[0].value.toInt()
+
             when (pwmDataport.id) {
-                Constants.ALIAS_PWMR -> pwmr.progress = progress
-                Constants.ALIAS_PWMG -> pwmg.progress = progress
-                Constants.ALIAS_PWMB -> pwmb.progress = progress
+                Constants.ALIAS_PWMR -> {
+                    pwmr.progress = progress
+                    pwmr_value.text = progress.toString()
+                }
+                Constants.ALIAS_PWMG -> {
+                    pwmg.progress = progress
+                    pwmg_value.text = progress.toString()
+                }
+                Constants.ALIAS_PWMB -> {
+                    pwmb.progress = progress
+                    pwmb_value.text = progress.toString()
+                }
             }
         }
     }
 
-    private fun handleResponseTest(dataset: List<ServerResponse>?) {
+    private fun handleResponseWrite(dataset: List<ServerResponse>?) {
         toast("onNext (WRITE): ${System.currentTimeMillis()} ms")
         Timber.d(dataset.toString())
     }
@@ -82,17 +100,48 @@ class PwmControlActivity : AppCompatActivity() {
         Timber.d(throwable.toString())
     }
 
-    private fun writeServerPwmValue(pwmSeekBarAlias: String, progress: Int) {
-        subscriptionWrite?.dispose()
-
+    private fun createWritePwmValueServerRequest(pwmSeekBarAlias: String, progress: Int): ServerRequest {
         val argument = Argument.createWithAliasWriteValue(pwmSeekBarAlias, progress.toString())
         val serverRequest = ServerRequest(argument = argument)
-        subscriptionWrite = api.callRpcApi(serverRequest)
+        return serverRequest
+    }
+
+    private fun callWriteApi(serverRequest: ServerRequest): Disposable {
+        return api.callRpcApi(serverRequest)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe (
-                        { responses: List<ServerResponse>? -> handleResponseTest(responses) },
+                .subscribe(
+                        { responses: List<ServerResponse>? -> handleResponseWrite(responses) },
                         { throwable -> handleResponse(throwable) }
                 )
+    }
+
+    private fun writeServerPwmRvalue(progress: Int) {
+        pwmr_value.text = progress.toString()
+        val serverRequest = createWritePwmValueServerRequest(Constants.ALIAS_PWMR, progress)
+        subscriptionWriteR?.dispose()
+        subscriptionWriteR = callWriteApi(serverRequest)
+    }
+
+    private fun writeServerPwmGvalue(progress: Int) {
+        pwmg_value.text = progress.toString()
+        val serverRequest = createWritePwmValueServerRequest(Constants.ALIAS_PWMG, progress)
+        subscriptionWriteG?.dispose()
+        subscriptionWriteG = callWriteApi(serverRequest)
+    }
+
+    private fun writeServerPwmBvalue(progress: Int) {
+        pwmb_value.text = progress.toString()
+        val serverRequest = createWritePwmValueServerRequest(Constants.ALIAS_PWMB, progress)
+        subscriptionWriteB?.dispose()
+        subscriptionWriteB = callWriteApi(serverRequest)
+    }
+
+    private fun writeServerPwmValueHelper(seekbarId: Int, seekbarProgress: Int) {
+        when (seekbarId) {
+            pwmr.id -> writeServerPwmRvalue(seekbarProgress)
+            pwmg.id -> writeServerPwmGvalue(seekbarProgress)
+            pwmb.id -> writeServerPwmBvalue(seekbarProgress)
+        }
     }
 
     private fun readServerPwmValues() {
