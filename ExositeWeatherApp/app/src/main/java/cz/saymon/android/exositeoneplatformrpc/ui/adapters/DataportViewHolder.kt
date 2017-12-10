@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpc.ui.recyclerview
+package cz.saymon.android.exositeoneplatformrpc.ui.adapters
 
 import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
