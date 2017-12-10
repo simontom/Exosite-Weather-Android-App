@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
                 Constants.ALIAS_TEMPBAT, Constants.ALIAS_HUMBAT,
                 Constants.ALIAS_TEMPLIV, Constants.ALIAS_HUMLIV)
 
-//        subscription2 = api.callRpcApi(Request())
         subscription2 = api.callRpcApi(ServerRequest(dataports))
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }
