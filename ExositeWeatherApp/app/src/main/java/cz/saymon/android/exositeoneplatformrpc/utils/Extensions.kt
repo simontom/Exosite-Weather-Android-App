@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.support.annotation.IntegerRes
 import android.support.annotation.LayoutRes
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,9 @@ fun Activity.hideSoftKeyboard() {
         inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
 }
+
+val Fragment.appComponent: AppComponent
+get() = this.getActivity()!!.appComponent
 
 operator fun Regex.contains(text: CharSequence) = matches(text)
 
