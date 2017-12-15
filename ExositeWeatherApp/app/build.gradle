@@ -65,12 +65,12 @@ dependencies {
     // Android Support libs (views) etc.
     implementation "com.android.support:support-v4:$rootProject.androidSupportVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.androidSupportVersion"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.androidSupportVersion"
     implementation "com.android.support:design:$rootProject.androidSupportVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
 
     // Loggin; better than plain 'Log'
-    implementation 'com.jakewharton.timber:timber:4.4.0'
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
     // Dependency injection
     implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
@@ -85,7 +85,7 @@ dependencies {
 
     // Reactive
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.reactivexVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.reactivexAndoirVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.reactivexAndroidVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
     implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxBindingVersion"
 

@@ -6,31 +6,16 @@ ext {
 
     androidSupportVersion = '27.0.2'
     constraintLayoutVersion = '1.0.2'
-    googleServicesVersion = '9.8.0'
 
-    glideVersion = '4.4.0'
-
-    nucleusVersion = '4.0.0'
-
-    esperandroVersion = '2.2.0'
-
-    icepickVersion = '3.2.0'
+    timberVersion = '4.4.0'
 
     daggerVersion = '2.11'
-
-    autoValueVersion = '1.2'
-    autoValueGsonVersion = '0.4.4'
-    autoValueParcelVersion = '0.2.5'
-    autoValueRedactedVersion = '1.0.0'
-    autoValueCursorVersion = '1.0.0'
-
-    butterKnifeVersion = '8.8.1'
 
     retrofitVersion = '2.3.0'
     okhttp3Version = '3.4.1'
 
     reactivexVersion = '2.1.5'
-    reactivexAndoirVersion = '2.0.1'
+    reactivexAndroidVersion = '2.0.1'
     rxBindingVersion = '2.0.0'
 }
 
