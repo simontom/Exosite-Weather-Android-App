@@ -63,36 +63,18 @@ kapt {
 
 dependencies {
     // Android Support libs (views) etc.
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:support-v4:$rootProject.androidSupportVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.androidSupportVersion"
-    implementation "com.android.support.constraint:constraint-layout:1.0.2"
-    implementation "com.android.support:design:$rootProject.androidSupportVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
-    implementation "com.android.support:design:$androidSupportVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.androidSupportVersion"
+    implementation "com.android.support:design:$rootProject.androidSupportVersion"
 
     // Loggin; better than plain 'Log'
     implementation 'com.jakewharton.timber:timber:4.4.0'
 
-    // Persistent data helpers
-    ///////////////////////////
-    // SharedPrefs
-    //    implementation "de.devland.esperandro:esperandro-api:$esperandroVersion"
-    //    implementation "de.devland.esperandro:esperandro-gson-addon:$esperandroVersion"
-    //    kapt     "de.devland.esperandro:esperandro:$esperandroVersion"
-
-    // OnSaveInstanceState helper
-    //    implementation "frankiesardo:icepick:$icepickVersion"
-    //    apt     "frankiesardo:icepick-processor:$icepickVersion"
-
     // Dependency injection
     implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-
-    // Image Loading
-    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
 
     // Retrofit and its helper parts
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
