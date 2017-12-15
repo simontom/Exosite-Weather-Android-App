@@ -2,56 +2,84 @@ package cz.saymon.android.exositeoneplatformrpc.ui.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import cz.saymon.android.exositeoneplatformrpc.R
-import kotlinx.android.synthetic.main.fragment_dataports_list.view.*
+import cz.saymon.android.exositeoneplatformrpc.model.Constants
+import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
+import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
+import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewAdapter
+import cz.saymon.android.exositeoneplatformrpc.utils.toast
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.fragment_dataports_list.*
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class DataportsListFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
-        }
-    }
+    @Inject
+    lateinit var api: ServerApi
+    private lateinit var adapter: DataportRecyclerViewAdapter
+    private var subscription: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val textView = TextView(activity)
-        textView.setText(R.string.hello_blank_fragment)
-        textView.text = textView.text.toString() + " : $mParam1 : $mParam2"
-        return textView
+        return inflater.inflate(R.layout.fragment_dataports_list, container, false)
     }
 
-    companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DataportsListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): DataportsListFragment {
-            val fragment = DataportsListFragment()
-            val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
-            fragment.arguments = args
-            return fragment
-        }
-    }
-}// Required empty public constructor
+//        appComponent.inject(this)
+
+//        initRecyclerView()
+//        initSwipeRefreshLayout()
+//        callApi()
+//    }
+
+//    private fun initSwipeRefreshLayout() {
+//        swiperefreshlayout.setOnRefreshListener { callApi() }
+//        swiperefreshlayout.setColorSchemeResources(R.color.blue, R.color.red,
+//                R.color.orange, R.color.pink, R.color.yellow, R.color.black, R.color.cyan)
+//    }
+//
+//    private fun initRecyclerView() {
+//        adapter = DataportRecyclerViewAdapter { toast("Clicked on: ${it.id}") }
+//        recyclerview.layoutManager = LinearLayoutManager(context)
+//        recyclerview.adapter = adapter
+//    }
+//
+//    private fun handleResponse(dataset: List<Dataport>) {
+//        toast("onNext: ${System.currentTimeMillis()} ms")
+//        Timber.d(dataset.toString())
+//        adapter.setDataports(dataset)
+//        swiperefreshlayout.isRefreshing = false
+//    }
+//
+//    private fun handleResponse(throwable: Throwable) {
+//        toast("onException: ${System.currentTimeMillis()} ms")
+//        Timber.d(throwable.toString())
+//        swiperefreshlayout.isRefreshing = false
+//    }
+//
+//    private fun callApi() {
+//        swiperefreshlayout.isRefreshing = true
+//        subscription?.dispose()
+//
+//        subscription = api.callRpcApi(ServerRequest(Constants.ALIASES))
+//                .delay(800, TimeUnit.MILLISECONDS)
+//                .flatMapIterable(Dataport.MAPPER)
+//                .filter { it.status == DataportStatus.OK }
+//                .toSortedList()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        { dataset -> handleResponse(dataset) },
+//                        { throwable -> handleResponse(throwable) })
+//    }
+
+}

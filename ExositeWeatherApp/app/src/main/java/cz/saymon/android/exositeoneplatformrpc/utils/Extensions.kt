@@ -32,6 +32,14 @@ fun Activity.toast(textResource: Int, showDuration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, textResource, showDuration).show()
 }
 
+fun Fragment.toast(text: String, showDuration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this.context!!, text, showDuration).show()
+}
+
+fun Fragment.toast(textResource: Int, showDuration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this.context!!, textResource, showDuration).show()
+}
+
 fun Activity.hideSoftKeyboard() {
     if (currentFocus != null) {
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -14,8 +14,8 @@ class ExositeTabsPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerA
 
     override fun getItem(position: Int): Fragment {
         when (position) {
-            0 -> return DataportsListFragment.newInstance(position.toString(), (position + 1).toString())
-            1 -> return PwmControlFragment.newInstance(position.toString(), (position + 1).toString())
+            0 -> return DataportsListFragment()
+            1 -> return PwmControlFragment()
             else -> throw IllegalStateException("Position not allowed: $position")
         }
     }
