@@ -3,7 +3,6 @@ package cz.saymon.android.exositeoneplatformrpc.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.support.annotation.IntegerRes
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +13,7 @@ import android.widget.Toast
 import cz.saymon.android.exositeoneplatformrpc.App
 import cz.saymon.android.exositeoneplatformrpc.di.components.AppComponent
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 private val dateFormatter = SimpleDateFormat("dd/MM HH:mm")
@@ -41,7 +40,7 @@ fun Activity.hideSoftKeyboard() {
 }
 
 val Fragment.appComponent: AppComponent
-get() = this.getActivity()!!.appComponent
+    get() = this.getActivity()!!.appComponent
 
 operator fun Regex.contains(text: CharSequence) = matches(text)
 
