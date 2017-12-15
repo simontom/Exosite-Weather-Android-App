@@ -77,113 +77,48 @@ dependencies {
     // Other libs for Views
 
     //    implementation 'org.quanqi:android-view-pager-indicator:0.9.0'
-
     //    implementation 'com.makeramen:roundedimageview:2.2.1'
 
     // MVP architecture support
-
     //    implementation "info.android15.nucleus:nucleus:$nucleusVersion"
-
     //    implementation "info.android15.nucleus:nucleus-support-v4:$nucleusVersion"
-
     //    implementation "info.android15.nucleus:nucleus-support-v7:$nucleusVersion"
 
     // Maps services and utils
-
     //    implementation "com.google.android.gms:play-services-maps:$googleServicesVersion"
-
     //    implementation "com.google.android.gms:play-services-location:$googleServicesVersion"
-
     //    implementation 'com.google.maps.android:android-maps-utils:0.4.4'
 
     // EventBus
-
     //    implementation 'org.greenrobot:eventbus:3.0.0'
 
     // Loggin; better than plain 'Log'
     implementation 'com.jakewharton.timber:timber:4.4.0'
 
     // Persistent data helpers
-
     ///////////////////////////
-
     // SharedPrefs
-
     //    implementation "de.devland.esperandro:esperandro-api:$esperandroVersion"
-
+    //    implementation "de.devland.esperandro:esperandro-gson-addon:$esperandroVersion"
     //    kapt     "de.devland.esperandro:esperandro:$esperandroVersion"
 
-    //    implementation "de.devland.esperandro:esperandro-gson-addon:$esperandroVersion"
-
-    // Database with RxJava support
-
-    //    implementation 'com.squareup.sqlbrite:sqlbrite:0.7.0'
-
     // OnSaveInstanceState helper
-
     //    implementation "frankiesardo:icepick:$icepickVersion"
-
     //    apt     "frankiesardo:icepick-processor:$icepickVersion"
 
-    // Dependency injection, Code generating
-
-    /////////////////////////////////////////
-
-    // Dagger
+    // Dependency injection
     implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-
-    //    provided 'org.glassfish:javax.annotation:10.0-b28'
-
-    // ButterKnife
-
-    //    implementation "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
-
-    //    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
-
-    // AutoValue
-
-    //    apt     "com.google.auto.value:auto-value:$autoValueVersion"
-
-    //    implementation "com.google.auto.value:auto-value:$autoValueVersion"
-
-    // https://github.com/rharter/auto-value-gson
-
-    //    apt     "com.ryanharter.auto.value:auto-value-gson:$autoValueGsonVersion"
-
-    //    implementation "com.ryanharter.auto.value:auto-value-gson:$autoValueGsonVersion"
-
-    // https://github.com/rharter/auto-value-parcel
-
-    //    apt     "com.ryanharter.auto.value:auto-value-parcel:$autoValueParcelVersion"
-
-    //    implementation "com.ryanharter.auto.value:auto-value-parcel-adapter:$autoValueParcelVersion"
-
-    // https://github.com/square/auto-value-redacted
-
-    //    apt     "com.squareup.auto.value:auto-value-redacted:$autoValueRedactedVersion"
-
-    // https://github.com/gabrielittner/auto-value-cursor
-
-    //    apt     "com.gabrielittner.auto.value:auto-value-cursor:$autoValueCursorVersion"
-
-    //    implementation "com.gabrielittner.auto.value:auto-value-cursor-annotations:$autoValueCursorVersion"
 
     // Networking
 
     //////////////
 
     // Image Loading
-
-    //    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
-
-    //    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
 
     // Network
-
-    //    implementation 'com.loopj.android:android-async-http:1.4.9'
-
-    //    implementation "com.squareup.okhttp3:okhttp:$okhttp3Version"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Version"
 
     // Retrofit and its helper parts
@@ -198,9 +133,4 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
     implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxBindingVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.kotlin_version"
-
-    //    implementation "com.jakewharton.rxbinding:rxbinding-support-v4:$rxBindingVersion"
-    //    implementation "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rxBindingVersion"
-    //    implementation "com.jakewharton.rxbinding:rxbinding-design:$rxBindingVersion"
-    //    implementation "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:$rxBindingVersion"
 }
