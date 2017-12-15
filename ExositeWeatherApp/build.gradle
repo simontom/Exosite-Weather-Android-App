@@ -8,6 +8,8 @@ ext {
     constraintLayoutVersion = '1.0.2'
     googleServicesVersion = '9.8.0'
 
+    glideVersion = '4.4.0'
+
     nucleusVersion = '4.0.0'
 
     esperandroVersion = '2.2.0'
