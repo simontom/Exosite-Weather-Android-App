@@ -65,7 +65,7 @@ class DataportsListFragment : Fragment() {
         adapter.setDataports(dataset)
         swiperefreshlayout.isRefreshing = false
 
-        activityAs<SnackbarDisplayer>()?.showSnackbar("test")
+        activityAs<SnackbarDisplayer>()?.showSnackbarInfo("Updated")
     }
 
     private fun handleResponse(throwable: Throwable) {
@@ -73,7 +73,7 @@ class DataportsListFragment : Fragment() {
         Timber.d(throwable.toString())
         swiperefreshlayout.isRefreshing = false
 
-        activityAs<SnackbarDisplayer>()?.showSnackbar("test")
+        activityAs<SnackbarDisplayer>()?.showSnackbarError(R.string.error_no_internet)
     }
 
     private fun callApi() {
