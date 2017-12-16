@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Pwm Red"/>
+        android:text="@string/seekbar_red"/>
 
     <TextView
         android:id="@+id/pwmr_value"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Pwm Green"/>
+        android:text="@string/seekbar_green"/>
 
     <TextView
         android:id="@+id/pwmg_value"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Pwm Blue"/>
+        android:text="@string/seekbar_blue"/>
 
     <TextView
         android:id="@+id/pwmb_value"

@@ -5,5 +5,9 @@
     <string name="tab_title_1">Dataports</string>
     <string name="tab_title_2">RGB Led</string>
 
+    <string name="seekbar_red">Pwm Red</string>
+    <string name="seekbar_green">Pwm Green</string>
+    <string name="seekbar_blue">Pwm Blue</string>
+
     <string name="error_no_internet">No Internet connection</string>
 </resources>
