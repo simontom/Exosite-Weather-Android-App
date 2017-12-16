@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Weather Station</string>
 
-    <string name="title_activity_tabbed">Main Screen</string>
+    <string name="title_activity_tabbed">Exosite Weather Data</string>
     <string name="tab_title_1">Dataports</string>
     <string name="tab_title_2">RGB Led</string>
 
