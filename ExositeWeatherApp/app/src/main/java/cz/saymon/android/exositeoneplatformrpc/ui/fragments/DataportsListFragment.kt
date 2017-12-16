@@ -37,7 +37,6 @@ class DataportsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         appComponent.inject(this)
 
         initRecyclerView()
@@ -60,20 +59,16 @@ class DataportsListFragment : Fragment() {
     }
 
     private fun handleResponse(dataset: List<Dataport>) {
-        toast("onNext: ${System.currentTimeMillis()} ms")
         Timber.d(dataset.toString())
         adapter.setDataports(dataset)
         swiperefreshlayout.isRefreshing = false
-
-        activityAs<SnackbarDisplayer>()?.showSnackbarInfo("Updated")
     }
 
     private fun handleResponse(throwable: Throwable) {
-        toast("onException: ${System.currentTimeMillis()} ms")
         Timber.d(throwable.toString())
         swiperefreshlayout.isRefreshing = false
 
-        activityAs<SnackbarDisplayer>()?.showSnackbarError(R.string.error_no_internet)
+        activityAs<SnackbarDisplayer>()?.showSnackbarError(R.string.message_error_no_internet)
     }
 
     private fun callApi() {

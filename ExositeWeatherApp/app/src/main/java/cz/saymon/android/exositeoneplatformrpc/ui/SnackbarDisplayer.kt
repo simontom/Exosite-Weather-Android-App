@@ -2,6 +2,7 @@ package cz.saymon.android.exositeoneplatformrpc.ui
 
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.TextView
 import cz.saymon.android.exositeoneplatformrpc.R
@@ -49,11 +50,13 @@ interface SnackbarDisplayer {
     }
 
     private fun applyColors(snackbarView: View, textColorRes: Int? = null, backgroundColorRes: Int? = null) {
-        backgroundColorRes?.let { snackbarView.setBackgroundColor(it) }
+        backgroundColorRes?.let {
+            snackbarView.setBackgroundColor(ContextCompat.getColor(snackbarView.context, it))
+        }
         textColorRes?.let {
             snackbarView
                     .findViewById<TextView>(android.support.design.R.id.snackbar_text)
-                    .setTextColor(it)
+                    .setTextColor(ContextCompat.getColor(snackbarView.context, it))
         }
     }
 

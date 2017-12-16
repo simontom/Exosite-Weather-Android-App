@@ -1,8 +1,6 @@
 package cz.saymon.android.exositeoneplatformrpc.ui.activities
 
 import android.os.Bundle
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import cz.saymon.android.exositeoneplatformrpc.R

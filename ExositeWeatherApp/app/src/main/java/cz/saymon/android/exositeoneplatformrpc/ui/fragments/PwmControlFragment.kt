@@ -16,8 +16,9 @@ import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Argument
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerResponse
+import cz.saymon.android.exositeoneplatformrpc.ui.SnackbarDisplayer
+import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
-import cz.saymon.android.exositeoneplatformrpc.utils.toast
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,21 +30,20 @@ import javax.inject.Inject
 
 class PwmControlFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_pwm_control, container, false)
-    }
-
-
     @Inject
     lateinit var api: ServerApi
+
     private var subscriptionRead: Disposable? = null
     private var subscriptionWriteR: Disposable? = null
     private var subscriptionWriteG: Disposable? = null
     private var subscriptionWriteB: Disposable? = null
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_pwm_control, container, false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         appComponent.inject(this)
 
         readServerPwmValues()
@@ -75,7 +75,6 @@ class PwmControlFragment : Fragment() {
     }
 
     private fun handleResponse(dataset: List<Dataport>) {
-        toast("onNext (READ): ${System.currentTimeMillis()} ms")
         Timber.d(dataset.toString())
 
         for (pwmDataport in dataset) {
@@ -99,13 +98,13 @@ class PwmControlFragment : Fragment() {
     }
 
     private fun handleResponseWrite(dataset: List<ServerResponse>?) {
-        toast("onNext (WRITE): ${System.currentTimeMillis()} ms")
         Timber.d(dataset.toString())
+        activityAs<SnackbarDisplayer>()?.showSnackbarInfo(R.string.message_info_data_written)
     }
 
     private fun handleResponse(throwable: Throwable) {
-        toast("onException: ${System.currentTimeMillis()} ms")
         Timber.d(throwable.toString())
+        activityAs<SnackbarDisplayer>()?.showSnackbarError(R.string.message_error_no_internet)
     }
 
     private fun createWritePwmValueServerRequest(pwmSeekBarAlias: String, progress: Int): ServerRequest {
