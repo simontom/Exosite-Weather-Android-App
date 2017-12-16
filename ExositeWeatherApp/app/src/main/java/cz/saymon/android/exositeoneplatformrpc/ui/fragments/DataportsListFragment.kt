@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
+import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportLocation
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
@@ -17,6 +18,7 @@ import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewA
 import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_dataports_list.*
@@ -64,6 +66,12 @@ class DataportsListFragment : Fragment() {
         swiperefreshlayout.isRefreshing = false
     }
 
+    private fun handleResponse(dataset: Map<DataportLocation, Dataport>) {
+        Timber.d(dataset.toString())
+//        adapter.setDataports(dataset)
+        swiperefreshlayout.isRefreshing = false
+    }
+
     private fun handleResponse(throwable: Throwable) {
         Timber.d(throwable.toString())
         swiperefreshlayout.isRefreshing = false
@@ -79,6 +87,8 @@ class DataportsListFragment : Fragment() {
                 .delay(800, TimeUnit.MILLISECONDS)
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }
+//                .toMap { it.location }
+//                .groupBy { it.location }
                 .toSortedList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
