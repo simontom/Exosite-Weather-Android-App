@@ -12,7 +12,9 @@ import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
+import cz.saymon.android.exositeoneplatformrpc.ui.SnackbarDisplayer
 import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewAdapter
+import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -45,8 +47,10 @@ class DataportsListFragment : Fragment() {
 
     private fun initSwipeRefreshLayout() {
         swiperefreshlayout.setOnRefreshListener { callApi() }
-        swiperefreshlayout.setColorSchemeResources(R.color.blue, R.color.red,
-                R.color.orange, R.color.pink, R.color.yellow, R.color.black, R.color.cyan)
+        swiperefreshlayout.setColorSchemeResources(
+                R.color.material_blue600, R.color.material_red600, R.color.material_deeporange600,
+                R.color.material_pink600, R.color.material_yellow600,
+                R.color.material_black, R.color.material_cyan600)
     }
 
     private fun initRecyclerView() {
@@ -60,12 +64,16 @@ class DataportsListFragment : Fragment() {
         Timber.d(dataset.toString())
         adapter.setDataports(dataset)
         swiperefreshlayout.isRefreshing = false
+
+        activityAs<SnackbarDisplayer>()?.showSnackbar("test")
     }
 
     private fun handleResponse(throwable: Throwable) {
         toast("onException: ${System.currentTimeMillis()} ms")
         Timber.d(throwable.toString())
         swiperefreshlayout.isRefreshing = false
+
+        activityAs<SnackbarDisplayer>()?.showSnackbar("test")
     }
 
     private fun callApi() {

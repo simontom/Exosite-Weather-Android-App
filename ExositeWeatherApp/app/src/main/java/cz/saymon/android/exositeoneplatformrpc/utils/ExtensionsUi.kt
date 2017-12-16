@@ -44,6 +44,10 @@ fun Fragment.toast(textResource: Int, showDuration: Int = Toast.LENGTH_SHORT) =
 val Fragment.appComponent: AppComponent
     get() = this.getActivity()!!.appComponent
 
+inline fun <reified T> Fragment.activityAs(): T? {
+    return this.getActivity()!! as? T
+}
+
 // View Extensions
 ///////////////////////
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
