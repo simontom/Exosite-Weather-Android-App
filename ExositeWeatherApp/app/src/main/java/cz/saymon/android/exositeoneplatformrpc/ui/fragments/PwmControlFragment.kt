@@ -6,11 +6,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.jakewharton.rxbinding2.widget.RxSeekBar
 import com.jakewharton.rxbinding2.widget.SeekBarProgressChangeEvent
-import kotlinx.android.synthetic.main.fragment_pwm_control.view.*
-
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
@@ -25,7 +22,7 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_pwm_control.*
+import kotlinx.android.synthetic.main.fragment_pwm_control.*
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -35,8 +32,6 @@ class PwmControlFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_pwm_control, container, false)
     }
-
-
 
 
     @Inject
