@@ -6,10 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter
 import cz.saymon.android.exositeoneplatformrpc.ui.fragments.DataportsListFragment
 import cz.saymon.android.exositeoneplatformrpc.ui.fragments.PwmControlFragment
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 class ExositeTabsPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
     override fun getItem(position: Int): Fragment {
