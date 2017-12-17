@@ -78,28 +78,6 @@ class DataportsListFragment : Fragment() {
         activityAs<SnackbarDisplayer>()?.showSnackbarError(R.string.message_error_no_internet)
     }
 
-    private fun callApi2() {
-        swiperefreshlayout.isRefreshing = true
-        subscription?.dispose()
-
-        subscription = api.callRpcApi(ServerRequest(Constants.ALIASES))
-                .delay(800, TimeUnit.MILLISECONDS)
-                .flatMapIterable(Dataport.MAPPER)
-                .filter { it.status == DataportStatus.OK }
-                .reduce(ArrayList<Dataport>(), { acc, dataport ->
-                    acc.add(dataport)
-                    acc
-                })
-//                .toSortedList()
-//                .collect(HashMap<DataportLocation, MutableList<Dataport>>(), (m, v) -> {
-//
-//        })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { dataset -> handleResponse(dataset) },
-                        { throwable -> handleResponse(throwable) })
-    }
-
     private fun callApi() {
         swiperefreshlayout.isRefreshing = true
         subscription?.dispose()
