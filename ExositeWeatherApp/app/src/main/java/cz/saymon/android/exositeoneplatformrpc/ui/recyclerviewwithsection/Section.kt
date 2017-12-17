@@ -2,6 +2,7 @@ package cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection
 
 /**
  * Interface for implementing required methods in a section.
+ * Source: https://github.com/IntruderShanky/Sectioned-RecyclerView
  */
 interface Section<C> {
     /**

@@ -3,6 +3,8 @@ package cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection
 /**
  * Wrapper used to link metadata with a list item.
  *
+ * Source: https://github.com/IntruderShanky/Sectioned-RecyclerView
+ *
  * @param <S> Section list item
  * @param <C> Child list item
 </C></S> */

@@ -16,6 +16,8 @@ import android.view.ViewGroup
  * [.removeChild]
  * [.notifyDataChanged]
  * methods and not the notify methods of RecyclerView.Adapter.
+ *
+ * Source: https://github.com/IntruderShanky/Sectioned-RecyclerView
  */
 abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.ViewHolder, CVH : RecyclerView.ViewHolder>
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
