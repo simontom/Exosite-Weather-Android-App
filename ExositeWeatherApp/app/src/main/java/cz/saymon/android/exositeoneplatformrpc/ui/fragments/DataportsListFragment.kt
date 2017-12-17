@@ -27,6 +27,8 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.ArrayList
+import android.support.v7.widget.DividerItemDecoration
+
 
 class DataportsListFragment : Fragment() {
 
@@ -59,6 +61,8 @@ class DataportsListFragment : Fragment() {
     private fun initRecyclerView() {
         adapter = DataportRecyclerViewAdapter_test { toast("Clicked on: ${it.id}") }
         recyclerview.layoutManager = LinearLayoutManager(context)
+        val decoration = DividerItemDecoration(context!!.applicationContext, DividerItemDecoration.VERTICAL)
+        recyclerview.addItemDecoration(decoration)
         recyclerview.adapter = adapter
     }
 
