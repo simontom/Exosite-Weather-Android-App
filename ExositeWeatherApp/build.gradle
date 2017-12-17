@@ -7,6 +7,8 @@ ext {
     androidSupportVersion = '27.0.2'
     constraintLayoutVersion = '1.0.2'
 
+    recyclerViewSectionedVersion = '2.1.1'
+
     timberVersion = '4.4.0'
 
     daggerVersion = '2.11'
