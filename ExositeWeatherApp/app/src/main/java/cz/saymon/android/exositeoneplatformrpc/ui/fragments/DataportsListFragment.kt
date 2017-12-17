@@ -18,11 +18,11 @@ import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewA
 import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
-import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_dataports_list.*
 import timber.log.Timber
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -66,9 +66,8 @@ class DataportsListFragment : Fragment() {
         swiperefreshlayout.isRefreshing = false
     }
 
-    private fun handleResponse(dataset: Map<DataportLocation, Dataport>) {
+    private fun handleResponse(dataset: TreeMap<DataportLocation, out List<Dataport>>) {
         Timber.d(dataset.toString())
-//        adapter.setDataports(dataset)
         swiperefreshlayout.isRefreshing = false
     }
 
@@ -79,6 +78,28 @@ class DataportsListFragment : Fragment() {
         activityAs<SnackbarDisplayer>()?.showSnackbarError(R.string.message_error_no_internet)
     }
 
+    private fun callApi2() {
+        swiperefreshlayout.isRefreshing = true
+        subscription?.dispose()
+
+        subscription = api.callRpcApi(ServerRequest(Constants.ALIASES))
+                .delay(800, TimeUnit.MILLISECONDS)
+                .flatMapIterable(Dataport.MAPPER)
+                .filter { it.status == DataportStatus.OK }
+                .reduce(ArrayList<Dataport>(), { acc, dataport ->
+                    acc.add(dataport)
+                    acc
+                })
+//                .toSortedList()
+//                .collect(HashMap<DataportLocation, MutableList<Dataport>>(), (m, v) -> {
+//
+//        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { dataset -> handleResponse(dataset) },
+                        { throwable -> handleResponse(throwable) })
+    }
+
     private fun callApi() {
         swiperefreshlayout.isRefreshing = true
         subscription?.dispose()
@@ -87,9 +108,18 @@ class DataportsListFragment : Fragment() {
                 .delay(800, TimeUnit.MILLISECONDS)
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }
-//                .toMap { it.location }
-//                .groupBy { it.location }
-                .toSortedList()
+                .groupBy { it.location }
+                .flatMap {
+                    it
+                            .reduce(ArrayList<Dataport>(), { acc, dataport ->
+                                acc.add(dataport)
+                                acc
+                            })
+                            .doOnSuccess { it.sort() }
+                            .toFlowable()
+                }
+                .toMap { it[0].location }
+                .map { TreeMap(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { dataset -> handleResponse(dataset) },
