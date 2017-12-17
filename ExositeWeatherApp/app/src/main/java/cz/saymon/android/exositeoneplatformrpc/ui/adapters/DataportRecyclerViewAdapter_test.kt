@@ -26,12 +26,12 @@ class DataportRecyclerViewAdapter_test(val clickListener: ((Dataport) -> Unit)?)
 
     override fun onBindSectionViewHolder(sectionViewHolder: DataportSectionHeaderViewHolder,
                                          sectionPosition: Int, section: DataportSectionHeader) {
-        sectionViewHolder.bind(section.dataportLocation, section.datportUpdateTime)
+        sectionViewHolder.bind(section.dataportLocation, section.dataportUpdateTime)
     }
 
     override fun onBindChildViewHolder(childViewHolder: DataportValueViewHolder,
                                        sectionPosition: Int, childPosition: Int, child: Dataport) {
         childViewHolder.bind(child)
     }
-    
+
 }

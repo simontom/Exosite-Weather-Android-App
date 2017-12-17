@@ -9,7 +9,7 @@ class DataportValueViewHolder(val view: View, val clickListener: ((Dataport) -> 
     : RecyclerView.ViewHolder(view) {
 
     fun bind(dataport: Dataport) {
-        val sectionText = "${dataport.values[0]} ${dataport.type.name}"
+        val sectionText = "${dataport.values[0].value} ${dataport.type.unit}"
 
         view.value.setText(sectionText)
         clickListener?.let {

@@ -14,7 +14,8 @@ import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
 import cz.saymon.android.exositeoneplatformrpc.ui.SnackbarDisplayer
-import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewAdapter
+import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewAdapter_test
+import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportSectionHeader
 import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
@@ -25,12 +26,13 @@ import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class DataportsListFragment : Fragment() {
 
     @Inject
     lateinit var api: ServerApi
-    private lateinit var adapter: DataportRecyclerViewAdapter
+    private lateinit var adapter: DataportRecyclerViewAdapter_test
     private var subscription: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,19 +57,18 @@ class DataportsListFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = DataportRecyclerViewAdapter { toast("Clicked on: ${it.id}") }
+        adapter = DataportRecyclerViewAdapter_test { toast("Clicked on: ${it.id}") }
         recyclerview.layoutManager = LinearLayoutManager(context)
         recyclerview.adapter = adapter
     }
 
-    private fun handleResponse(dataset: List<Dataport>) {
-        Timber.d(dataset.toString())
-        adapter.setDataports(dataset)
-        swiperefreshlayout.isRefreshing = false
-    }
-
     private fun handleResponse(dataset: TreeMap<DataportLocation, out List<Dataport>>) {
         Timber.d(dataset.toString())
+        val sections = dataset.map {
+            val dataportUpdateTime = it.value[0].values[0].time
+            DataportSectionHeader(it.key, dataportUpdateTime, it.value)
+        }
+        adapter.notifyDataChanged(sections)
         swiperefreshlayout.isRefreshing = false
     }
 
