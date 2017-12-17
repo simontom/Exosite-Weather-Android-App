@@ -2,6 +2,7 @@ package cz.saymon.android.exositeoneplatformrpc.ui.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -27,8 +28,6 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.ArrayList
-import android.support.v7.widget.DividerItemDecoration
-
 
 class DataportsListFragment : Fragment() {
 
