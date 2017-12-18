@@ -1,34 +1,40 @@
 package cz.saymon.android.exositeoneplatformrpc.ui.adapters
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
+import cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection.DataportSectionHeader
+import cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection.SectionRecyclerViewAdapter
+import cz.saymon.android.exositeoneplatformrpc.ui.viewholders.DataportSectionHeaderViewHolder
+import cz.saymon.android.exositeoneplatformrpc.ui.viewholders.DataportValueViewHolder
 import cz.saymon.android.exositeoneplatformrpc.utils.inflate
-import java.util.ArrayList
 
-class DataportRecyclerViewAdapter(val clickListener: (Dataport) -> Unit) : RecyclerView.Adapter<DataportViewHolder>() {
 
-    val dataset: MutableList<Dataport> = ArrayList<Dataport>()
+class DataportRecyclerViewAdapter(val clickListener: ((Dataport) -> Unit)?)
+    : SectionRecyclerViewAdapter<
+        DataportSectionHeader,
+        Dataport,
+        DataportSectionHeaderViewHolder,
+        DataportValueViewHolder>() {
 
-    fun setDataports(dataports: List<Dataport>) {
-        with(dataset) {
-            clear()
-            addAll(dataports)
-        }
-        notifyDataSetChanged()
+    override fun onCreateSectionViewHolder(sectionViewGroup: ViewGroup, viewType: Int): DataportSectionHeaderViewHolder {
+        val view = sectionViewGroup.inflate(R.layout.dataport_section_row)
+        return DataportSectionHeaderViewHolder(view)
     }
 
-    override fun getItemCount() = dataset.size
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DataportViewHolder {
-        val view = parent?.inflate(R.layout.dataport_item_row)
-        val viewHolder = DataportViewHolder(view, clickListener)
-        return viewHolder
+    override fun onCreateChildViewHolder(childViewGroup: ViewGroup, viewType: Int): DataportValueViewHolder {
+        val view = childViewGroup.inflate(R.layout.dataport_value_row)
+        return DataportValueViewHolder(view, clickListener)
     }
 
-    override fun onBindViewHolder(holder: DataportViewHolder?, position: Int) {
-        holder?.bind(dataset[position])
+    override fun onBindSectionViewHolder(sectionViewHolder: DataportSectionHeaderViewHolder,
+                                         sectionPosition: Int, section: DataportSectionHeader) {
+        sectionViewHolder.bind(section.dataportLocation, section.dataportUpdateTime)
+    }
+
+    override fun onBindChildViewHolder(childViewHolder: DataportValueViewHolder,
+                                       sectionPosition: Int, childPosition: Int, child: Dataport) {
+        childViewHolder.bind(child)
     }
 
 }

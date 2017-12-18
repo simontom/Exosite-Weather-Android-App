@@ -62,7 +62,6 @@ kapt {
 
 dependencies {
     // Android Support libs (views) etc.
-    implementation "com.android.support:support-v4:$rootProject.androidSupportVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.androidSupportVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.androidSupportVersion"
     implementation "com.android.support:design:$rootProject.androidSupportVersion"

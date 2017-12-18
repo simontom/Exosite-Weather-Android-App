@@ -1,10 +1,10 @@
-package cz.saymon.android.exositeoneplatformrpc.ui.adapters
+package cz.saymon.android.exositeoneplatformrpc.ui.viewholders
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportLocation
 import cz.saymon.android.exositeoneplatformrpc.utils.toFormattedDate
-import kotlinx.android.synthetic.main.dataport_item_row.view.*
+import kotlinx.android.synthetic.main.dataport_section_row.view.*
 
 class DataportSectionHeaderViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 

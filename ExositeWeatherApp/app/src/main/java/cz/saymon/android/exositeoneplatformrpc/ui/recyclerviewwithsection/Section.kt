@@ -12,5 +12,5 @@ interface Section<C> {
      *
      * @return A [List] of the children of this [Section]
      */
-    val childItems: MutableList<C>
+    val childItems: List<C>
 }

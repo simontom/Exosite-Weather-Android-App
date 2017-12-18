@@ -6,15 +6,6 @@ import android.view.ViewGroup
 /**
  * RecyclerView.Adapter implementation that adds the ability to manage Sections and their child.
  *
- * Changes should be notified through:
- * [.insertNewSection]
- * [.insertNewSection]
- * [.removeSection]
- * [.insertNewChild]
- * [.removeChild]
- * [.notifyDataChanged]
- * methods and not the notify methods of RecyclerView.Adapter.
- *
  * Source: https://github.com/IntruderShanky/Sectioned-RecyclerView
  */
 abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
@@ -30,7 +21,6 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
      * available in [SectionRecyclerViewAdapter].
      */
     private var flattenedItemList: List<SectionWrapper<S, C>>? = null
-    private val sectionItemList: MutableList<S> = ArrayList<S>()
 
     /**
      * Implementation of Adapter.onCreateViewHolder(ViewGroup, int)
@@ -63,15 +53,13 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
      * @param flatPosition The index in the merged list of children and parents at which to bind
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, flatPosition: Int) {
-        if (flatPosition > flattenedItemList!!.size) {
-            throw IllegalStateException("Trying to bind item out of bounds, size " + flattenedItemList!!.size
-                    + " flatPosition " + flatPosition + ". Was the data changed without a call to notify...()?")
-        }
         val sectionWrapper = flattenedItemList!![flatPosition]
         if (sectionWrapper.isSection) {
+            // TODO: Unchecked Cast in generic class for SectionViewHolder
             val sectionViewHolder = holder as SVH
             onBindSectionViewHolder(sectionViewHolder, sectionWrapper.sectionPosition, sectionWrapper.section!!)
         } else {
+            // TODO: Unchecked Cast in generic class for ChildViewHolder
             val childViewHolder = holder as CVH
             onBindChildViewHolder(childViewHolder, sectionWrapper.sectionPosition,
                     sectionWrapper.getChildPosition(), sectionWrapper.child!!)
@@ -155,43 +143,6 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
 
     private fun isSectionViewType(viewType: Int): Boolean {
         return viewType == SECTION_VIEW_TYPE
-    }
-
-    fun insertNewSection(section: S, sectionPosition: Int = sectionItemList.size) {
-        if (sectionPosition > sectionItemList.size || sectionPosition < 0)
-            throw IndexOutOfBoundsException("sectionPosition =  " + sectionPosition + " , Size is " + sectionItemList.size)
-        notifyDataChanged(sectionItemList)
-    }
-
-    fun removeSection(sectionPosition: Int) {
-        if (sectionPosition > sectionItemList.size - 1 || sectionPosition < 0)
-            throw IndexOutOfBoundsException("sectionPosition =  " + sectionPosition + " , Size is " + sectionItemList.size)
-        sectionItemList.removeAt(sectionPosition)
-        notifyDataChanged(sectionItemList)
-    }
-
-    fun insertNewChild(child: C, sectionPosition: Int) {
-        if (sectionPosition > sectionItemList.size - 1 || sectionPosition < 0)
-            throw IndexOutOfBoundsException("Invalid sectionPosition =  " + sectionPosition + " , Size is " + sectionItemList.size)
-        insertNewChild(child, sectionPosition, sectionItemList[sectionPosition].childItems.size)
-    }
-
-    fun insertNewChild(child: C, sectionPosition: Int, childPosition: Int) {
-        if (sectionPosition > sectionItemList.size - 1 || sectionPosition < 0)
-            throw IndexOutOfBoundsException("Invalid sectionPosition =  " + sectionPosition + " , Size is " + sectionItemList.size)
-        if (childPosition > sectionItemList[sectionPosition].childItems.size || childPosition < 0)
-            throw IndexOutOfBoundsException("Invalid childPosition =  " + childPosition + " , Size is " + sectionItemList[sectionPosition].childItems.size)
-        sectionItemList[sectionPosition].childItems.add(childPosition, child)
-        notifyDataChanged(sectionItemList)
-    }
-
-    fun removeChild(sectionPosition: Int, childPosition: Int) {
-        if (sectionPosition > sectionItemList.size - 1 || sectionPosition < 0)
-            throw IndexOutOfBoundsException("Invalid sectionPosition =  " + sectionPosition + " , Size is " + sectionItemList.size)
-        if (childPosition > sectionItemList[sectionPosition].childItems.size - 1 || childPosition < 0)
-            throw IndexOutOfBoundsException("Invalid childPosition =  " + childPosition + " , Size is " + sectionItemList[sectionPosition].childItems.size)
-        sectionItemList[sectionPosition].childItems.removeAt(childPosition)
-        notifyDataChanged(sectionItemList)
     }
 
     fun notifyDataChanged(sectionItemList: List<S>) {

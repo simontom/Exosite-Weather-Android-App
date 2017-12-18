@@ -1,4 +1,4 @@
-package cz.saymon.android.exositeoneplatformrpc.ui.adapters
+package cz.saymon.android.exositeoneplatformrpc.ui.viewholders
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

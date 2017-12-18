@@ -6,7 +6,6 @@ import cz.saymon.android.exositeoneplatformrpc.di.modules.HttpClientModule
 import cz.saymon.android.exositeoneplatformrpc.di.modules.JsonConverterModule
 import cz.saymon.android.exositeoneplatformrpc.di.modules.NetworkModule
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
-import cz.saymon.android.exositeoneplatformrpc.ui.activities.MainActivity
 import cz.saymon.android.exositeoneplatformrpc.ui.fragments.DataportsListFragment
 import cz.saymon.android.exositeoneplatformrpc.ui.fragments.PwmControlFragment
 import dagger.Component
@@ -26,8 +25,6 @@ interface AppComponent {
 
     // Injections
     //////////////
-    fun inject(activity: MainActivity)
-
     fun inject(fragment: DataportsListFragment)
     fun inject(fragment: PwmControlFragment)
 

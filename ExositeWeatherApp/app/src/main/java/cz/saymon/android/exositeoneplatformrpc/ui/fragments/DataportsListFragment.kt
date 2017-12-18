@@ -2,6 +2,7 @@ package cz.saymon.android.exositeoneplatformrpc.ui.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -10,13 +11,12 @@ import android.view.ViewGroup
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
-import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportLocation
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
 import cz.saymon.android.exositeoneplatformrpc.ui.SnackbarDisplayer
-import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewAdapter_test
-import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportSectionHeader
+import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewAdapter
+import cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection.DataportSectionHeader
 import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
 import cz.saymon.android.exositeoneplatformrpc.utils.toast
@@ -29,11 +29,12 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
+
 class DataportsListFragment : Fragment() {
 
     @Inject
     lateinit var api: ServerApi
-    private lateinit var adapter: DataportRecyclerViewAdapter_test
+    private lateinit var adapter: DataportRecyclerViewAdapter
     private var subscription: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,27 +59,27 @@ class DataportsListFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = DataportRecyclerViewAdapter_test { toast("Clicked on: ${it.id}") }
+        adapter = DataportRecyclerViewAdapter { toast("Clicked on: ${it.id}") }
+
         recyclerview.layoutManager = LinearLayoutManager(context)
-        val decoration = DividerItemDecoration(context!!.applicationContext, DividerItemDecoration.VERTICAL)
-        recyclerview.addItemDecoration(decoration)
+        recyclerview.setHasFixedSize(false)
+
+        val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        recyclerview.addItemDecoration(itemDecorator)
+        recyclerview.itemAnimator = DefaultItemAnimator()
+
         recyclerview.adapter = adapter
     }
 
-    private fun handleResponse(dataset: TreeMap<DataportLocation, out List<Dataport>>) {
+    private fun handleResponse(dataset: List<DataportSectionHeader>) {
         Timber.d(dataset.toString())
-        val sections = dataset.map {
-            val dataportUpdateTime = it.value[0].values[0].time
-            DataportSectionHeader(it.key, dataportUpdateTime, it.value.toMutableList())
-        }
-        adapter.notifyDataChanged(sections)
+        adapter.notifyDataChanged(dataset)
         swiperefreshlayout.isRefreshing = false
     }
 
-    private fun handleResponse(throwable: Throwable) {
+    private fun handleResponseError(throwable: Throwable) {
         Timber.d(throwable.toString())
         swiperefreshlayout.isRefreshing = false
-
         activityAs<SnackbarDisplayer>()?.showSnackbarError(R.string.message_error_no_internet)
     }
 
@@ -102,10 +103,16 @@ class DataportsListFragment : Fragment() {
                 }
                 .toMap { it[0].location }
                 .map { TreeMap(it) }
+                .map {
+                    it.map {
+                        val dataportUpdateTime = it.value[0].values[0].time
+                        DataportSectionHeader(it.key, dataportUpdateTime, it.value.toMutableList())
+                    }
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { dataset -> handleResponse(dataset) },
-                        { throwable -> handleResponse(throwable) })
+                        { throwable -> handleResponseError(throwable) })
     }
 
 }
