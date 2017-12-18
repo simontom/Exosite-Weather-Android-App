@@ -8,7 +8,7 @@ package cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection
  * @param <S> Section list item
  * @param <C> Child list item
 </C></S> */
-class SectionWrapper<S : Section<C>, C> {
+class SectionWrapper<S, C> where S : Section<C> {
 
     var isSection: Boolean = false
         private set

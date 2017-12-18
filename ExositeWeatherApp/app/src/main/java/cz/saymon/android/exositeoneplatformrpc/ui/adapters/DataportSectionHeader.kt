@@ -7,5 +7,5 @@ import cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection.Sectio
 data class DataportSectionHeader(
         val dataportLocation: DataportLocation,
         val dataportUpdateTime: Long,
-        override val childItems: List<Dataport>
+        override val childItems: MutableList<Dataport>
 ) : Section<Dataport>

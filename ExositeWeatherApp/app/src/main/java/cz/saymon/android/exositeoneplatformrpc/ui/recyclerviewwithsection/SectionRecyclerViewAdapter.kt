@@ -4,14 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 
 /**
- * RecyclerView.Adapter implementation that
- * adds the ability to manage Sections and their child.
+ * RecyclerView.Adapter implementation that adds the ability to manage Sections and their child.
  *
  * Changes should be notified through:
  * [.insertNewSection]
  * [.insertNewSection]
  * [.removeSection]
- * [.insertNewChild]
  * [.insertNewChild]
  * [.removeChild]
  * [.notifyDataChanged]
@@ -19,17 +17,11 @@ import android.view.ViewGroup
  *
  * Source: https://github.com/IntruderShanky/Sectioned-RecyclerView
  */
-abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.ViewHolder, CVH : RecyclerView.ViewHolder>
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>()
+        where S : Section<C>, SVH : RecyclerView.ViewHolder, CVH : RecyclerView.ViewHolder {
 
-    /**
-     * Default ViewType for section rows
-     */
     private val SECTION_VIEW_TYPE = 1
-
-    /**
-     * Default ViewType for child rows
-     */
     private val CHILD_VIEW_TYPE = 2
 
     /**
@@ -37,12 +29,8 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
      * Changes to this list should be made through the add/remove methods
      * available in [SectionRecyclerViewAdapter].
      */
-    private var flatItemList: List<SectionWrapper<S, C>>? = null
-
-/*    private val sectionItemList: MutableList<S> = ArrayList<S>()
-    init {
-        this.flatItemList = generateFlatItemList(sectionItemList)
-    }*/
+    private var flattenedItemList: List<SectionWrapper<S, C>>? = null
+    private val sectionItemList: MutableList<S> = ArrayList<S>()
 
     /**
      * Implementation of Adapter.onCreateViewHolder(ViewGroup, int)
@@ -75,11 +63,11 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
      * @param flatPosition The index in the merged list of children and parents at which to bind
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, flatPosition: Int) {
-        if (flatPosition > flatItemList!!.size) {
-            throw IllegalStateException("Trying to bind item out of bounds, size " + flatItemList!!.size
+        if (flatPosition > flattenedItemList!!.size) {
+            throw IllegalStateException("Trying to bind item out of bounds, size " + flattenedItemList!!.size
                     + " flatPosition " + flatPosition + ". Was the data changed without a call to notify...()?")
         }
-        val sectionWrapper = flatItemList!![flatPosition]
+        val sectionWrapper = flattenedItemList!![flatPosition]
         if (sectionWrapper.isSection) {
             val sectionViewHolder = holder as SVH
             onBindSectionViewHolder(sectionViewHolder, sectionWrapper.sectionPosition, sectionWrapper.section!!)
@@ -94,8 +82,7 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
      * Callback called from [.onCreateViewHolder] when
      * the list item created is a section.
      *
-     * @param sectionViewGroup The [ViewGroup] in the list for which a [SVH] is being
-     * created
+     * @param sectionViewGroup The [ViewGroup] in the list for which a [SVH] is being created
      * @return A `SVH` corresponding to the parent with the `ViewGroup` parentViewGroup
      */
     abstract fun onCreateSectionViewHolder(sectionViewGroup: ViewGroup, viewType: Int): SVH
@@ -104,8 +91,7 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
      * Callback called from [.onCreateViewHolder] when
      * the list item created is a child.
      *
-     * @param childViewGroup The [ViewGroup] in the list for which a [CVH]
-     * is being created
+     * @param childViewGroup The [ViewGroup] in the list for which a [CVH] is being created
      * @return A `CVH` corresponding to the child with the `ViewGroup` childViewGroup
      */
     abstract fun onCreateChildViewHolder(childViewGroup: ViewGroup, viewType: Int): CVH
@@ -113,8 +99,6 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
     /**
      * Callback called from onBindViewHolder(RecyclerView.ViewHolder, int)
      * when the list item bound to is a section.
-     *
-     *
      * Bind data to the [SVH] here.
      *
      * @param sectionViewHolder The `SVH` to bind data to
@@ -126,8 +110,6 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
     /**
      * Callback called from onBindViewHolder(RecyclerView.ViewHolder, int)
      * when the list item bound to is a child.
-     *
-     *
      * Bind data to the [CVH] here.
      *
      * @param childViewHolder The `CVH` to bind data to
@@ -150,8 +132,7 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
     /**
      * Generates a full list of all sections and their children, in order.
      *
-     * @param sectionItemList A list of the sections from
-     * the [SectionRecyclerViewAdapter]
+     * @param sectionItemList A list of the sections from the [SectionRecyclerViewAdapter]
      * @return A list of all sections and their children
      */
     private fun generateFlatItemList(sectionItemList: List<S>): List<SectionWrapper<S, C>> {
@@ -164,18 +145,19 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
     }
 
     override fun getItemCount(): Int {
-        return flatItemList?.size ?: 0
+        return flattenedItemList?.size ?: 0
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (flatItemList!![position].isSection) SECTION_VIEW_TYPE else CHILD_VIEW_TYPE
+        val section = flattenedItemList!![position]
+        return if (section.isSection) SECTION_VIEW_TYPE else CHILD_VIEW_TYPE
     }
 
-    fun isSectionViewType(viewType: Int): Boolean {
+    private fun isSectionViewType(viewType: Int): Boolean {
         return viewType == SECTION_VIEW_TYPE
     }
 
-    /*fun insertNewSection(section: S, sectionPosition: Int = sectionItemList.size) {
+    fun insertNewSection(section: S, sectionPosition: Int = sectionItemList.size) {
         if (sectionPosition > sectionItemList.size || sectionPosition < 0)
             throw IndexOutOfBoundsException("sectionPosition =  " + sectionPosition + " , Size is " + sectionItemList.size)
         notifyDataChanged(sectionItemList)
@@ -210,11 +192,10 @@ abstract class SectionRecyclerViewAdapter<S : Section<C>, C, SVH : RecyclerView.
             throw IndexOutOfBoundsException("Invalid childPosition =  " + childPosition + " , Size is " + sectionItemList[sectionPosition].childItems.size)
         sectionItemList[sectionPosition].childItems.removeAt(childPosition)
         notifyDataChanged(sectionItemList)
-    }*/
+    }
 
     fun notifyDataChanged(sectionItemList: List<S>) {
-        flatItemList = ArrayList()
-        flatItemList = generateFlatItemList(sectionItemList)
+        flattenedItemList = generateFlatItemList(sectionItemList)
         notifyDataSetChanged()
     }
 

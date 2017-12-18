@@ -69,7 +69,7 @@ class DataportsListFragment : Fragment() {
         Timber.d(dataset.toString())
         val sections = dataset.map {
             val dataportUpdateTime = it.value[0].values[0].time
-            DataportSectionHeader(it.key, dataportUpdateTime, it.value)
+            DataportSectionHeader(it.key, dataportUpdateTime, it.value.toMutableList())
         }
         adapter.notifyDataChanged(sections)
         swiperefreshlayout.isRefreshing = false
