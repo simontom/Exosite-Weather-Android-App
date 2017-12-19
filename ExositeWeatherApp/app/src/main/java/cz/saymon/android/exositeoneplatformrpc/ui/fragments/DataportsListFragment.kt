@@ -64,6 +64,7 @@ class DataportsListFragment : Fragment() {
             val alias = it.id
             val location = it.location.locationName
             val unit = it.type.unit
+            // TODO: Open Activity with Chart in Landscape
             toast("Clicked on: $alias $location [$unit]")
         }
 
