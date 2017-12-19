@@ -7,6 +7,8 @@ ext {
     androidSupportVersion = '27.0.2'
     constraintLayoutVersion = '1.0.2'
 
+    mpAndroidChartVersion = 'v3.0.3'
+
     timberVersion = '4.4.0'
 
     daggerVersion = '2.11'
