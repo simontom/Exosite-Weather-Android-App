@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
+import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportLocation
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
@@ -59,7 +60,12 @@ class DataportsListFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = DataportRecyclerViewAdapter { toast("Clicked on: ${it.id}") }
+        adapter = DataportRecyclerViewAdapter {
+            val alias = it.id
+            val location = it.location.locationName
+            val unit = it.type.unit
+            toast("Clicked on: $alias $location {$unit}")
+        }
 
         recyclerview.layoutManager = LinearLayoutManager(context)
         recyclerview.setHasFixedSize(false)
