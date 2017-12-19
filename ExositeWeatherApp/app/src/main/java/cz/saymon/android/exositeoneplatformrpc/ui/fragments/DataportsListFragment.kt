@@ -64,7 +64,7 @@ class DataportsListFragment : Fragment() {
             val alias = it.id
             val location = it.location.locationName
             val unit = it.type.unit
-            toast("Clicked on: $alias $location {$unit}")
+            toast("Clicked on: $alias $location [$unit]")
         }
 
         recyclerview.layoutManager = LinearLayoutManager(context)
