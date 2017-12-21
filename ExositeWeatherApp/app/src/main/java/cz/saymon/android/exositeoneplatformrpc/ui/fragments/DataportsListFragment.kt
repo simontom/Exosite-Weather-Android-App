@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
-import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportLocation
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
@@ -35,8 +34,8 @@ class DataportsListFragment : Fragment() {
 
     @Inject
     lateinit var api: ServerApi
-    private lateinit var adapter: DataportRecyclerViewAdapter
     private var subscription: Disposable? = null
+    private lateinit var adapter: DataportRecyclerViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dataports_list, container, false)
@@ -120,6 +119,11 @@ class DataportsListFragment : Fragment() {
                 .subscribe(
                         { dataset -> handleResponse(dataset) },
                         { throwable -> handleResponseError(throwable) })
+    }
+
+    override fun onDestroy() {
+        subscription?.dispose()
+        super.onDestroy()
     }
 
 }

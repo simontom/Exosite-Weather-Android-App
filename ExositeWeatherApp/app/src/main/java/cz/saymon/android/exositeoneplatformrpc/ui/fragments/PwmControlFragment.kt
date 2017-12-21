@@ -18,10 +18,12 @@ import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequ
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerResponse
 import cz.saymon.android.exositeoneplatformrpc.ui.SnackbarDisplayer
 import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
+import cz.saymon.android.exositeoneplatformrpc.utils.addTo
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_pwm_control.*
 import timber.log.Timber
@@ -33,6 +35,7 @@ class PwmControlFragment : Fragment() {
     @Inject
     lateinit var api: ServerApi
 
+    private var compositeDisposable: CompositeDisposable? = null
     private var subscriptionRead: Disposable? = null
     private var subscriptionWriteR: Disposable? = null
     private var subscriptionWriteG: Disposable? = null
@@ -45,6 +48,8 @@ class PwmControlFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         appComponent.inject(this)
+
+        compositeDisposable = CompositeDisposable()
 
         readServerPwmValues()
         initPwmSeekbars()
@@ -71,7 +76,7 @@ class PwmControlFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { seekBarEvent ->
                     writeServerPwmValueHelper(seekBarEvent.view().id, seekBarEvent.progress())
-                }
+                }.addTo(compositeDisposable!!)
     }
 
     private fun handleResponse(dataset: List<Dataport>) {
@@ -119,7 +124,7 @@ class PwmControlFragment : Fragment() {
                 .subscribe(
                         { responses: List<ServerResponse>? -> handleResponseWrite(responses) },
                         { throwable -> handleResponse(throwable) }
-                )
+                ).addTo(compositeDisposable!!)
     }
 
     private fun writeServerPwmRvalue(progress: Int) {
@@ -162,6 +167,12 @@ class PwmControlFragment : Fragment() {
                 .subscribe(
                         { dataset -> handleResponse(dataset) },
                         { throwable -> handleResponse(throwable) })
+                .addTo(compositeDisposable!!)
+    }
+
+    override fun onDestroy() {
+        compositeDisposable?.dispose()
+        super.onDestroy()
     }
 
 }
