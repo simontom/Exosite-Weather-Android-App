@@ -1,5 +1,6 @@
 package cz.saymon.android.exositeoneplatformrpc.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -15,6 +16,7 @@ import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.ServerRequest
 import cz.saymon.android.exositeoneplatformrpc.ui.SnackbarDisplayer
+import cz.saymon.android.exositeoneplatformrpc.ui.activities.DataportChartActivity
 import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewAdapter
 import cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection.DataportSectionHeader
 import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
@@ -65,6 +67,7 @@ class DataportsListFragment : Fragment() {
             val unit = it.type.unit
             // TODO: Open Activity with Chart in Landscape
             toast("Clicked on: $alias $location [$unit]")
+            DataportChartActivity.showActivity(activity as Context, alias, location, unit)
         }
 
         recyclerview.layoutManager = LinearLayoutManager(context)
@@ -111,7 +114,7 @@ class DataportsListFragment : Fragment() {
                 .map { TreeMap(it) }
                 .map {
                     it.map {
-                        val dataportUpdateTime = it.value[0].values[0].time
+                        val dataportUpdateTime = it.value[0].values[0].timeMs
                         DataportSectionHeader(it.key, dataportUpdateTime, it.value.toMutableList())
                     }
                 }
