@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -60,8 +62,93 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
         }
     }
 
-    private val timeWindowHours = 72L
-    private val maxNumberOfValuesPerHour = 4L
+    private object ChartSettings {
+        private val timeWindowDays = 7L
+        internal val timeWindowHours = timeWindowDays * 24L
+        internal val maxNumberOfValuesPerHour = 4L
+        @SuppressLint("SimpleDateFormat")
+        private val xAxisDateFormatter = SimpleDateFormat("MM/dd HH:mm")
+        private val axisFontSize = 12.0F
+        private val dragDecelerationFrictionCoef = 0.9F
+        private val backgroundColoroRes = R.color.material_grey100
+        private val axisFontColorRes = R.color.material_pink900
+        private val datasetLineColorRes = R.color.material_pink400
+        private val lineDatasetCircleRadius = 2.5F
+        private val lineDatasetCircleHoleRadius = 1.5F
+        private val lineDatasetCircleColorRes = R.color.material_teal400
+        private val lineDatasetCircleHoleColorRes = R.color.material_yellow600
+        private val lineDatasetWidth = 2.0F
+        private val lineDatasetMode = LineDataSet.Mode.LINEAR
+        private val lineValueTextSize = 10.0F
+        private val lineValueTextColorRes = R.color.material_yellow900
+
+        @SuppressLint("SimpleDateFormat")
+        internal fun initializeChart(context: Context, line_chart: LineChart, valueUnit: String) {
+            with(line_chart) {
+                setOnChartValueSelectedListener(context as OnChartValueSelectedListener)
+                description.isEnabled = false
+                dragDecelerationFrictionCoef = ChartSettings.dragDecelerationFrictionCoef
+                isDragEnabled = true
+                isHighlightPerDragEnabled = true
+                setPinchZoom(true)
+                setScaleEnabled(true)
+                setDrawGridBackground(true)
+                setBackgroundColor(ContextCompat.getColor(context, backgroundColoroRes))
+            }
+
+            val timeFormatter = SimpleDateFormat("HH:mm")
+            val chartMarkerView = ChartMarkerView(context, valueUnit, timeFormatter)
+            chartMarkerView.chartView = line_chart // For bounds control
+            line_chart.marker = chartMarkerView // Set the marker to the chart
+
+            with(line_chart.xAxis) {
+                position = XAxis.XAxisPosition.BOTTOM
+                textSize = axisFontSize
+                textColor = ContextCompat.getColor(context, axisFontColorRes)
+                valueFormatter = IAxisValueFormatter { value, axis -> xAxisDateFormatter.format(value.toLong()) }
+            }
+
+            with(line_chart.axisLeft) {
+                setDrawGridLines(true)
+                textSize = axisFontSize
+                textColor = ContextCompat.getColor(context, axisFontColorRes)
+            }
+
+            with(line_chart.axisRight) {
+                isEnabled = false
+            }
+        }
+
+        internal fun createLineDataSet(context: Context, values: List<Value>): LineDataSet {
+            val entries = values.map { Entry(it.timeMs.toFloat(), it.value.toFloat()) }
+            // It is necessary to sort by x-values, otherwise, unexpected behaviour occurs
+            Collections.sort(entries, EntryXComparator())
+
+            val dataset = LineDataSet(entries, "_ignored_").apply {
+                axisDependency = YAxis.AxisDependency.LEFT
+                mode = lineDatasetMode
+                color = ContextCompat.getColor(context, datasetLineColorRes)
+                lineWidth = lineDatasetWidth
+                setDrawCircles(true)
+                setDrawValues(true)
+                highLightColor = ContextCompat.getColor(context, lineDatasetCircleColorRes)
+                setCircleColor(ContextCompat.getColor(context, lineDatasetCircleColorRes))
+                circleRadius = lineDatasetCircleRadius
+                setDrawCircleHole(true)
+                circleHoleRadius = lineDatasetCircleHoleRadius
+                setCircleColorHole(ContextCompat.getColor(context, lineDatasetCircleHoleColorRes))
+            }
+
+            return dataset
+        }
+
+        internal fun createLineData(context: Context, lineDataSet: LineDataSet): LineData {
+            return LineData(lineDataSet).apply {
+                setValueTextColor(ContextCompat.getColor(context, lineValueTextColorRes))
+                setValueTextSize(lineValueTextSize)
+            }
+        }
+    }
 
     @Inject
     lateinit var api: ServerApi
@@ -75,83 +162,18 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
         val (alias, location, valueUnit) = getDataFrom(intent)
         supportActionBar?.title = "$location [$valueUnit]"
 
-        initializeLineChart(valueUnit)
+        ChartSettings.initializeChart(this, line_chart, valueUnit)
 
         callApi(alias)
     }
 
-    @SuppressLint("SimpleDateFormat")
-    private fun initializeLineChart(valueUnit: String) {
-        with(line_chart) {
-            setOnChartValueSelectedListener(this@DataportChartActivity)
-            description.isEnabled = false
-            setTouchEnabled(true)
-            setDrawGridBackground(false)
-            dragDecelerationFrictionCoef = 0.9f
-            setScaleEnabled(true)
-            isDragEnabled = true
-            setPinchZoom(true)
-            isHighlightPerDragEnabled = true
-            setBackgroundColor(ContextCompat.getColor(this@DataportChartActivity, R.color.material_grey100))
-        }
-
-        val chartMarkerView = ChartMarkerView(this, valueUnit)
-        chartMarkerView.chartView = line_chart // For bounds control
-        line_chart.marker = chartMarkerView // Set the marker to the chart
-
-        with(line_chart.xAxis) {
-            position = XAxis.XAxisPosition.BOTTOM
-            textSize = 12.0F
-            textColor = ContextCompat.getColor(this@DataportChartActivity, R.color.material_pink900)
-            val simpleDateFormatter = SimpleDateFormat("MM/dd HH:mm")
-            valueFormatter = IAxisValueFormatter { value, axis -> simpleDateFormatter.format(value.toLong()) }
-        }
-
-        with(line_chart.axisLeft) {
-            setDrawGridLines(true)
-            textSize = 12.0F
-            textColor = ContextCompat.getColor(this@DataportChartActivity, R.color.material_pink900)
-        }
-
-        with(line_chart.axisRight) {
-            isEnabled = false
-        }
-    }
-
-    override fun snackbarCoordinatorLayout() = main_layout
-
-    private fun createChartDataset(values: List<Value>): LineDataSet {
-        val entries = values.map { Entry(it.timeMs.toFloat(), it.value.toFloat()) }
-        // It is necessary to sort by x-values, otherwise, unexpected behaviour occurs
-        Collections.sort(entries, EntryXComparator())
-
-        val dataset = with(LineDataSet(entries, "DataSet")) {
-            axisDependency = YAxis.AxisDependency.LEFT
-            color = ContextCompat.getColor(this@DataportChartActivity, R.color.colorAccent)
-            valueTextColor = ContextCompat.getColor(this@DataportChartActivity, R.color.colorPrimaryDark)
-            formLineWidth = 2.0F
-            setDrawCircles(true)
-            setDrawValues(true)
-            highLightColor = ContextCompat.getColor(this@DataportChartActivity, R.color.material_teal400)
-            setCircleColor(ContextCompat.getColor(this@DataportChartActivity, R.color.material_teal400))
-            circleRadius = 2.5F
-            setDrawCircleHole(true)
-            circleHoleRadius = 1.5F
-            setCircleColorHole(ContextCompat.getColor(this@DataportChartActivity, R.color.material_yellow600))
-            mode = LineDataSet.Mode.LINEAR
-            this@with
-        }
-
-        return dataset
-    }
+    override fun snackbarCoordinatorLayout(): CoordinatorLayout = main_layout
 
     private fun handleResponse(values: List<Value>) {
         Timber.d(values.toString())
-        val dataset = createChartDataset(values)
 
-        val lineData = LineData(dataset)
-        lineData.setValueTextColor(ContextCompat.getColor(this@DataportChartActivity, R.color.material_yellow900))
-        lineData.setValueTextSize(10.0F)
+        val lineDataSet = ChartSettings.createLineDataSet(this, values)
+        val lineData = ChartSettings.createLineData(this, lineDataSet)
 
         line_chart.setData(lineData)
         line_chart.legend.isEnabled = false
@@ -167,8 +189,8 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
         subscription?.dispose()
 
         val now = Date().time / 1000L
-        val threeDaysAgo = now - (timeWindowHours * 60L * 60L)
-        val maxNumberOfValues = timeWindowHours * maxNumberOfValuesPerHour
+        val threeDaysAgo = now - (ChartSettings.timeWindowHours * 60L * 60L)
+        val maxNumberOfValues = ChartSettings.timeWindowHours * ChartSettings.maxNumberOfValuesPerHour
         val argument = Argument(alias, starttime = threeDaysAgo, endtime = now,
                 selection = ArgumentSelectionType.AUTOWINDOW, limit = maxNumberOfValues.toInt())
 
@@ -182,7 +204,6 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
                         { throwable -> handleResponseError(throwable) })
     }
 
-
     override fun onDestroy() {
         subscription?.dispose()
         super.onDestroy()
@@ -190,7 +211,6 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
 
     override fun onNothingSelected() {
     }
-
     override fun onValueSelected(e: Entry?, h: Highlight?) {
         Timber.d("ValSelected: Value:${e?.y} xIndex:${e?.x} DataSetIndex:${h?.dataSetIndex}")
     }

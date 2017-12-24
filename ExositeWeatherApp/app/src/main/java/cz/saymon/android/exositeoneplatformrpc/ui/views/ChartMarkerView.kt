@@ -9,15 +9,20 @@ import com.github.mikephil.charting.utils.MPPointF
 import com.github.mikephil.charting.utils.Utils
 import cz.saymon.android.exositeoneplatformrpc.R
 import kotlinx.android.synthetic.main.custom_chart_marker_view.view.*
+import java.text.SimpleDateFormat
 
 @SuppressLint("ViewConstructor")
-class ChartMarkerView(context: Context, val valueUnit: String) : MarkerView(context, R.layout.custom_chart_marker_view) {
+class ChartMarkerView(context: Context, val valueUnit: String, val timeFormatter: SimpleDateFormat)
+    : MarkerView(context, R.layout.custom_chart_marker_view) {
 
-    // callbacks everytime the MarkerView is redrawn, can be used to update the
-    // content (user-interface)
+    // Callbacks everytime the MarkerView is redrawn, can be used to update the content (user-interface)
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         val formattedValue = Utils.formatNumber(e!!.y, 1, true) + valueUnit
         value.text = formattedValue
+
+        val formattedTime = timeFormatter.format(e.x)
+        time.text = formattedTime
+
         super.refreshContent(e, highlight)
     }
 
