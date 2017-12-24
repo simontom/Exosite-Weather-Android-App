@@ -46,6 +46,9 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer {
         }
     }
 
+    private val timeWindowHours = 72L
+    private val numberOfValuesPerHour = 3L
+
     @Inject
     lateinit var api: ServerApi
     private var subscription: Disposable? = null
@@ -73,22 +76,32 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer {
         textview.text = "${dataport.values.size}\n$dataport"
     }
 
+    private fun handleResponse(dates: List<Date>) {
+        Timber.d(dates.toString())
+        val text = dates.fold(StringBuilder(), { acc, date -> acc.append(date.toString()).append("\n") }).toString()
+        textview.text = dates.size.toString() + "\n" + text
+    }
+
     private fun handleResponseError(throwable: Throwable) {
         Timber.d(throwable.toString())
-        // TODO: Show Snackbar with error #HERE#
+        showSnackbarError(R.string.message_error_no_internet)
     }
 
     private fun callApi(alias: String) {
         subscription?.dispose()
 
         val now = Date().time / 1000L
-        val threeDaysAgo = now - (3L * 24L * 60L * 60L)
+        val threeDaysAgo = now - (timeWindowHours * 60L * 60L)
+        val maxNumberOfValues = timeWindowHours * numberOfValuesPerHour
         val argument = Argument(alias, starttime = threeDaysAgo, endtime = now,
-                selection = ArgumentSelectionType.GIVENWINDOW, limit = 150)
+                selection = ArgumentSelectionType.AUTOWINDOW, limit = maxNumberOfValues.toInt())
 
         subscription = api.callRpcApi(ServerRequest(argument = argument))
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }
+                .flatMapIterable { it.values }
+                .map { Date(it.timeMs) }
+                .toList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { dataset -> handleResponse(dataset) },
