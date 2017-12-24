@@ -5,19 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context="cz.saymon.android.exositeoneplatformrpc.ui.activities.DataportChartActivity">
 
-    <ScrollView
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/textview"
-            style="@style/TextAppearance.AppCompat.Large"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="TEXT VIEW"/>
-
-    </ScrollView>
+        android:layout_height="match_parent"/>
 
 </android.support.design.widget.CoordinatorLayout>
