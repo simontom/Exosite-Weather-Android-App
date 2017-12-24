@@ -20,6 +20,7 @@ class JsonConverterModule {
     @Singleton
     internal fun provideGson(): GsonConverterFactory {
         val builder = GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
                 .registerTypeAdapter(Call::class.java, CallSerializer())
                 .registerTypeAdapter(CallProcedureType::class.java, CallProcedureTypeSerializer())
                 .registerTypeAdapter(ArgumentSortType::class.java, ArgumentSortTypeSerializer())

@@ -1,13 +1,14 @@
 package cz.saymon.android.exositeoneplatformrpc.model.retrofit.request
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import cz.saymon.android.exositeoneplatformrpc.model.Constants
 import java.util.*
 
 data class Call(
-        @SerializedName("id") val id: String,
-        @SerializedName("procedure") val procedure: CallProcedureType = CallProcedureType.READ,
-        @SerializedName("arguments") val arguments: Argument = Argument()) {
+        @Expose() @SerializedName("id") val id: String,
+        @Expose() @SerializedName("procedure") val procedure: CallProcedureType = CallProcedureType.READ,
+        @Expose() @SerializedName("arguments") val arguments: Argument = Argument()) {
 
     companion object {
         val defaultCalls: List<Call> by lazy {

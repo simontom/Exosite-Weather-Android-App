@@ -1,5 +1,7 @@
 package cz.saymon.android.exositeoneplatformrpc.model.retrofit.response
 
+import com.google.gson.annotations.Expose
+
 data class ServerValue(
-        val time: Long,
-        val value: Double)
+        @Expose() val timeS: Long,
+        @Expose() val value: Double)

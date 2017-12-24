@@ -8,10 +8,10 @@ data class ServerRequest(
         @Expose(serialize = false) val dataportIds: List<String>? = null,
         @Expose(serialize = false) val argument: Argument? = null) {
 
-    @SerializedName("auth")
+    @Expose() @SerializedName("auth")
     val auth: Auth = Auth()
 
-    @SerializedName("calls")
+    @Expose() @SerializedName("calls")
     var calls: MutableList<Call> = ArrayList()
         private set
 
