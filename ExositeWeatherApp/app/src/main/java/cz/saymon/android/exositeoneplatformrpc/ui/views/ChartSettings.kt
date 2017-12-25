@@ -12,9 +12,9 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.EntryXComparator
+import com.github.mikephil.charting.utils.Utils
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Value
-import kotlinx.android.synthetic.main.activity_dataport_chart.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,7 +63,7 @@ internal object ChartSettings {
             position = XAxis.XAxisPosition.BOTTOM
             textSize = axisFontSize
             textColor = ContextCompat.getColor(context, axisFontColorRes)
-            valueFormatter = IAxisValueFormatter { value, axis -> xAxisDateTimeFormatter.format(value.toLong()) }
+            valueFormatter = IAxisValueFormatter { value, _ -> xAxisDateTimeFormatter.format(value.toLong()) }
         }
 
         with(line_chart.axisLeft) {
@@ -98,6 +98,9 @@ internal object ChartSettings {
                     setDrawCircleHole(true)
                     circleHoleRadius = lineDatasetCircleHoleRadius
                     setCircleColorHole(ContextCompat.getColor(context, lineDatasetCircleHoleColorRes))
+                    setValueFormatter { value, _, _, _ ->
+                        Utils.formatNumber(value, 1, true)
+                    }
                 }
     }
 

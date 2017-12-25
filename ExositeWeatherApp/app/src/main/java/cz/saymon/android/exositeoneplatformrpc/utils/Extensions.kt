@@ -14,6 +14,6 @@ operator fun Regex.contains(text: CharSequence) = matches(text)
 fun Long.toFormattedDate() = dateFormatter.format(Date(this))
 
 fun Disposable.addTo(compositeDisposable: CompositeDisposable): Disposable {
-    compositeDisposable?.add(this)
+    compositeDisposable.add(this)
     return this
 }
