@@ -9,6 +9,6 @@
     <string name="seekbar_green">Pwm Green</string>
     <string name="seekbar_blue">Pwm Blue</string>
 
-    <string name="message_info_data_written">Values sent correctly</string>
+    <string name="message_info_data_written">Value updated successfully</string>
     <string name="message_error_no_internet">No Internet connection</string>
 </resources>
