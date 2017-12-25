@@ -104,6 +104,18 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
                 .subscribe(
                         { dataset -> handleResponse(dataset) },
                         { throwable -> handleResponseError(throwable) })
+
+
+//        subscription = api.callRpcApi(ServerRequest(argument = argument))
+//                .flatMapIterable(Dataport.MAPPER)
+//                .map { it.values }
+//                .window(3L) // Sample Window
+//                // Use flatMap to make List of Windowed Values
+//                // List of Values Avg toList again
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        { dataset -> handleResponse(dataset) },
+//                        { throwable -> handleResponseError(throwable) })
     }
 
     override fun onDestroy() {

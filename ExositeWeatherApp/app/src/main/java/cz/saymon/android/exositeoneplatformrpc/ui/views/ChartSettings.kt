@@ -17,12 +17,15 @@ import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Value
 import java.text.SimpleDateFormat
 import java.util.*
 
+@SuppressLint("SimpleDateFormat")
 internal object ChartSettings {
+    private val xAxisDateTimeFormatter = SimpleDateFormat("MM/dd HH:mm")
+    internal val chartMarkerValueDateFormatter = SimpleDateFormat("MM/dd")
+    internal val chartMarkerValueTimeFormatter = SimpleDateFormat("HH:mm")
+
     private val timeWindowDays = 7L
     internal val timeWindowHours = timeWindowDays * 24L
     internal val maxNumberOfValuesPerHour = 4L
-    @SuppressLint("SimpleDateFormat")
-    private val xAxisDateFormatter = SimpleDateFormat("MM/dd HH:mm")
     private val axisFontSize = 12.0F
     private val dragDecelerationFrictionCoef = 0.9F
     private val backgroundColoroRes = R.color.material_grey100
@@ -51,8 +54,7 @@ internal object ChartSettings {
             setBackgroundColor(ContextCompat.getColor(context, backgroundColoroRes))
         }
 
-        val timeFormatter = SimpleDateFormat("HH:mm")
-        val chartMarkerView = ChartMarkerView(context, valueUnit, timeFormatter)
+        val chartMarkerView = ChartMarkerView(context, valueUnit)
         chartMarkerView.chartView = line_chart // For bounds control
         line_chart.marker = chartMarkerView // Set the marker to the chart
 
@@ -60,7 +62,7 @@ internal object ChartSettings {
             position = XAxis.XAxisPosition.BOTTOM
             textSize = axisFontSize
             textColor = ContextCompat.getColor(context, axisFontColorRes)
-            valueFormatter = IAxisValueFormatter { value, axis -> xAxisDateFormatter.format(value.toLong()) }
+            valueFormatter = IAxisValueFormatter { value, axis -> xAxisDateTimeFormatter.format(value.toLong()) }
         }
 
         with(line_chart.axisLeft) {
@@ -102,5 +104,4 @@ internal object ChartSettings {
             setValueTextSize(lineValueTextSize)
         }
     }
-
 }
