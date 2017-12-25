@@ -31,6 +31,14 @@
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 
+-dontwarn okio.**
+-dontwarn com.squareup.okhttp3.**
+-keep class com.squareup.okhttp3.** { *; }
+-keep interface com.squareup.okhttp3.* { *; }
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.concurrent.GuardedBy
+-dontwarn javax.annotation.ParametersAreNonnullByDefault
+
 #### Advised here: https://github.com/google/gson/blob/master/examples/android-proguard-example/proguard.cfg
 ##---------------Begin: proguard configuration for Gson  ----------
 # Gson uses generic type information stored in a class file when working with fields. Proguard
@@ -52,4 +60,9 @@
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
+##---------------End: proguard configuration for Gson  ----------
+
+#### Advised here: https://github.com/PhilJay/MPAndroidChart/wiki/Proguard
+##---------------Begin: proguard configuration for MPAndroidChart  ----------
+-keep class com.github.mikephil.charting.** { *; }
 ##---------------End: proguard configuration for Gson  ----------
