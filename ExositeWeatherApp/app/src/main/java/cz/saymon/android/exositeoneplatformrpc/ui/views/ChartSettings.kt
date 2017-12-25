@@ -26,7 +26,7 @@ internal object ChartSettings {
 
     private val timeWindowDays = 7L
     internal val timeWindowHours = timeWindowDays * 24L
-    internal val maxNumberOfValuesPerHour = 4L
+    internal val maxNumberOfValuesPerHour = 8L
     private val axisFontSize = 12.0F
     private val dragDecelerationFrictionCoef = 0.9F
     private val backgroundColoroRes = R.color.material_grey100
