@@ -45,9 +45,9 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
         }
 
         private fun getDataFrom(intent: Intent): List<String> {
-            val alias = intent.getStringExtra(ALIAS) ?: "temBed"
-            val location = intent.getStringExtra(LOCATION) ?: "Bedroom"
-            val valueUnit = intent.getStringExtra(VALUE_UNIT) ?: "°C"
+            val alias = intent.getStringExtra(ALIAS)
+            val location = intent.getStringExtra(LOCATION)
+            val valueUnit = intent.getStringExtra(VALUE_UNIT)
 
             return listOf(alias, location, valueUnit)
         }

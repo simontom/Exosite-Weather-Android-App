@@ -15,16 +15,6 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.activities.DataportChartActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".ui.activities.TabbedActivity"
             android:label="@string/title_activity_tabbed"
             android:screenOrientation="portrait"
@@ -34,6 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activities.DataportChartActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"/>
 
     </application>
 
