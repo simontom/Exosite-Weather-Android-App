@@ -10,7 +10,6 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Dataport
-import cz.saymon.android.exositeoneplatformrpc.model.data_objects.DataportStatus
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Value
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.ServerApi
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Argument
@@ -29,6 +28,8 @@ import javax.inject.Inject
 class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartValueSelectedListener {
 
     companion object {
+        val downsamplingCoefficient = 4
+
         private val ALIAS = "cz.saymon.android.alias"
         private val LOCATION = "cz.saymon.android.location"
         private val VALUE_UNIT = "cz.saymon.android.value_unit"
@@ -44,9 +45,9 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
         }
 
         private fun getDataFrom(intent: Intent): List<String> {
-            val alias = intent.getStringExtra(ALIAS)
-            val location = intent.getStringExtra(LOCATION)
-            val valueUnit = intent.getStringExtra(VALUE_UNIT)
+            val alias = intent.getStringExtra(ALIAS) ?: "temBed"
+            val location = intent.getStringExtra(LOCATION) ?: "Bedroom"
+            val valueUnit = intent.getStringExtra(VALUE_UNIT) ?: "°C"
 
             return listOf(alias, location, valueUnit)
         }
@@ -76,15 +77,20 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
 
         val lineDataSet = ChartSettings.createLineDataSet(this, values)
         val lineData = ChartSettings.createLineData(this, lineDataSet)
-
-        line_chart.data = lineData
-        line_chart.legend.isEnabled = false
-        line_chart.invalidate()
+        ChartSettings.setDataToChart(line_chart, lineData)
     }
 
     private fun handleResponseError(throwable: Throwable) {
         Timber.d(throwable.toString())
         showSnackbarError(R.string.message_error_no_internet)
+    }
+
+    private fun averageOfValues(values: List<Value>): Value {
+        val sum = values.fold((0L to 0.0), { acc, value ->
+            (acc.first + value.timeMs to acc.second + value.value)
+        })
+
+        return Value(sum.first / values.size, sum.second / values.size)
     }
 
     private fun callApi(alias: String) {
@@ -98,24 +104,14 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
 
         subscription = api.callRpcApi(ServerRequest(argument = argument))
                 .flatMapIterable(Dataport.MAPPER)
-                .filter { it.status == DataportStatus.OK }
-                .map { it.values }
+                .flatMapIterable { it.values }
+                .buffer(downsamplingCoefficient)
+                .map { averageOfValues(it) }
+                .toSortedList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { dataset -> handleResponse(dataset) },
                         { throwable -> handleResponseError(throwable) })
-
-
-//        subscription = api.callRpcApi(ServerRequest(argument = argument))
-//                .flatMapIterable(Dataport.MAPPER)
-//                .map { it.values }
-//                .window(3L) // Sample Window
-//                // Use flatMap to make List of Windowed Values
-//                // List of Values Avg toList again
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        { dataset -> handleResponse(dataset) },
-//                        { throwable -> handleResponseError(throwable) })
     }
 
     override fun onDestroy() {
@@ -125,6 +121,7 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
 
     override fun onNothingSelected() {
     }
+
     override fun onValueSelected(e: Entry?, h: Highlight?) {
         Timber.d("ValSelected: Value:${e?.y} xIndex:${e?.x} DataSetIndex:${h?.dataSetIndex}")
     }

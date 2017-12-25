@@ -14,6 +14,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.EntryXComparator
 import cz.saymon.android.exositeoneplatformrpc.R
 import cz.saymon.android.exositeoneplatformrpc.model.data_objects.Value
+import kotlinx.android.synthetic.main.activity_dataport_chart.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,7 +37,7 @@ internal object ChartSettings {
     private val lineDatasetCircleColorRes = R.color.material_teal400
     private val lineDatasetCircleHoleColorRes = R.color.material_yellow600
     private val lineDatasetWidth = 2.0F
-    private val lineDatasetMode = LineDataSet.Mode.LINEAR
+    private val lineDatasetMode = LineDataSet.Mode.HORIZONTAL_BEZIER
     private val lineValueTextSize = 10.0F
     private val lineValueTextColorRes = R.color.material_yellow900
 
@@ -76,10 +77,12 @@ internal object ChartSettings {
         }
     }
 
-    internal fun createLineDataSet(context: Context, values: List<Value>): LineDataSet {
+    internal fun createLineDataSet(context: Context, values: List<Value>, sortXaxisValues: Boolean = false): LineDataSet {
         val entries = values.map { Entry(it.timeMs.toFloat(), it.value.toFloat()) }
         // It is necessary to sort by x-values, otherwise, unexpected behaviour occurs
-        Collections.sort(entries, EntryXComparator())
+        if (sortXaxisValues) {
+            Collections.sort(entries, EntryXComparator())
+        }
 
         return LineDataSet(entries, "_ignored_")
                 .apply {
@@ -103,5 +106,11 @@ internal object ChartSettings {
             setValueTextColor(ContextCompat.getColor(context, lineValueTextColorRes))
             setValueTextSize(lineValueTextSize)
         }
+    }
+
+    internal fun setDataToChart(line_chart: LineChart, lineData: LineData) {
+        line_chart.data = lineData
+        line_chart.legend.isEnabled = false
+        line_chart.invalidate()
     }
 }
