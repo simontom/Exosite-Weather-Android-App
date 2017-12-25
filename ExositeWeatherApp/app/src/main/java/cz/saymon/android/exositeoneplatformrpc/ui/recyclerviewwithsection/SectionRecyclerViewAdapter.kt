@@ -52,14 +52,13 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
      * @param holder       The RecyclerView.ViewHolder to bind data to
      * @param flatPosition The index in the merged list of children and parents at which to bind
      */
+    @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, flatPosition: Int) {
         val sectionWrapper = flattenedItemList!![flatPosition]
         if (sectionWrapper.isSection) {
-            // TODO: Unchecked Cast in generic class for SectionViewHolder
             val sectionViewHolder = holder as SVH
             onBindSectionViewHolder(sectionViewHolder, sectionWrapper.sectionPosition, sectionWrapper.section!!)
         } else {
-            // TODO: Unchecked Cast in generic class for ChildViewHolder
             val childViewHolder = holder as CVH
             onBindChildViewHolder(childViewHolder, sectionWrapper.sectionPosition,
                     sectionWrapper.getChildPosition(), sectionWrapper.child!!)
