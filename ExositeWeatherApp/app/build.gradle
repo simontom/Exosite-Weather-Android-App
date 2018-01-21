@@ -82,13 +82,17 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Version"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-scalars:$rootProject.retrofitVersion"
-    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
 
     // Reactive
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.reactivexVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.reactivexAndroidVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
     implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxBindingVersion"
+
+    // Android Architecture Component - ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.lifecycleVersion"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.kotlin_version"
 }

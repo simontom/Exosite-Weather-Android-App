@@ -10,6 +10,8 @@ buildscript {
         androidSupportVersion = '27.0.2'
         constraintLayoutVersion = '1.0.2'
 
+        lifecycleVersion = '1.0.0'
+
         mpAndroidChartVersion = 'v3.0.3'
 
         timberVersion = '4.4.0'
@@ -18,6 +20,7 @@ buildscript {
 
         retrofitVersion = '2.3.0'
         okhttp3Version = '3.4.1'
+        gsonVersion = '2.8.1'
 
         reactivexVersion = '2.1.5'
         reactivexAndroidVersion = '2.0.1'
