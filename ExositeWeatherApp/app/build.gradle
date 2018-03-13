@@ -66,7 +66,6 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$rootProject.androidSupportVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.androidSupportVersion"
     implementation "com.android.support:design:$rootProject.androidSupportVersion"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
 
     implementation "com.github.PhilJay:MPAndroidChart:$rootProject.mpAndroidChartVersion"
 
