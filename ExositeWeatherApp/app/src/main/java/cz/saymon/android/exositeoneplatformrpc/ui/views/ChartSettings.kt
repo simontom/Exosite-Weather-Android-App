@@ -24,6 +24,7 @@ internal object ChartSettings {
     internal val chartMarkerValueDateFormatter = SimpleDateFormat("MM/dd")
     internal val chartMarkerValueTimeFormatter = SimpleDateFormat("HH:mm")
 
+    val dataDownsamplingCoefficient = 2
     private val timeWindowDays = 7L
     internal val timeWindowHours = timeWindowDays * 24L
     internal val maxNumberOfValuesPerHour = 8L

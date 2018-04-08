@@ -28,8 +28,6 @@ import javax.inject.Inject
 class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartValueSelectedListener {
 
     companion object {
-        val downsamplingCoefficient = 4
-
         private val ALIAS = "cz.saymon.android.alias"
         private val LOCATION = "cz.saymon.android.location"
         private val VALUE_UNIT = "cz.saymon.android.value_unit"
@@ -105,7 +103,7 @@ class DataportChartActivity : AppCompatActivity(), SnackbarDisplayer, OnChartVal
         subscription = api.callRpcApi(ServerRequest(argument = argument))
                 .flatMapIterable(Dataport.MAPPER)
                 .flatMapIterable { it.values }
-                .buffer(downsamplingCoefficient)
+                .buffer(ChartSettings.dataDownsamplingCoefficient)
                 .map { averageOfValues(it) }
                 .toSortedList()
                 .observeOn(AndroidSchedulers.mainThread())
