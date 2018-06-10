@@ -10,6 +10,6 @@ data class Value(val timeMs: Long, val value: Double) : Comparable<Value> {
 
     companion object {
         // Multiply by 1000 because Date expects [ms]
-        fun parseFrom(serverValue: ServerValue) = Value(serverValue.timeS * 1000, serverValue.value)
+        fun from(serverValue: ServerValue) = Value(serverValue.timeS * 1000, serverValue.value)
     }
 }

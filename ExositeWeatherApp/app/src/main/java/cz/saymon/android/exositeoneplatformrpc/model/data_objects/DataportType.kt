@@ -13,7 +13,7 @@ enum class DataportType(private val regex: Regex, val unit: String) {
     UNKNOWN(Regex("_ignored_"), "--");
 
     companion object {
-        fun parseFrom(dataportId: String): DataportType = when (dataportId) {
+        fun from(dataportId: String): DataportType = when (dataportId) {
             in TEMPERATURE.regex -> TEMPERATURE
             in HUMIDITY.regex -> HUMIDITY
             in PRESSURE.regex -> PRESSURE

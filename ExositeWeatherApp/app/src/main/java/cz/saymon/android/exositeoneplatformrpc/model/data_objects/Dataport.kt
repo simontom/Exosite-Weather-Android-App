@@ -25,10 +25,10 @@ data class Dataport(val id: String,
 
             for (serverResponse: ServerResponse in serverResponses) {
                 val id: String = serverResponse.id!!
-                val status = DataportStatus.parseFrom(serverResponse.status!!)
-                val location = DataportLocation.parseFrom(id)
-                val type = DataportType.parseFrom(id)
-                val values = (serverResponse.values ?: ArrayList<ServerResponse>()).map { Value.parseFrom(it as ServerValue) }
+                val status = DataportStatus.from(serverResponse.status!!)
+                val location = DataportLocation.from(id)
+                val type = DataportType.from(id)
+                val values = (serverResponse.values ?: ArrayList<ServerResponse>()).map { Value.from(it as ServerValue) }
                 dataports.add(Dataport(id, status, location, type, values))
             }
 

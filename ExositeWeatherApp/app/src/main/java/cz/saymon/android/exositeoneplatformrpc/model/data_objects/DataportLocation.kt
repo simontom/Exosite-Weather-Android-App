@@ -16,7 +16,7 @@ enum class DataportLocation(locationSuffix: String,
     UNKNOWN("#UNKNOWN#", "Unknown");
 
     companion object {
-        fun parseFrom(dataportId: String) =
+        fun from(dataportId: String) =
                 values().firstOrNull { dataportId in it.regex }
                         ?: UNKNOWN
     }
