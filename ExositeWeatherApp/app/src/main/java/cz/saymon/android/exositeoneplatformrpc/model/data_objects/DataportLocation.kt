@@ -1,7 +1,5 @@
 package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 
-import cz.saymon.android.exositeoneplatformrpc.utils.contains
-
 enum class DataportLocation(locationSuffix: String,
                             val locationName: String,
                             private val regex: Regex = Regex(".+$locationSuffix")) {
@@ -17,7 +15,7 @@ enum class DataportLocation(locationSuffix: String,
 
     companion object {
         fun from(dataportId: String) =
-                values().firstOrNull { dataportId in it.regex }
+                values().firstOrNull { it.regex.matches(dataportId) }
                         ?: UNKNOWN
     }
 }
