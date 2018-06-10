@@ -3,7 +3,7 @@ package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 enum class DataportStatus(private val status: String) {
     OK("ok"),
     INVALID("invalid"),
-    UNKNOWN_ERROR("");
+    UNKNOWN_ERROR("unknown");
 
     companion object {
         fun parseFrom(status: String): DataportStatus = when(status.toLowerCase()) {
