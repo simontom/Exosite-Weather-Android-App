@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_tabbed.*
 
 class TabbedActivity : AppCompatActivity(), SnackbarDisplayer {
 
-    private var tabsPagerAdapter: ExositeTabsPagerAdapter? = null
+    private lateinit var tabsPagerAdapter: ExositeTabsPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

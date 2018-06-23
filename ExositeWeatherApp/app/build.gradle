@@ -69,7 +69,7 @@ dependencies {
 
     implementation "com.github.PhilJay:MPAndroidChart:$rootProject.mpAndroidChartVersion"
 
-    // Loggin; better than plain 'Log'
+    // Logging; better than plain 'Log'
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
     // Dependency injection

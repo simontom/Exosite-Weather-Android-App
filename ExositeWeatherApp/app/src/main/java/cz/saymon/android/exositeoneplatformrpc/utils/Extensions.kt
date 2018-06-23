@@ -8,7 +8,6 @@ import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 private val dateFormatter = SimpleDateFormat("yy/MM/dd HH:mm")
-
 fun Long.toFormattedDate() = dateFormatter.format(Date(this))!!
 
 fun Disposable.addTo(compositeDisposable: CompositeDisposable): Disposable {

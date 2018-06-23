@@ -8,13 +8,13 @@ import com.google.gson.annotations.SerializedName
 enum class ArgumentSortType {
 
     /**
-     * From older values
+     * Starting with older values
      */
     @SerializedName("asc")
     ASCENDING,
 
     /**
-     * From newer values
+     * Starting with newer values
      */
     @SerializedName("desc")
     DESCENDING

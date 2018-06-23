@@ -5,7 +5,7 @@ buildscript {
         compileSdkVersion = 27
         buildToolsVersion = '27.0.3'
 
-        kotlin_version = '1.2.41'
+        kotlin_version = '1.2.50'
 
         androidSupportVersion = '27.1.1'
 

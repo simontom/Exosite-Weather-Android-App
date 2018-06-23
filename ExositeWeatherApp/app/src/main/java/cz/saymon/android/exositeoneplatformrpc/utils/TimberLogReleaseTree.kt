@@ -14,7 +14,7 @@ class TimberLogReleaseTree : Timber.Tree() {
     override fun log(priority: Int, tag: String, message: String, t: Throwable?) {
         // Report caught exceptions to Crashlytics
         if (priority == Log.ERROR && t != null) {
-            //            Crashlytics.log(t);
+//          Crashlytics.log(t);
         }
 
         if (isLoggable(tag, priority)) {
@@ -50,7 +50,6 @@ class TimberLogReleaseTree : Timber.Tree() {
     }
 
     companion object {
-
         private val MAX_LOG_LENGTH = 4000
     }
 

@@ -4,7 +4,8 @@ import com.google.gson.*
 import com.google.gson.annotations.SerializedName
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Argument
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.Call
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.CallProcedureType.*
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.CallProcedureType.READ
+import cz.saymon.android.exositeoneplatformrpc.model.retrofit.request.CallProcedureType.WRITE
 import java.lang.reflect.Type
 
 
@@ -34,6 +35,22 @@ class CallSerializer : JsonSerializer<Call> {
         callJsonObject.addProperty(procedureSerializedName, src.procedure.procedureName)
     }
 
+    private fun addArgumentsRead(callJsonObject: JsonObject, context: JsonSerializationContext, src: Call) {
+        val argumentWithIdJson = createArgumentWithAlias(context, src)
+
+        val argumentWithOptions = src.arguments.copy(alias = null)
+        val argumentWithOptionsJson = context.serialize(argumentWithOptions)
+
+        addArgumentsJsonArray(callJsonObject, src, argumentWithIdJson, argumentWithOptionsJson)
+    }
+
+    private fun addArgumentsWrite(callJsonObject: JsonObject, context: JsonSerializationContext, src: Call) {
+        val argumentWithIdJson = createArgumentWithAlias(context, src)
+        val argumentValueJson = context.serialize(src.arguments.writeValue)
+
+        addArgumentsJsonArray(callJsonObject, src, argumentWithIdJson, argumentValueJson)
+    }
+
     private fun createArgumentWithAlias(context: JsonSerializationContext, src: Call): JsonElement {
         val argumentWithId = Argument.createWithAlias(src.id)
         val argumentWithIdJson = context.serialize(argumentWithId)
@@ -48,22 +65,6 @@ class CallSerializer : JsonSerializer<Call> {
 
         val argumentsSerializedName = src.javaClass.getDeclaredField("arguments").getAnnotation(SerializedName::class.java).value
         callJsonObject.add(argumentsSerializedName, argumentsJsonArray)
-    }
-
-    private fun addArgumentsRead(callJsonObject: JsonObject, context: JsonSerializationContext, src: Call) {
-        val argumentWithIdJson = createArgumentWithAlias(context, src)
-
-        val argumentWithOptions = src.arguments.copy(alias = null)
-        val argumentWithOptionsJson = context.serialize(argumentWithOptions)
-
-        addArgumentsJsonArray(callJsonObject, src, argumentWithIdJson, argumentWithOptionsJson)
-    }
-
-    private fun addArgumentsWrite(callJsonObject: JsonObject, context: JsonSerializationContext, src: Call) {
-        val argumentWithIdJson = createArgumentWithAlias(context, src)
-        val argumentValueJson = context.serialize(src.arguments.writeValue)
-        
-        addArgumentsJsonArray(callJsonObject, src, argumentWithIdJson, argumentValueJson)
     }
 
 }

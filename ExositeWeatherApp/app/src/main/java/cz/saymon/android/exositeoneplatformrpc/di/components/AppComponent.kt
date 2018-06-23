@@ -14,7 +14,8 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AppModule::class, NetworkModule::class, JsonConverterModule::class, HttpClientModule::class))
+@Component(modules = arrayOf(AppModule::class, NetworkModule::class,
+        JsonConverterModule::class, HttpClientModule::class))
 interface AppComponent {
 
     // Downstream components need these exposed

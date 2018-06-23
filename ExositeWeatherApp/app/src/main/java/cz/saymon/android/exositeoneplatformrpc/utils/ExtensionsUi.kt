@@ -45,7 +45,7 @@ val Fragment.appComponent: AppComponent
     get() = this.getActivity()!!.appComponent
 
 inline fun <reified T> Fragment.activityAs(): T? {
-    return this.getActivity()!! as? T
+    return this.activity!! as? T
 }
 
 // View Extensions

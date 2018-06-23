@@ -1,7 +1,6 @@
 package cz.saymon.android.exositeoneplatformrpc.model.data_objects
 
 import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerResponse
-import cz.saymon.android.exositeoneplatformrpc.model.retrofit.response.ServerValue
 import io.reactivex.functions.Function
 
 data class Dataport(val id: String,
@@ -28,7 +27,8 @@ data class Dataport(val id: String,
                 val status = DataportStatus.from(serverResponse.status!!)
                 val location = DataportLocation.from(id)
                 val type = DataportType.from(id)
-                val values = (serverResponse.values ?: ArrayList<ServerResponse>()).map { Value.from(it as ServerValue) }
+                val values = (serverResponse.values ?: ArrayList())
+                        .map { Value.from(it) }
                 dataports.add(Dataport(id, status, location, type, values))
             }
 

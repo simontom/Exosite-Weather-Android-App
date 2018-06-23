@@ -18,14 +18,16 @@ class HttpClientModule {
 
     @Provides
     @Singleton
-    internal fun provideOkHttpCache(app: App): Cache = Cache(File(app.cacheDir, CACHE_FOLDER_NAME), CACHE_SIZE_BYTES.toLong())
+    internal fun provideOkHttpCache(app: App): Cache =
+            Cache(File(app.cacheDir, CACHE_FOLDER_NAME), CACHE_SIZE_BYTES.toLong())
 
     @Provides
     @Singleton
     internal fun provideOkHttpClient(cache: Cache, networkStatus: NetworkStatus): OkHttpClient {
         // Can be Level.BASIC, Level.HEADERS, or Level.BODY
         // See http://square.github.io/okhttp/3.x/logging-interceptor/ to see the options.
-        val httpLoggingInterceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+                .apply { level = HttpLoggingInterceptor.Level.BODY }
 
         val builderClient = OkHttpClient.Builder().apply {
             connectTimeout(CONNECTION_TIMEOUT.toLong(), TimeUnit.SECONDS)
@@ -45,10 +47,10 @@ class HttpClientModule {
 
             val maxAge = 60 * 60 // Read from cache
             val maxStale = 60 * 60 * 24 * 28 // Tolerate 4-weeks stale
-            val cacheHeaderValue = when (isOnGoodConnection) {
-                true -> "public, max-age=$maxAge"
-                false -> "public, only-if-cached, max-stale=$maxStale"
-            }
+            val cacheHeaderValue =
+                    if (isOnGoodConnection)
+                        "public, max-age=$maxAge"
+                    else "public, only-if-cached, max-stale=$maxStale"
 
             return@addNetworkInterceptor originalResponse
                     .newBuilder()
@@ -69,7 +71,10 @@ class HttpClientModule {
         }
 
         builderClient.addInterceptor { chain ->
-            val request = chain.request().newBuilder().header("Content-Type", "application/json; charset=utf-8").build()
+            val request = chain.request()
+                    .newBuilder()
+                    .header("Content-Type", "application/json; charset=utf-8")
+                    .build()
             chain.proceed(request)
         }
 
