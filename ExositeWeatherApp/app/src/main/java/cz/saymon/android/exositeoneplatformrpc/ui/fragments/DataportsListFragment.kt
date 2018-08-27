@@ -21,7 +21,6 @@ import cz.saymon.android.exositeoneplatformrpc.ui.adapters.DataportRecyclerViewA
 import cz.saymon.android.exositeoneplatformrpc.ui.recyclerviewwithsection.DataportSectionHeader
 import cz.saymon.android.exositeoneplatformrpc.utils.activityAs
 import cz.saymon.android.exositeoneplatformrpc.utils.appComponent
-import cz.saymon.android.exositeoneplatformrpc.utils.toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_dataports_list.*
@@ -95,7 +94,7 @@ class DataportsListFragment : Fragment() {
         subscription?.dispose()
 
         subscription = api.callRpcApi(ServerRequest(Constants.ALIASES))
-                .delay(800, TimeUnit.MILLISECONDS)
+                .delay(400, TimeUnit.MILLISECONDS)
                 .flatMapIterable(Dataport.MAPPER)
                 .filter { it.status == DataportStatus.OK }
                 .groupBy { it.location }
@@ -105,15 +104,16 @@ class DataportsListFragment : Fragment() {
                                 acc.add(dataport)
                                 acc
                             })
-                            .doOnSuccess { it.sort() }
+                            .doOnSuccess { list -> list.sort() }
                             .toFlowable()
                 }
                 .toMap { it[0].location }
                 .map { TreeMap(it) }
                 .map {
-                    it.map {
-                        val dataportUpdateTime = it.value[0].values[0].timeMs
-                        DataportSectionHeader(it.key, dataportUpdateTime, it.value.toMutableList())
+                    it.map { mapEntry ->
+                        val dataportUpdateTime = mapEntry.value[0].values[0].timeMs
+                        DataportSectionHeader(mapEntry.key,
+                                dataportUpdateTime, mapEntry.value.toMutableList())
                     }
                 }
                 .observeOn(AndroidSchedulers.mainThread())
