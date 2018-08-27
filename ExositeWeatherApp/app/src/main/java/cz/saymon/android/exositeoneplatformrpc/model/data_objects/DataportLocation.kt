@@ -14,8 +14,9 @@ enum class DataportLocation(locationSuffix: String,
     UNKNOWN("#UNKNOWN#", "Unknown");
 
     companion object {
+        private val values = values()
         fun from(dataportId: String) =
-                values().firstOrNull { it.regex.matches(dataportId) }
+                values.firstOrNull { it.regex.matches(dataportId) }
                         ?: UNKNOWN
     }
 }
