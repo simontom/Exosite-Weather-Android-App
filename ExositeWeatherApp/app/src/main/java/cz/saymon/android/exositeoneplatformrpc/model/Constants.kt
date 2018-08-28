@@ -2,6 +2,7 @@ package cz.saymon.android.exositeoneplatformrpc.model
 
 object Constants {
 
+    val MAX_TIME_DIFFERENCE_MS = 60L * 60L * 1000L
     val UI_DEBOUNCE_TIME_MS = 500L
 
     val BASE_SERVER_URL = "http://m2.exosite.com/onep:v1/rpc/"
