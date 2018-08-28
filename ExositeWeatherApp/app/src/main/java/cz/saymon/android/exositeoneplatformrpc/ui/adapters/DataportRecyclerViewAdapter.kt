@@ -16,7 +16,8 @@ class DataportRecyclerViewAdapter(private val clickListener: ((Dataport) -> Unit
         DataportSectionHeaderViewHolder,
         DataportValueViewHolder>() {
 
-    override fun onCreateSectionViewHolder(sectionViewGroup: ViewGroup, viewType: Int): DataportSectionHeaderViewHolder {
+    override fun onCreateSectionViewHolder(sectionViewGroup: ViewGroup, viewType: Int):
+            DataportSectionHeaderViewHolder {
         val view = sectionViewGroup.inflate(R.layout.dataport_section_row)
         return DataportSectionHeaderViewHolder(view)
     }
