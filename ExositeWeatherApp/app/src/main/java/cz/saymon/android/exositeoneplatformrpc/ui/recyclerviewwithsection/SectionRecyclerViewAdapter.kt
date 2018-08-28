@@ -8,9 +8,11 @@ import android.view.ViewGroup
  *
  * Source: https://github.com/IntruderShanky/Sectioned-RecyclerView
  */
-abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
+abstract class SectionRecyclerViewAdapter<
+        in TSection, TChild, TSectionViewHolder, TChildViewHolder>
     : RecyclerView.Adapter<RecyclerView.ViewHolder>()
-        where S : Section<C>, SVH : RecyclerView.ViewHolder, CVH : RecyclerView.ViewHolder {
+        where TSection : Section<TChild>, TSectionViewHolder : RecyclerView.ViewHolder,
+              TChildViewHolder : RecyclerView.ViewHolder {
 
     private val SECTION_VIEW_TYPE = 1
     private val CHILD_VIEW_TYPE = 2
@@ -20,7 +22,7 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
      * Changes to this list should be made through the add/remove methods
      * available in [SectionRecyclerViewAdapter].
      */
-    private var flattenedItemList: List<SectionWrapper<S, C>>? = null
+    private var flattenedItemList: List<SectionWrapper<TSection, TChild>>? = null
 
     /**
      * Implementation of Adapter.onCreateViewHolder(ViewGroup, int)
@@ -56,10 +58,11 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, flatPosition: Int) {
         val sectionWrapper = flattenedItemList!![flatPosition]
         if (sectionWrapper.isSection) {
-            val sectionViewHolder = holder as SVH
-            onBindSectionViewHolder(sectionViewHolder, sectionWrapper.sectionPosition, sectionWrapper.section!!)
+            val sectionViewHolder = holder as TSectionViewHolder
+            onBindSectionViewHolder(sectionViewHolder, sectionWrapper.sectionPosition,
+                    sectionWrapper.section!!)
         } else {
-            val childViewHolder = holder as CVH
+            val childViewHolder = holder as TChildViewHolder
             onBindChildViewHolder(childViewHolder, sectionWrapper.sectionPosition,
                     sectionWrapper.getChildPosition(), sectionWrapper.child!!)
         }
@@ -69,49 +72,51 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
      * Callback called from [.onCreateViewHolder] when
      * the list item created is a section.
      *
-     * @param sectionViewGroup The [ViewGroup] in the list for which a [SVH] is being created
-     * @return A `SVH` corresponding to the parent with the `ViewGroup` parentViewGroup
+     * @param sectionViewGroup The [ViewGroup] in the list for which a [TSectionViewHolder] is being created
+     * @return A `TSectionViewHolder` corresponding to the parent with the `ViewGroup` parentViewGroup
      */
-    abstract fun onCreateSectionViewHolder(sectionViewGroup: ViewGroup, viewType: Int): SVH
+    abstract fun onCreateSectionViewHolder(sectionViewGroup: ViewGroup, viewType: Int): TSectionViewHolder
 
     /**
      * Callback called from [.onCreateViewHolder] when
      * the list item created is a child.
      *
-     * @param childViewGroup The [ViewGroup] in the list for which a [CVH] is being created
-     * @return A `CVH` corresponding to the child with the `ViewGroup` childViewGroup
+     * @param childViewGroup The [ViewGroup] in the list for which a [TChildViewHolder] is being created
+     * @return A `TChildViewHolder` corresponding to the child with the `ViewGroup` childViewGroup
      */
-    abstract fun onCreateChildViewHolder(childViewGroup: ViewGroup, viewType: Int): CVH
+    abstract fun onCreateChildViewHolder(childViewGroup: ViewGroup, viewType: Int): TChildViewHolder
 
     /**
      * Callback called from onBindViewHolder(RecyclerView.ViewHolder, int)
      * when the list item bound to is a section.
-     * Bind data to the [SVH] here.
+     * Bind data to the [TSectionViewHolder] here.
      *
-     * @param sectionViewHolder The `SVH` to bind data to
+     * @param sectionViewHolder The `TSectionViewHolder` to bind data to
      * @param sectionPosition   The position of the parent to bind
-     * @param section           The parent which holds the data to be bound to the `SVH`
+     * @param section           The parent which holds the data to be bound to the `TSectionViewHolder`
      */
-    abstract fun onBindSectionViewHolder(sectionViewHolder: SVH, sectionPosition: Int, section: S)
+    abstract fun onBindSectionViewHolder(sectionViewHolder: TSectionViewHolder,
+                                         sectionPosition: Int, section: TSection)
 
     /**
      * Callback called from onBindViewHolder(RecyclerView.ViewHolder, int)
      * when the list item bound to is a child.
-     * Bind data to the [CVH] here.
+     * Bind data to the [TChildViewHolder] here.
      *
-     * @param childViewHolder The `CVH` to bind data to
+     * @param childViewHolder The `TChildViewHolder` to bind data to
      * @param sectionPosition The position of the parent that contains the child to bind
      * @param childPosition   The position of the child to bind
-     * @param child           The child which holds that data to be bound to the `CVH`
+     * @param child           The child which holds that data to be bound to the `TChildViewHolder`
      */
-    abstract fun onBindChildViewHolder(childViewHolder: CVH, sectionPosition: Int, childPosition: Int, child: C)
+    abstract fun onBindChildViewHolder(childViewHolder: TChildViewHolder, sectionPosition: Int, childPosition: Int, child: TChild)
 
-    private fun generateSectionWrapper(flatItemList: MutableList<SectionWrapper<S, C>>, section: S, sectionPosition: Int) {
+    private fun generateSectionWrapper(flatItemList: MutableList<SectionWrapper<TSection, TChild>>,
+                                       section: TSection, sectionPosition: Int) {
         val sectionWrapper = SectionWrapper(section, sectionPosition)
         flatItemList.add(sectionWrapper)
         val childList = section.childItems
         for (i in childList.indices) {
-            val childWrapper = SectionWrapper<S, C>(childList[i], sectionPosition, i)
+            val childWrapper = SectionWrapper<TSection, TChild>(childList[i], sectionPosition, i)
             flatItemList.add(childWrapper)
         }
     }
@@ -122,8 +127,9 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
      * @param sectionItemList A list of the sections from the [SectionRecyclerViewAdapter]
      * @return A list of all sections and their children
      */
-    private fun generateFlatItemList(sectionItemList: List<S>): List<SectionWrapper<S, C>> {
-        val flatItemList = ArrayList<SectionWrapper<S, C>>()
+    private fun generateFlatItemList(sectionItemList: List<TSection>):
+            List<SectionWrapper<TSection, TChild>> {
+        val flatItemList = ArrayList<SectionWrapper<TSection, TChild>>()
         for (i in sectionItemList.indices) {
             val section = sectionItemList[i]
             generateSectionWrapper(flatItemList, section, i)
@@ -144,7 +150,7 @@ abstract class SectionRecyclerViewAdapter<in S, C, SVH, CVH>
         return viewType == SECTION_VIEW_TYPE
     }
 
-    fun notifyDataChanged(sectionItemList: List<S>) {
+    fun notifyDataChanged(sectionItemList: List<TSection>) {
         flattenedItemList = generateFlatItemList(sectionItemList)
         notifyDataSetChanged()
     }
