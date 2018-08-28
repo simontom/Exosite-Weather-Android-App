@@ -7,7 +7,7 @@ enum class DataportStatus(private val status: String) {
 
     companion object {
         private val values = values()
-        fun from(status: String) = values.firstOrNull { status.toLowerCase().equals(it.status) }
+        fun from(status: String) = values.firstOrNull { status.equals(it.status, true) }
                 ?: UNKNOWN_ERROR
     }
 }
