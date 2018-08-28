@@ -23,8 +23,8 @@ object Constants {
     val ALIAS_HUMBED2 = "humBed2"
     val ALIAS_TEMPLIV2 = "temLiv2"
     val ALIAS_HUMLIV2 = "humLiv2"
-    val ALIAS_LIGOUT = "ligOut"
-    val ALIAS_UVOUT = "uvOut"
+    val ALIAS_LIGOUT2 = "ligOut2"
+    val ALIAS_UVOUT2 = "uvOut2"
     val ALIAS_VOLOUT2 = "volOut2"
 
     val ALIAS_PWMR = "pwmR"
@@ -37,7 +37,8 @@ object Constants {
             ALIAS_TEMPLIV, ALIAS_HUMLIV,
             ALIAS_TEMPHAL, ALIAS_PREHAL,
             ALIAS_TEMPOUT, ALIAS_HUMOUT, ALIAS_VOLOUT,
-            ALIAS_TEMPBED2, ALIAS_HUMBED2)
+            ALIAS_TEMPBED2, ALIAS_HUMBED2,
+            ALIAS_LIGOUT2, ALIAS_UVOUT2, ALIAS_VOLOUT2)
 
     val ALIASES_PWM = listOf(ALIAS_PWMR, ALIAS_PWMG, ALIAS_PWMB)
 
