@@ -9,7 +9,7 @@ import cz.saymon.android.exositeoneplatformrpc.ui.viewholders.DataportSectionHea
 import cz.saymon.android.exositeoneplatformrpc.ui.viewholders.DataportValueViewHolder
 import cz.saymon.android.exositeoneplatformrpc.utils.inflate
 
-class DataportRecyclerViewAdapter(private val clickListener: ((Dataport) -> Unit)?)
+class DataportRecyclerViewAdapter(private val clickListener: ((Dataport) -> Unit) = {})
     : SectionRecyclerViewAdapter<
         DataportSectionHeader,
         Dataport,

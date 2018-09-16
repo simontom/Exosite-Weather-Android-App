@@ -8,10 +8,10 @@ import cz.saymon.android.exositeoneplatformrpc.utils.toFormattedDate
 import kotlinx.android.synthetic.main.dataport_section_row.view.*
 import java.util.*
 
-class DataportSectionHeaderViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class DataportSectionHeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(dataportLocation: DataportLocation, timeUpdated: Long) {
-        with(view) {
+        with(itemView) {
             location.text = dataportLocation.locationName
             time.text = timeUpdated.toFormattedDate()
 

@@ -85,7 +85,7 @@ class HttpClientModule {
     companion object {
         private val CACHE_FOLDER_NAME = "http-cache"
         private val CACHE_SIZE_BYTES = 10 * 1024 * 1024
-        private val CONNECTION_TIMEOUT = 16
+        private val CONNECTION_TIMEOUT = 8
     }
 
 }
